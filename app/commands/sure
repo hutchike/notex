@@ -1,0 +1,27 @@
+#!/usr/bin/env php
+<?
+require getenv('YAWF_ROOT') . '/yawf/lib/Command.php';
+
+class Sure_command extends Command
+{
+    const USAGE = 'usage: sure -rules=rules.txt -facts=facts.txt';
+
+    public function run()
+    {
+        load_plugin('Sure');
+
+        $rules = $this->args->rules;
+        $facts = $this->args->facts;
+        if (!$rules || !$facts) $this->quit(self::USAGE);
+
+        $memory = $this->args->debug ? array('DEBUG' => TRUE) : NULL;
+        $sure = new Sure($this->args->limit);
+        $sure->with($rules)->given($facts)->infer($memory);
+        if ($this->args->dump) print json_encode((array)$sure->memory());
+    }
+}
+
+$sure = new Sure_command();
+$sure->run();
+
+// End of sure

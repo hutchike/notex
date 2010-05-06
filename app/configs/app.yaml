@@ -1,0 +1,50 @@
+# Application settings in YAML format (see http://www.yaml.org/ for details)
+
+# For a full list of timezones, see http://www.php.net/manual/en/timezones.php
+
+ini:
+    date.timezone: America/Mexico_City
+    log_errors: true
+    track_errors: true
+    display_errors: true
+
+settings:
+    testing_enabled: true
+    logging_enabled: true
+    benchmarking_on: true
+    exception_redirect: NULL
+    default_log_level: info
+    params_trim_whitespace: true
+    params_format_as_html: false
+    params_strip_slashes: true
+    supported_languages: [en]
+    default_language: en
+    cookie_domain: .website.org
+    cache_expiry_secs: 3600
+
+testing:
+    contact_email: support@website.org
+    webmaster_email: webmaster@website.org
+    app_name: My Application
+    app_test_controller_list: [User]
+    app_test_view_path_list: [/, user/login, user/logout]
+
+database:
+    connector: SQLite3
+    hostname: localhost
+    username: root
+    password: 
+    database_live: yawf/data/myapp_live.db
+    database_test: yawf/data/myapp_test.db
+
+content:
+    file_url_prefix: /
+    view_url_prefix: /
+    default_content_type: html
+    default_controller: App
+    default_folder: default
+    default_file: index
+    default_extension: .php
+    file_not_found: not_found
+
+# End of app.yaml

@@ -1,0 +1,4 @@
+RewriteEngine on
+RewriteCond $1 !^(download|images|scripts|styles|favicon\.ico|index\.php|robots\.txt)
+RewriteRule ^(.*)$ /index.php/$1 [L]
+ErrorDocument 404 /not/found

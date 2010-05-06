@@ -1,0 +1,36 @@
+div.test_controller_header, div.test_view_header {
+    border-top:1px solid #999;
+    padding-top:5px;
+    font-weight:bold;
+}
+div.test_method_header, div.test_when_header {
+    color:black;
+}
+div.test_case_passed {
+    color:green;
+}
+div.test_case_failed {
+    color:red;
+}
+div.test_case_data {
+    font-size:small;
+    padding-left:5px;
+    border-left:4px solid red;
+}
+div.test_results_header {
+    font-weight:bold;
+    color:black;
+}
+div.test_cases_passed {
+    color:green;
+}
+div.test_cases_failed {
+    color:red;
+}
+div.test_run_output_header {
+    font-weight:bold;
+    color:black;
+}
+div.test_run_output_data {
+    background-color:#eee;
+}

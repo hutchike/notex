@@ -1,0 +1,13 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+body {
+    background-color: #ccc;
+    margin: 4px;
+}
+
+span#flash {
+    color: red;
+}

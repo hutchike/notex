@@ -1,0 +1,23 @@
+# English translations
+en:
+    valid_email_needs_an_at: Email should include "@"
+    valid_email_cannot_start_with_at: Email cannot start with "@"
+    valid_email_cannot_end_with_at: Email cannot end with "@"
+    valid_email_needs_a_dot: Email should include "."
+    valid_email_cannot_start_with_dot: Email cannot start with "."
+    valid_email_cannot_end_with_dot: Email cannot end with "."
+    valid_length_too_short: Too short
+    valid_length_too_long: Too long
+    valid_name_can_only_include_words: Name can only include words
+
+# Spanish translations
+es:
+    valid_email_needs_an_at: Email should include "@"
+    valid_email_cannot_start_with_at: Email cannot start with "@"
+    valid_email_cannot_end_with_at: Email cannot end with "@"
+    valid_email_needs_a_dot: Email should include "."
+    valid_email_cannot_start_with_dot: Email cannot start with "."
+    valid_email_cannot_end_with_dot: Email cannot end with "."
+    valid_length_too_short: Too short
+    valid_length_too_long: Too long
+    valid_name_can_only_include_words: Name can only include words

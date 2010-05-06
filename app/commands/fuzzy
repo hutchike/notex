@@ -1,0 +1,27 @@
+#!/usr/bin/env php
+<?
+require getenv('YAWF_ROOT') . '/yawf/lib/Command.php';
+
+class Fuzzy_command extends Command
+{
+    const USAGE = 'usage: fuzzy -rules=rules.txt -facts=facts.txt';
+
+    public function run()
+    {
+        load_plugin('FuzzySure');
+
+        $rules = $this->args->rules;
+        $facts = $this->args->facts;
+        if (!$rules || !$facts) $this->quit(self::USAGE);
+
+        $memory = $this->args->debug ? array('DEBUG' => TRUE) : NULL;
+        $sure = new FuzzySure($this->args->limit);
+        $sure->with($rules)->given($facts)->infer($memory);
+        if ($this->args->dump) print json_encode((array)$sure->memory());
+    }
+}
+
+$fuzzy = new Fuzzy_command();
+$fuzzy->run();
+
+// End of sure
