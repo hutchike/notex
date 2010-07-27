@@ -9,12 +9,19 @@ class App_controller extends Controller
         $this->render->debug = '';
         $this->render->layout = 'notepad';
 
-        if ($_SERVER['REQUEST_URI'] == '/')
+        // Redirect to a unique notepad if not chosen
+
+        $request = $_SERVER['REQUEST_URI'];
+        if ($request == '/')
         {
             $md5 = md5($_SERVER['REMOTE_ADDR'] . time());
             $url = '/' . substr($md5, 0, 10);
             header("Location: $url");
             exit;
+        }
+        else // good, we've chosen a personal notepad
+        {
+            $this->render->title = ltrim($request, '/');
         }
     }
 }
