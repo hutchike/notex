@@ -9,6 +9,8 @@ class Note_controller extends App_controller
 
     public function load()
     {
+        // Load the note
+
         $url = $this->short_url($this->params->url);
         $notes = array();
         $note = new Note(array('url' => $url));
@@ -17,6 +19,8 @@ class Note_controller extends App_controller
 
     public function save()
     {
+        // Save the note
+
         $url = $this->short_url($this->params->url);
         $notes = $this->params->notes;
         $note = new Note(array('url' => $url));
@@ -24,7 +28,13 @@ class Note_controller extends App_controller
         $note->notes = $notes;
         $note->save();
         $this->render->data = json_decode($notes);
-        Log::info($_SERVER['REMOTE_ADDR'] . " saved $notes at $url");
+
+        // Log the info
+
+        $list = array();
+        foreach ($this->render->data as $id => $note) $list[] = $note->text;
+        $text = join($list, ', ');
+        Log::info($_SERVER['REMOTE_ADDR'] . " saved \"$text\" at $url");
     }
 
     protected function short_url($url)
