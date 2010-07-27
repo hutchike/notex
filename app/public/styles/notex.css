@@ -1,0 +1,42 @@
+* {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 24px;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background: url(/images/background2.jpg);
+}
+
+#notepad {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 684px;
+  height: 912px;
+  background: url(/images/notepad1.jpg);
+}
+
+#page {
+  position: absolute;
+  top: 104px;
+  left: 42px;
+  width: 555px;
+  height: 777px;
+  background-color: transparent;
+  border: 0;
+}
+
+#edit {
+  position: absolute;
+  display: none;
+  height: 30px;
+  width: 555px;
+  background-color: transparent;
+  border: 0;
+}
+
+.note {
+  position: absolute;
+}
