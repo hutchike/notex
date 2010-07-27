@@ -40,3 +40,9 @@ body {
 .note {
   position: absolute;
 }
+
+#debug {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

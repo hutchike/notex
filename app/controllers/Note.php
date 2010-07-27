@@ -24,6 +24,7 @@ class Note_controller extends App_controller
         $note->notes = $notes;
         $note->save();
         $this->render->data = json_decode($notes);
+        Log::info($_SERVER['REMOTE_ADDR'] . " saved $notes at $url");
     }
 
     protected function short_url($url)

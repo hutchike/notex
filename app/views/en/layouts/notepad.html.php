@@ -6,3 +6,4 @@
     </form>
   </div>
 </div>
+<div id="debug"><?= $debug ?></div>
