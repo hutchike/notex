@@ -14,7 +14,7 @@ class Note_controller extends App_controller
         $url = $this->short_url($this->params->url);
         $notes = array();
         $note = new Note(array('url' => $url));
-        $this->render->data = $note->load() ? json_decode($note->notes) : NULL;
+        $this->render->data = $note->load() ? json_decode(str_replace('<', '&lt;', $note->notes)) : NULL;
     }
 
     public function save()
