@@ -8,6 +8,7 @@ var notex = {
   count: 0,
   cursor: {x: null, y: null},
   offset: {x: 42, y: 114},
+  adjust: {x: 0, y: 7},
   origin: {x: null, y: null},
   init: function() {
     $('#page').mousemove(function(e) {
@@ -32,7 +33,7 @@ var notex = {
       if (notex.origin.y > notex.page_height - notex.line_height) return;
     } else {
       notex.origin.x = notex.cursor.x - notex.offset.x;
-      notex.origin.y = notex.cursor.y - notex.offset.y;
+      notex.origin.y = notex.cursor.y - notex.offset.y - notex.adjust.y;
     }
     var width = notex.page_width - notex.origin.x;
     $('#edit').css({'top': notex.origin.y, 'left': notex.origin.x, 'width': width}).attr('value', text).show().focus();
