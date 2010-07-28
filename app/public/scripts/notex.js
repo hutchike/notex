@@ -21,16 +21,16 @@ var notex = {
   click: function(e) {
     if (notex.editing) return;
     var text = '';
-    if (notex.selected) {
+    if (typeof e.pageX == 'undefined') {
+      notex.origin.y += notex.line_height;
+      if (notex.origin.y > notex.page_height - notex.line_height) return;
+    } else if (notex.selected) {
       var id = notex.selected.attr('id');
       var note = notex.notes[id];
       text = notex.selected.text(); notex.selected.text('');
       notex.origin.x = note.x-1;
       notex.origin.y = note.y-1;
-      delete notex.notes[id];
-    } else if (typeof e.pageX == 'undefined') {
-      notex.origin.y += notex.line_height;
-      if (notex.origin.y > notex.page_height - notex.line_height) return;
+      notex.notes[id] = null;
     } else {
       notex.origin.x = notex.cursor.x - notex.offset.x;
       notex.origin.y = notex.cursor.y - notex.offset.y - notex.adjust.y;
@@ -69,6 +69,7 @@ var notex = {
       for (id in notex.notes) {
         var note = notex.notes[id];
         if (note) notex.render(note);
+        notex.count++;
       }
     });
   },
