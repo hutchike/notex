@@ -80,9 +80,9 @@ var notex = {
     });
   },
   markup: function(text) {
-    text = text.replace(/(http:\/\/\S+)/, '<a href="$1">$1</a>');
-    text = text.replace(/_(\w+)_/, '<b>$1</b>');
-    text = text.replace(/\/(\w+)\//, '<i>$1</i>');
+    text = text.replace(/(http:\/\/\S+)/g, '<a href="$1">$1</a>');
+    text = text.replace(/_(\w+)_/g, '<b>$1</b>');
+    text = text.replace(/\/(\w+)\//g, '<i>$1</i>');
     return text;
   },
   load: function() {
