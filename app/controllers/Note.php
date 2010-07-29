@@ -31,13 +31,14 @@ class Note_controller extends App_controller
 
         $can_edit = TRUE;
         $secret = $this->params->secret;
+        $hidden = md5($path . $secret);
         if ($note->get_id())
         {
-            if ($note->secret && $note->secret != $secret) $can_edit = FALSE;
+            if ($note->secret && $note->secret != $hidden) $can_edit = FALSE;
         }
         else // it's a new note and might be secret?
         {
-            $note->secret = $secret;
+            if ($secret) $note->secret = $hidden;
         }
 
         // Edit the note if allowed
