@@ -11,9 +11,9 @@ class Note_controller extends App_controller
     {
         // Load the note
 
-        $url = $this->short_url($this->params->url);
+        $url = parse_url($this->params->url);
         $notes = array();
-        $note = new Note(array('url' => $url));
+        $note = new Note(array('url' => $url['path']));
         $this->render->data = $note->load() ? json_decode(str_replace('<', '&lt;', $note->notes)) : NULL;
     }
 
@@ -21,25 +21,36 @@ class Note_controller extends App_controller
     {
         // Save the note
 
-        $url = $this->short_url($this->params->url);
+        $url = parse_url($this->params->url);
+        $path = $url['path'];
         $notes = $this->params->notes;
-        $note = new Note(array('url' => $url));
+        $note = new Note(array('url' => $path));
         $note->load();
+        $old_notes = $note->notes;
         $note->notes = $notes;
         $note->save();
-        $this->render->data = json_decode($notes);
+        $this->render->data = $this->diff($old_notes, $notes);
 
         // Log the info
 
-        $list = array();
-        foreach ($this->render->data as $id => $note) $list[] = $note->text;
-        $text = join($list, ', ');
-        Log::info($_SERVER['REMOTE_ADDR'] . " saved \"$text\" at $url");
+        Log::info($_SERVER['REMOTE_ADDR'] . " saved a note at $path");
     }
 
-    protected function short_url($url)
+    public function diff($old_notes, $new_notes)
     {
-        return preg_replace('/^https?:\/\/(\w+\.)?notex.com/i', '', $url);
+        $old = json_decode($old_notes, TRUE); if (!$old) $old = array();
+        $new = json_decode($new_notes, TRUE); if (!$new) $new = array();
+        $diff = NULL;
+        foreach ($old as $id => $old_note)
+        {
+            $new_note = array_key($new, $id);
+            if ($new_note &&
+                array_key($old_note, 'deleted') != TRUE &&
+                array_key($old_note, 'text') == array_key($new_note, 'text')) continue;
+
+            $diff[$id] = $old_note;
+        }
+        return $diff;
     }
 }
 
