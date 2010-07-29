@@ -1,3 +1,8 @@
+/*
+ * noteX - Copyright (c) 2010 Kevin Hutchinson <hutchike@gmail.com>
+ *         All Rights Reserved. Please contact me if you'd like to
+ *         own a copy of this system or have it installed locally.
+ */
 var notex = {
   Line_height: 41,
   Page_height: 777,
