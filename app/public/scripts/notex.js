@@ -80,6 +80,9 @@ var notex = {
     $('#content').append('<div id="'+id+'" class="note" style="top:'+note.y+'px;left:'+note.x+'px;color:'+note.color+'">'+notex.markup(note.text)+'</div>');
     $('.note').mouseover(function(e) {
       notex.selected = $(e.target);
+      if (notex.selected.attr('class') != 'note') {
+        notex.selected = notex.selected.parent(); // for formetted text
+      }
     }).mouseout(function(e) {
       notex.selected = null;
     });
