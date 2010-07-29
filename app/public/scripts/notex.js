@@ -80,7 +80,7 @@ var notex = {
     $('#content').append('<div id="'+id+'" class="note" style="top:'+note.y+'px;left:'+note.x+'px;color:'+note.color+'">'+notex.markup(note.text)+'</div>');
     $('.note').mouseover(function(e) {
       notex.selected = $(e.target);
-      if (notex.selected.attr('class') != 'note') {
+      while (notex.selected.attr('class') != 'note') {
         notex.selected = notex.selected.parent(); // for formetted text
       }
     }).mouseout(function(e) {
@@ -89,8 +89,8 @@ var notex = {
   },
   markup: function(text) {
     text = text.replace(/(http:\/\/\S+)/g, '<a href="$1" target="_blank">$1</a>');
-    text = text.replace(/(^|\s)_(\S.*\S)_/g, '$1<b>$2</b>');
-    text = text.replace(/(^|\s)\/(\S.*\S)\//g, '$1<i>$2</i>');
+    text = text.replace(/(^|\s|\/)_(\S.*\S)_/g, '$1<b>$2</b>');
+    text = text.replace(/(^|\s|>)\/(\S.*[^\s<])\//g, '$1<i>$2</i>');
     text = text.replace(/(\S+@\S+)/g, '<a href="mailto:$1">$1</a>');
     text = text.replace(/(^|\s)@(\w+)/g, '$1<a href="http://twitter.com/$2" target="_blank">@$2</a>');
     text = text.replace(/(^|\s)#(\w+)/g, '$1<a href="http://twitter.com/#search?q=%23$2" target="_blank">#$2</a>');
