@@ -2,6 +2,7 @@ var notex = {
   Line_height: 41,
   Page_height: 777,
   Page_width: 560,
+  Poll_msecs: 2000,
   is_editing: false,
   selected: null,
   notes: {},
@@ -17,6 +18,7 @@ var notex = {
     }).click(notex.click);
     $('#edit').focusout(notex.write);
     notex.load();
+    window.setInterval(notex.save, notex.Poll_msecs);
   },
   click: function(e) {
     if (notex.is_editing) return;
