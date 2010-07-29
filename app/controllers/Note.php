@@ -60,11 +60,12 @@ class Note_controller extends App_controller
         $diff = NULL;
         foreach ($old as $id => $old_note)
         {
-            $new_note = array_key($new, $id);
-            if ($new_note &&
-                array_key($old_note, 'deleted') != TRUE &&
-                array_key($old_note, 'text') == array_key($new_note, 'text')) continue;
-
+            $new_note = array_key($new, $id, array());
+            $new_text = array_key($new_note, 'text');
+            $old_text = array_key($old_note, 'text');
+            $is_deleted = array_key($old_note, 'deleted');
+            if ($new_note && !$is_deleted && $old_text == $new_text) continue;
+            if (!$new_note && $is_deleted) continue;
             $diff[$id] = $old_note;
         }
         return $diff;
