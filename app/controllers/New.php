@@ -10,7 +10,7 @@ class New_controller extends App_controller
     {
         // Redirect to a new unique notepad
 
-        $md5 = md5($_SERVER['REMOTE_ADDR'] . time());
+        $md5 = md5($this->host_ip . time());
         $url = '/' . substr($md5, 0, 10);
         header("Location: $url");
         exit;

@@ -50,7 +50,7 @@ class Note_controller extends App_controller
         // Log the info
 
         $action = $can_edit ? 'saved' : 'viewed';
-        Log::info($_SERVER['REMOTE_ADDR'] . " $action a note at $path");
+        Log::info($this->host_ip . " $action a note at $path");
     }
 
     public function diff($old_notes, $new_notes)
