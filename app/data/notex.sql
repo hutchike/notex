@@ -4,7 +4,8 @@ create table if not exists notes
     created_at  datetime not null,
     updated_at  datetime,
     url         varchar(255),
-    notes       text
+    notes       text,
+    secret      varchar(255)
 );
 
 create index if not exists note_created_at on notes(created_at);

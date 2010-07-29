@@ -5,6 +5,8 @@ var notex = {
   Poll_msecs: 2000,
   is_editing: false,
   selected: null,
+  secret: '',
+  color: 'black',
   notes: {},
   cursor: {x: null, y: null},
   offset: {x: 42, y: 114},
@@ -18,6 +20,7 @@ var notex = {
     }).click(notex.click);
     $('#edit').focusout(notex.write);
     notex.load();
+    notex.set_color();
     window.setInterval(notex.save, notex.Poll_msecs);
   },
   click: function(e) {
@@ -48,7 +51,7 @@ var notex = {
       }
     }
     var width = notex.Page_width - notex.origin.x;
-    $('#edit').css({'top': notex.origin.y, 'left': notex.origin.x, 'width': width}).attr('value', text).show().select().focus();
+    $('#edit').css({'top': notex.origin.y, 'left': notex.origin.x, 'width': width, color: notex.color}).attr('value', text).show().select().focus();
     notex.is_editing = true;
   },
   write: function(opts) {
@@ -62,13 +65,13 @@ var notex = {
   create: function(text) {
     $('#edit').attr('value', '').hide();
     var id = (new Date()).getTime();
-    var note = {id: 'note'+id, x: notex.origin.x+1, y: notex.origin.y+1, text: text};
+    var note = {id: 'note'+id, x: notex.origin.x+1, y: notex.origin.y+1, text: text, color: notex.color};
     notex.notes[note.id] = note;
     notex.render(note);
   },
   render: function(note) {
     if (note.deleted) return;
-    $('#content').append('<div id="'+note.id+'" class="note" style="top:'+note.y+'px;left:'+note.x+'px">'+note.text+'</div>');
+    $('#content').append('<div id="'+note.id+'" class="note" style="top:'+note.y+'px;left:'+note.x+'px;color:'+note.color+'">'+note.text+'</div>');
     $('.note').mouseover(function(e) {
       notex.selected = $(e.target);
     }).mouseout(function(e) {
@@ -86,7 +89,7 @@ var notex = {
     });
   },
   save: function() {
-    $.post('/note/save.json', {url: window.location.href, notes: $.toJSON(notex.notes)},
+    $.post('/note/save.json', {url: window.location.href, notes: $.toJSON(notex.notes), secret: notex.secret},
     function(data) {
       var diff;
       eval('diff='+data+';');
@@ -104,6 +107,16 @@ var notex = {
     var x_diff = Math.abs(pos1.x - pos2.x);
     var y_diff = Math.abs(pos1.y - pos2.y);
     return (x_diff <= notex.nearby.x && y_diff <= notex.nearby.y);
+  },
+  set_color: function() {
+    var url = new String(window.location.href);
+    var found = url.match(/#(\w+)/);
+    if (found) notex.color = found[1];
+  },
+  set_secret: function() {
+    var url = new String(window.location.href);
+    var found = url.match(/\?(\w+)/);
+    if (found) notex.secret = found[1];
   },
   debug: function(obj) { $('#debug').text('['+$.toJSON(obj)+']') }
 };
