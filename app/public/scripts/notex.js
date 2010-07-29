@@ -21,6 +21,7 @@ var notex = {
     $('#edit').focusout(notex.write);
     notex.load();
     notex.set_color();
+    notex.set_secret();
     window.setInterval(notex.save, notex.Poll_msecs);
   },
   click: function(e) {

@@ -19,21 +19,38 @@ class Note_controller extends App_controller
 
     public function save()
     {
-        // Save the note
+        // Get the old note
 
         $url = parse_url($this->params->url);
         $path = $url['path'];
         $notes = $this->params->notes;
         $note = new Note(array('url' => $path));
         $note->load();
+
+        // Can we edit it?
+
+        $can_edit = TRUE;
+        $secret = $this->params->secret;
+        if ($note->get_id())
+        {
+            if ($note->secret && $note->secret != $secret) $can_edit = FALSE;
+        }
+        else // it's a new note and might be secret?
+        {
+            $note->secret = $secret;
+        }
+
+        // Edit the note if allowed
+
         $old_notes = $note->notes;
         $note->notes = $notes;
-        $note->save();
+        if ($can_edit) $note->save();
         $this->render->data = $this->diff($old_notes, $notes);
 
         // Log the info
 
-        Log::info($_SERVER['REMOTE_ADDR'] . " saved a note at $path");
+        $action = $can_edit ? 'saved' : 'viewed';
+        Log::info($_SERVER['REMOTE_ADDR'] . " $action a note at $path");
     }
 
     public function diff($old_notes, $new_notes)
