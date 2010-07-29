@@ -34,7 +34,7 @@ var notex = {
       for (id in notex.notes) {
         var note = notex.notes[id];
         if (note && notex.is_near(note, notex.origin)) {
-          notex.selected = $('#'+note.id);
+          notex.selected = $('#'+id);
         }
       }
     } else {
@@ -65,19 +65,25 @@ var notex = {
   },
   create: function(text) {
     $('#edit').attr('value', '').hide();
-    var id = (new Date()).getTime();
-    var note = {id: 'note'+id, x: notex.origin.x+1, y: notex.origin.y+1, text: text, color: notex.color};
-    notex.notes[note.id] = note;
-    notex.render(note);
+    var id = 'note' + (new Date()).getTime();
+    var note = {x: notex.origin.x+1, y: notex.origin.y+1, text: text, color: notex.color};
+    notex.notes[id] = note;
+    notex.render(id, note);
   },
-  render: function(note) {
+  render: function(id, note) {
     if (note.deleted) return;
-    $('#content').append('<div id="'+note.id+'" class="note" style="top:'+note.y+'px;left:'+note.x+'px;color:'+note.color+'">'+note.text+'</div>');
+    $('#content').append('<div id="'+id+'" class="note" style="top:'+note.y+'px;left:'+note.x+'px;color:'+note.color+'">'+notex.markup(note.text)+'</div>');
     $('.note').mouseover(function(e) {
       notex.selected = $(e.target);
     }).mouseout(function(e) {
       notex.selected = null;
     });
+  },
+  markup: function(text) {
+    text = text.replace(/(http:\/\/\S+)/, '<a href="$1">$1</a>');
+    text = text.replace(/_(\w+)_/, '<b>$1</b>');
+    text = text.replace(/\/(\w+)\//, '<i>$1</i>');
+    return text;
   },
   load: function() {
     $.get('/note/load.json', {url: window.location.href},
@@ -85,11 +91,12 @@ var notex = {
       eval('notex.notes='+data+';');
       for (id in notex.notes) {
         var note = notex.notes[id];
-        notex.render(note);
+        notex.render(id, note);
       }
     });
   },
   save: function() {
+    if (notex.is_editing) return;
     $.post('/note/save.json', {url: window.location.href, notes: $.toJSON(notex.notes), secret: notex.secret},
     function(data) {
       var diff;
@@ -99,7 +106,7 @@ var notex = {
         if (note.deleted) {
           $('#'+id).remove();
         } else {
-          notex.render(note);
+          notex.render(id, note);
         }
       }
     });
