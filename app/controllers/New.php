@@ -12,7 +12,7 @@ class New_controller extends App_controller
 
         $md5 = md5($_SERVER['REMOTE_ADDR'] . time());
         $url = '/' . substr($md5, 0, 10);
-        header("Location: $url$color$secret");
+        header("Location: $url");
         exit;
     }
 }
