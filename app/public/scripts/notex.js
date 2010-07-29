@@ -86,8 +86,8 @@ var notex = {
   },
   markup: function(text) {
     text = text.replace(/(http:\/\/\S+)/g, '<a href="$1" target="_blank">$1</a>');
-    text = text.replace(/(^|\s)_(\w+)_/g, '$1<b>$2</b>');
-    text = text.replace(/(^|\s)\/(\w+)\//g, '$1<i>$2</i>');
+    text = text.replace(/(^|\s)_(\w.*\w)_/g, '$1<b>$2</b>');
+    text = text.replace(/(^|\s)\/(\w.*\w)\//g, '$1<i>$2</i>');
     text = text.replace(/(\S+@\S+)/g, '<a href="mailto:$1">$1</a>');
     text = text.replace(/(^|\s)@(\w+)/g, '$1<a href="http://twitter.com/$2" target="_blank">@$2</a>');
     text = text.replace(/(^|\s)#(\w+)/g, '$1<a href="http://twitter.com/#search?q=%23$2" target="_blank">#$2</a>');
