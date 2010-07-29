@@ -15,7 +15,7 @@ class Note extends Model
             if (array_key($note, 'deleted')) continue;
             $filtered[$id] = $note;
         }
-        return $filtered;
+        return $filtered ? $filtered : NULL;
     }
 }
 
