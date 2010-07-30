@@ -31,10 +31,11 @@ class Note extends Model
         }
         ksort($list);
         $note = '';
-        $last_pos = NULL;
+        $last_pos = 0;
         foreach ($list as $pos => $text)
         {
-            if ($note) $note .= (intval($pos) == intval($last_pos) ? ' ' : "\n");
+            $nl = str_repeat("\n", intval($pos/10) - intval($last_pos/10));
+            if ($note) $note .= (intval($pos) == intval($last_pos) ? ' ' : $nl);
             $note .= $text;
             $last_pos = $pos;
         }
