@@ -71,6 +71,9 @@ var notex = {
   create: function(text) {
     $('#edit').attr('value', '').hide();
     var id = 'note' + (new Date()).getTime();
+    text = text.replace(/"/g, '&quot;'); // for JSON
+    text = text.replace(/</g, '&lt;');  // for XML
+    text = text.replace(/>/g, '&gt;'); // for XML
     var note = {x: notex.origin.x+1, y: notex.origin.y+1, text: text, color: notex.color};
     notex.notes[id] = note;
     notex.render(id, note);

@@ -71,6 +71,14 @@ class Note_controller extends App_controller
         }
         return $diff;
     }
+
+    public function data_for($url)
+    {
+        load_models('Note');
+        $url = preg_replace('/\.\w+$/', '', $url);
+        $note = new Note(array('url' => $url));
+        return $note->load() ? $note->to_text() : NULL;
+    }
 }
 
 // End of Note.php
