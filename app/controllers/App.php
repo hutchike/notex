@@ -20,8 +20,7 @@ class App_controller extends Controller
         $type = $this->app->get_content_type();
         if ($type != 'html')
         {
-            $path = array_key($_SERVER, 'PATH_INFO',
-                              array_key($_SERVER, 'DOCUMENT_URI', 'unknown'));
+            $path = preg_replace('/[#\?].*$/', '', $_SERVER['REQUEST_URI']);
             $note_controller = $this->app->new_controller('Note');
             $data = $note_controller->data_for($path);
             if ($type == 'txt') $data = html_entity_decode($data);
