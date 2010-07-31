@@ -96,7 +96,7 @@ var notex = {
   },
   markup: function(text) {
     text = text.replace(/note:(\S+)/g, 'note:<a href="/$1">$1</a>');
-    text = text.replace(/(https?):\/\/(\S+)/g, '$1://<a href="$1://$2">$2</a>');
+    text = text.replace(/(https?):\/\/(\S+)/g, '$1://<a href="$1://$2" target="_blank">$2</a>');
     text = text.replace(/(images?):(.+)/, '$1:<a href="http://www.google.com/images?hl=en&q=$2" target="_blank">$2</a>');
     text = text.replace(/(maps?):(.+)/, '$1:<a href="http://maps.google.com/?ie=UTF&near=$2" target="_blank">$2</a>');
     text = text.replace(/(music):(.+)/, '$1:<a href="http://www.emusic.com/search.html?mode=x&QT=$2" target="_blank">$2</a>');
