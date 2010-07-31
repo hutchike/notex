@@ -78,6 +78,10 @@ var notex = {
     notex.notes[id] = note;
     notex.render(id, note);
   },
+  embed: function(it) {
+    var id = 'embed' + (new Date()).getTime();
+    return '<span id="'+id+'_embed"></span><script type="text/javascript">try{$("#'+id+'_embed").text('+it+')}catch(e){};</script>='+it;
+  },
   render: function(id, note) {
     if (note.deleted) return;
     $('#content').append('<div id="'+id+'" class="note" style="top:'+note.y+'px;left:'+note.x+'px;color:'+note.color+'">'+notex.markup(note.text)+'</div>');
@@ -91,12 +95,14 @@ var notex = {
     });
   },
   markup: function(text) {
-    text = text.replace(/(http:\/\/\S+)/g, '<a href="$1" target="_blank">$1</a>');
+    text = text.replace(/note:(\S+)/g, '<a href="/$1">note:$1</a>');
+    text = text.replace(/(http:\/\/\S+)/g, '<a href="$1">$1</a>');
     text = text.replace(/(^|\s|\/)_(\S.*\S)_/g, '$1<b>$2</b>');
     text = text.replace(/(^|\s|>)\/(\S.*[^\s<])\//g, '$1<i>$2</i>');
     text = text.replace(/(\S+@\S+)/g, '<a href="mailto:$1">$1</a>');
     text = text.replace(/(^|\s)@(\w+)/g, '$1<a href="http://twitter.com/$2" target="_blank">@$2</a>');
     text = text.replace(/(^|\s)#(\w+)/g, '$1<a href="http://twitter.com/#search?q=%23$2" target="_blank">#$2</a>');
+    text = text.replace(/^=(.+)$/, notex.embed('$1'));
     return text;
   },
   load: function() {
