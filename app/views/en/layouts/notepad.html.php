@@ -1,4 +1,4 @@
-<? if (is_null($auth_token)): ?>
+<? if (is_null($access_token)): ?>
 <div id="twitter">
   <a href="/twitter/login"><img src="/images/twitter/lighter.png" alt="twitter login"/></a>
 </div>

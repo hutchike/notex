@@ -14,7 +14,7 @@ class App_controller extends Controller
 
         $uri = $_SERVER['REQUEST_URI'];
         $this->render->title = $uri == '/' ? 'your web notepad' : ltrim($uri, '/');
-        $this->render->auth_token = $this->session->auth_token;
+        $this->render->access_token = $this->session->access_token;
         $this->render->debug = '';
         $this->render->layout = 'notepad';
         $this->host_ip = array_key($_SERVER, 'HTTP_X_FORWARDED_FOR', $_SERVER['REMOTE_ADDR']);
