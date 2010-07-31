@@ -25,7 +25,12 @@ class Twitter_controller extends App_controller
 
     public function clear()
     {
-        // TODO: Clear session
+        $this->session->status = NULL;
+        $this->session->access_token = NULL;
+        $this->session->oauth_status = NULL;
+        $this->session->oauth_token = NULL;
+        $this->session->oauth_token_secret = NULL;
+        $this->redirect('');
     }
 
     public function callback()
@@ -51,6 +56,12 @@ class Twitter_controller extends App_controller
         {
             $this->redirect('twitter/clear');
         }
+    }
+
+    public function access_token()
+    {
+        var_dump($this->session->access_token);
+        exit;
     }
 }
 
