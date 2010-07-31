@@ -95,13 +95,13 @@ var notex = {
     });
   },
   markup: function(text) {
-    text = text.replace(/note:(\S+)/g, '<a href="/$1">note:$1</a>');
-    text = text.replace(/(http:\/\/\S+)/g, '<a href="$1">$1</a>');
+    text = text.replace(/note:(\S+)/g, 'note:<a href="/$1">$1</a>');
+    text = text.replace(/http:\/\/(\S+)/g, 'http://<a href="http://$1">$1</a>');
     text = text.replace(/(^|\s|\/)_(\S.*\S)_/g, '$1<b>$2</b>');
     text = text.replace(/(^|\s|>)\/(\S.*[^\s<])\//g, '$1<i>$2</i>');
     text = text.replace(/(\S+@\S+)/g, '<a href="mailto:$1">$1</a>');
-    text = text.replace(/(^|\s)@(\w+)/g, '$1<a href="http://twitter.com/$2" target="_blank">@$2</a>');
-    text = text.replace(/(^|\s)#(\w+)/g, '$1<a href="http://twitter.com/#search?q=%23$2" target="_blank">#$2</a>');
+    text = text.replace(/(^|\s)@(\w+)/g, '$1@<a href="http://twitter.com/$2" target="_blank">$2</a>');
+    text = text.replace(/(^|\s)#(\w+)/g, '$1#<a href="http://twitter.com/#search?q=%23$2" target="_blank">$2</a>');
     text = text.replace(/^=(.+)$/, notex.embed('$1'));
     return text;
   },
