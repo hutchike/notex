@@ -15,7 +15,7 @@ var notex = {
   notes: {},
   cursor: {x: null, y: null},
   offset: {x: 42, y: 114},
-  adjust: {x: 0, y: 7},
+  adjust: {x: -2, y: 5},
   origin: {x: null, y: null},
   nearby: {x: 10, y: 20},
   init: function() {
@@ -43,7 +43,7 @@ var notex = {
         }
       }
     } else {
-      notex.origin.x = notex.cursor.x - notex.offset.x;
+      notex.origin.x = notex.cursor.x - notex.offset.x - notex.adjust.x;
       notex.origin.y = notex.cursor.y - notex.offset.y - notex.adjust.y;
     }
     if (notex.selected) {
@@ -51,8 +51,8 @@ var notex = {
       var note = notex.notes[id];
       if (note) {
         text = notex.selected.text(); notex.selected.text('');
-        notex.origin.x = note.x-1;
-        notex.origin.y = note.y-1;
+        notex.origin.x = note.x + notex.adjust.x;
+        notex.origin.y = note.y + notex.adjust.y;
         notex.notes[id].deleted = true;
       }
     }
@@ -74,7 +74,7 @@ var notex = {
     text = text.replace(/"/g, '&quot;'); // for JSON
     text = text.replace(/</g, '&lt;');  // for XML
     text = text.replace(/>/g, '&gt;'); // for XML
-    var note = {x: notex.origin.x+1, y: notex.origin.y+1, text: text, color: notex.color};
+    var note = {x: notex.origin.x - notex.adjust.x, y: notex.origin.y - notex.adjust.y, text: text, color: notex.color};
     notex.notes[id] = note;
     notex.render(id, note);
   },
