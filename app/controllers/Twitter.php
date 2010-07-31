@@ -57,12 +57,6 @@ class Twitter_controller extends App_controller
             $this->redirect('twitter/clear');
         }
     }
-
-    public function access_token()
-    {
-        var_dump($this->session->access_token);
-        exit;
-    }
 }
 
 // End of Twitter.php
