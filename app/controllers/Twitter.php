@@ -14,15 +14,14 @@ class Twitter_controller extends App_controller
         $this->session->oauth_token = $token = $request_token['oauth_token'];
         $this->session->oauth_token_secret = $request_token['oauth_token_secret'];
 
-        switch ($connection->http_code)
+        if (200 == $connection->http_code)
         {
-            case 200:
-                $url = $connection->getAuthorizeURL($token);
-                $this->redirect($url); 
-                break;
-
-            default:
-                $this->render->debug = 'Cannot authenticate with Twitter';
+            $url = $connection->getAuthorizeURL($token);
+            $this->redirect($url); 
+        }
+        else
+        {
+            $this->render->debug = 'Cannot authenticate with Twitter';
         }
     }
 
