@@ -9,6 +9,10 @@ body {
   background: url(/images/background2.jpg);
 }
 
+img {
+  border: 0;
+}
+
 #notepad {
   position: absolute;
   top: 0;
