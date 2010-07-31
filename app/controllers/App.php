@@ -5,6 +5,11 @@ class App_controller extends Controller
 {
     public function before()
     {
+        // Setup extra configuration, e.g. Twitter
+
+        $config = Config::load('notex');
+        Config::define_constants($config['twitter']);
+
         // Setup global variables and rendering data
 
         $uri = $_SERVER['REQUEST_URI'];
