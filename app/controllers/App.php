@@ -17,11 +17,14 @@ class App_controller extends Controller
 
         $this->render->callback = $this->params->callback;
         $this->render->data = NULL;
-        if ($this->app->get_content_type() != 'html')
+        $type = $this->app->get_content_type();
+        if ($type != 'html')
         {
-            $path = $_SERVER['PATH_INFO'];
+            $path = preg_replace('/[#\?].*$/', '', $_SERVER['REQUEST_URI']);
             $note_controller = $this->app->new_controller('Note');
-            $this->render->data = $note_controller->data_for($path);
+            $data = $note_controller->data_for($path);
+            if ($type == 'txt') $data = html_entity_decode($data);
+            $this->render->data = $data;
         }
     }
 }

@@ -25,12 +25,21 @@ class Note extends Model
         {
             if (array_key($note, 'deleted')) continue;
             $x = array_key($note, 'x', 0);
-            $y = array_key($note, 'y', 0);
+            $line = sprintf('%02d', intval(array_key($note, 'y', 0) / 41));
             $text = array_key($note, 'text', '');
-            $list[$y*1000+$x] = $text;
+            $list[$line.($x/1000)] = $text;
         }
         ksort($list);
-        return join(' ', array_values($list));
+        $note = '';
+        $last_pos = 0;
+        foreach ($list as $pos => $text)
+        {
+            $nl = str_repeat("\n", intval($pos/10) - intval($last_pos/10));
+            if ($note) $note .= (intval($pos) == intval($last_pos) ? ' ' : $nl);
+            $note .= $text;
+            $last_pos = $pos;
+        }
+        return $note;
     }
 
     public function to_array()

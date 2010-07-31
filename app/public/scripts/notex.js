@@ -15,7 +15,7 @@ var notex = {
   notes: {},
   cursor: {x: null, y: null},
   offset: {x: 42, y: 114},
-  adjust: {x: 0, y: 7},
+  adjust: {x: -2, y: 5},
   origin: {x: null, y: null},
   nearby: {x: 10, y: 20},
   init: function() {
@@ -43,7 +43,7 @@ var notex = {
         }
       }
     } else {
-      notex.origin.x = notex.cursor.x - notex.offset.x;
+      notex.origin.x = notex.cursor.x - notex.offset.x - notex.adjust.x;
       notex.origin.y = notex.cursor.y - notex.offset.y - notex.adjust.y;
     }
     if (notex.selected) {
@@ -51,8 +51,8 @@ var notex = {
       var note = notex.notes[id];
       if (note) {
         text = notex.selected.text(); notex.selected.text('');
-        notex.origin.x = note.x-1;
-        notex.origin.y = note.y-1;
+        notex.origin.x = note.x + notex.adjust.x;
+        notex.origin.y = note.y + notex.adjust.y;
         notex.notes[id].deleted = true;
       }
     }
@@ -74,9 +74,13 @@ var notex = {
     text = text.replace(/"/g, '&quot;'); // for JSON
     text = text.replace(/</g, '&lt;');  // for XML
     text = text.replace(/>/g, '&gt;'); // for XML
-    var note = {x: notex.origin.x+1, y: notex.origin.y+1, text: text, color: notex.color};
+    var note = {x: notex.origin.x - notex.adjust.x, y: notex.origin.y - notex.adjust.y, text: text, color: notex.color};
     notex.notes[id] = note;
     notex.render(id, note);
+  },
+  embed: function(it) {
+    var id = 'embed' + (new Date()).getTime();
+    return '<span id="'+id+'_embed"></span><script type="text/javascript">try{$("#'+id+'_embed").text('+it+')}catch(e){};</script>='+it;
   },
   render: function(id, note) {
     if (note.deleted) return;
@@ -91,12 +95,21 @@ var notex = {
     });
   },
   markup: function(text) {
-    text = text.replace(/(http:\/\/\S+)/g, '<a href="$1" target="_blank">$1</a>');
+    text = text.replace(/note:(\S+)/ig, 'note:<a href="/$1">$1</a>');
+    text = text.replace(/(https?):\/\/(\S+)/ig, '$1://<a href="$1://$2" target="_blank">$2</a>');
+    text = text.replace(/(images?):(.+)/i, '$1:<a href="http://www.google.com/images?hl=en&q=$2" target="_blank">$2</a>');
+    text = text.replace(/(maps?):(.+)/i, '$1:<a href="http://maps.google.com/?ie=UTF&near=$2" target="_blank">$2</a>');
+    text = text.replace(/(music):(.+)/i, '$1:<a href="http://www.emusic.com/search.html?mode=x&QT=$2" target="_blank">$2</a>');
+    text = text.replace(/(photos?):(.+)/i, '$1:<a href="http://www.flickr.com/search/?q=$2" target="_blank">$2</a>');
+    text = text.replace(/(search):(.+)/i, '$1:<a href="http://www.google.com/search?ie=UTF-8&q=$2" target="_blank">$2</a>');
+    text = text.replace(/(videos?):(.+)/i, '$1:<a href="http://www.youtube.com/results?search_query=$2" target="_blank">$2</a>');
+    text = text.replace(/(wiki|wikipedia):(.+)/i, '$1:<a href="http://en.wikipedia.org/wiki/$2" target="_blank">$2</a>');
     text = text.replace(/(^|\s|\/)_(\S.*\S)_/g, '$1<b>$2</b>');
     text = text.replace(/(^|\s|>)\/(\S.*[^\s<])\//g, '$1<i>$2</i>');
     text = text.replace(/(\S+@\S+)/g, '<a href="mailto:$1">$1</a>');
-    text = text.replace(/(^|\s)@(\w+)/g, '$1<a href="http://twitter.com/$2" target="_blank">@$2</a>');
-    text = text.replace(/(^|\s)#(\w+)/g, '$1<a href="http://twitter.com/#search?q=%23$2" target="_blank">#$2</a>');
+    text = text.replace(/(^|\s)@(\w+)/g, '$1@<a href="http://twitter.com/$2" target="_blank">$2</a>');
+    text = text.replace(/(^|\s)#(\w+)/g, '$1#<a href="http://twitter.com/#search?q=%23$2" target="_blank">$2</a>');
+    text = text.replace(/^=(.+)$/, notex.embed('$1'));
     return text;
   },
   load: function() {

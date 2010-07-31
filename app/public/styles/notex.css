@@ -39,6 +39,7 @@ body {
 
 .note {
   position: absolute;
+  line-height: 41px;
 }
 
 #debug {
