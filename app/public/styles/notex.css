@@ -9,6 +9,10 @@ body {
   background: url(/images/background1.jpg);
 }
 
+img {
+  border: 0;
+}
+
 #notepad {
   position: absolute;
   top: 0;
@@ -46,6 +50,12 @@ body {
   position: absolute;
   color: red;
   font-size: 14px;
-  top: 0;
+  top: 60px;
   right: 0;
+}
+
+#twitter {
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }
