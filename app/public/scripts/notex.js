@@ -95,7 +95,7 @@ var notex = {
     });
   },
   markup: function(text) {
-    text = text.replace(/note:(\S+)/ig, 'note:<a href="/$1">$1</a>');
+    text = text.replace(/(noted?):(\S+)/ig, '$1:<a href="/$2">$2</a>');
     text = text.replace(/(https?):\/\/(\S+)/ig, '$1://<a href="$1://$2" target="_blank">$2</a>');
     text = text.replace(/(images?):(.+)/i, '$1:<a href="http://www.google.com/images?hl=en&q=$2" target="_blank">$2</a>');
     text = text.replace(/(maps?):(.+)/i, '$1:<a href="http://maps.google.com/?ie=UTF&near=$2" target="_blank">$2</a>');
@@ -104,7 +104,7 @@ var notex = {
     text = text.replace(/(search):(.+)/i, '$1:<a href="http://www.google.com/search?ie=UTF-8&q=$2" target="_blank">$2</a>');
     text = text.replace(/(videos?):(.+)/i, '$1:<a href="http://www.youtube.com/results?search_query=$2" target="_blank">$2</a>');
     text = text.replace(/(wiki|wikipedia):(.+)/i, '$1:<a href="http://en.wikipedia.org/wiki/$2" target="_blank">$2</a>');
-    text = text.replace(/(^|\s|\/)_(\S.*\S)_/g, '$1<b>$2</b>');
+    text = text.replace(/(^|\s|\/)_(\S.*)_/g, '$1<b>$2</b>');
     text = text.replace(/(^|\s|>)\/(\S.*[^\s<])\//g, '$1<i>$2</i>');
     text = text.replace(/(\S+@\S+)/g, '<a href="mailto:$1">$1</a>');
     text = text.replace(/(^|\s)@(\w+)/g, '$1@<a href="http://twitter.com/$2" target="_blank">$2</a>');
