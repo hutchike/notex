@@ -14,8 +14,8 @@ var notex = {
   color: 'black',
   notes: {},
   cursor: {x: null, y: null},
-  offset: {x: 42, y: 114},
-  adjust: {x: -2, y: 5},
+  offset: {x: 44, y: 114},
+  adjust: {x: -1, y: 5},
   origin: {x: null, y: null},
   nearby: {x: 10, y: 20},
   init: function() {
