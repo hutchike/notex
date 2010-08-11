@@ -47,6 +47,19 @@ class Note extends Model
         $notes_json = str_replace('<', '&lt;', $this->notes);
         return json_decode($notes_json, TRUE);
     }
+
+    public static function set_database_for($username)
+    {
+        if ($username == '' || $username == 'www') return;
+
+        $data_file = "app/data/users/$username.db";
+        if (!file_exists($data_file))
+        {
+            $user_file = 'app/data/new_user.db';
+            copy($user_file, $data_file);
+        }
+        parent::connect($data_file, TRUE);
+    }
 }
 
 // End of Note.php
