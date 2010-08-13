@@ -13,7 +13,7 @@ img {
 #logo {
   position: absolute;
   top: 2px;
-  left: 218px;
+  left: 220px;
   width: 325px;
   height: 54px;
   background: url(/images/noted.cc.png);
@@ -25,16 +25,17 @@ img {
 
 #notepad {
   position: absolute;
-  top: 60px;
-  left: 224px;
-  width: 556px;
-  height: 764px;
+  top: 55px;
+  left: 220px;
+  width: 579px;
+  height: 787px;
+  background: url(/images/noteshadow.png);
 }
 
 #page {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 12px;
+  left: 12px;
   width: 556px;
   height: 764px;
   background: url(/images/notepad3.jpg);
@@ -118,15 +119,15 @@ img {
   font-size: 10px;
 }
 
-#stylebox {
+#penbox {
   position: absolute;
-  top: 60px;
-  left: 11px;
+  top: 65px;
+  left: 13px;
   width: 200px;
   height: 90px;
 }
 
-#stylebox #selectcolor {
+#penbox #selectcolor {
   position: absolute;
   top: 28px;
   left: 28px;
@@ -135,7 +136,7 @@ img {
   background: url(/images/selectcolor.png);
 }
 
-#stylebox #selectfont {
+#penbox #selectfont {
   position: absolute;
   top: 57px;
   left: 4px;
@@ -146,8 +147,8 @@ img {
 
 #notelist {
   position: absolute;
-  top: 160px;
-  left: 11px;
+  top: 165px;
+  left: 13px;
   width: 200px;
 }
 
@@ -163,10 +164,10 @@ img {
 }
 
 #notelist #listbody #listitems {
-  width: 200px;
+  width: 155px;
   padding: 5px;
   margin: 0;
-  margin-left: 30px;
+  margin-left: 25px;
   list-style-image: url(/images/page_white.png);
 }
 

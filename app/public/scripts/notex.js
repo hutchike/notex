@@ -19,7 +19,7 @@ var notex = {
   font: '',
   notes: {},
   cursor: {x: null, y: null},
-  offset: {x: 2, y: 8},
+  offset: {x: 14, y: 20},
   adjust: {x: -1, y: 5},
   origin: {x: null, y: null},
   nearby: {x: 10, y: 20},
@@ -33,7 +33,7 @@ var notex = {
     notex.load();
     notex.set_secret();
     notex.set_offset();
-    notex.stylebox.init();
+    notex.penbox.init();
     window.setInterval(notex.poll, notex.Poll_msecs);
   },
   poll: function() {
@@ -186,7 +186,7 @@ var notex = {
   debug: function(obj) { $('#debug').text('['+$.toJSON(obj)+']') }
 };
 
-notex.stylebox = {
+notex.penbox = {
   Cookie_hours: 24*90,
   init: function() {
     var color = notex.cookie.get('color');
