@@ -1,3 +1,4 @@
+<div id="logo"></div>
 <div id="notepad">
   <div id="page">
     <div id="content"><?= $content ?></div>
