@@ -86,3 +86,20 @@ img {
   right: 5px;
   z-index: 10;
 }
+
+#legal {
+  position: absolute;
+  top: 1100px;
+  left: 10px;
+  color: #ccc;
+  z-index: 10;
+}
+
+#legal a {
+  color: #99f;
+  text-decoration: none;
+}
+
+#legal, #legal * {
+  font-size: 10px;
+}
