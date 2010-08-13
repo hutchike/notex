@@ -4,10 +4,14 @@
  *         own a copy of this system or have it installed locally.
  */
 var notex = {
+
+  // Constants
   Line_height: 41,
   Page_height: 764,
   Page_width: 556,
   Poll_msecs: 2000,
+
+  // Properties
   is_editing: false,
   selected: null,
   secret: '',
@@ -18,6 +22,7 @@ var notex = {
   adjust: {x: -1, y: 5},
   origin: {x: null, y: null},
   nearby: {x: 10, y: 20},
+
   init: function() {
     $('#page').mousemove(function(e) {
       notex.cursor.x = e.pageX;
@@ -151,15 +156,23 @@ var notex = {
     var y_diff = Math.abs(pos1.y - pos2.y);
     return (x_diff <= notex.nearby.x && y_diff <= notex.nearby.y);
   },
-  set_color: function() {
-    var url = new String(window.location.href);
-    var found = url.match(/#(\w+)/);
-    if (found) notex.color = found[1];
+  set_color: function(color) {
+    if (color) {
+      notex.color = color;
+    } else { // use a named anchor from the URL
+      var url = new String(window.location.href);
+      var found = url.match(/#(\w+)/);
+      if (found) notex.color = found[1];
+    }
   },
-  set_secret: function() {
-    var url = new String(window.location.href);
-    var found = url.match(/\?(\w+)/);
-    if (found) notex.secret = found[1];
+  set_secret: function(secret) {
+    if (secret) {
+      notex.secret = secret;
+    } else { // use a query string from the URL
+      var url = new String(window.location.href);
+      var found = url.match(/\?(\w+)/);
+      if (found) notex.secret = found[1];
+    }
   },
   set_offset: function() {
     var notepad = $('#notepad');
