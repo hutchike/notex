@@ -7,6 +7,7 @@ body {
   padding: 0;
   margin: 0;
   background: url(/images/redrocks.jpg);
+  min-height: 1125px;
 }
 
 img {
@@ -19,9 +20,6 @@ img {
   left: 224px;
   width: 556px;
   height: 764px;
-  background: url(/images/notepad3.jpg);
-  filter: alpha(opacity=90);
-  opacity: 0.9;
 }
 
 #page {
@@ -30,7 +28,9 @@ img {
   left: 0;
   width: 556px;
   height: 764px;
-  background-color: transparent;
+  background: url(/images/notepad3.jpg);
+  filter: alpha(opacity=90);
+  opacity: 0.9;
   border: 0;
 }
 
@@ -43,6 +43,15 @@ img {
   border: 0;
 }
 
+#handle {
+  position: absolute;
+  border: 1px solid #999;
+  background-color: #ccc;
+  width: 5px;
+  height: 5px;
+  display: none;
+}
+
 .note {
   position: absolute;
   line-height: 41px;
@@ -52,15 +61,6 @@ img {
   background-color: #fff;
   filter: alpha(opacity=50);
   opacity: 0.5;
-}
-
-#handle {
-  position: absolute;
-  border: 1px solid #999;
-  background-color: #ccc;
-  width: 5px;
-  height: 5px;
-  display: none;
 }
 
 #debug {
