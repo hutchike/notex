@@ -6,29 +6,44 @@
 body {
   padding: 0;
   margin: 0;
-  background: url(/images/background1.jpg);
+  background: url(/images/redrocks.jpg);
+  min-height: 1125px;
 }
 
 img {
   border: 0;
 }
 
+#logo {
+  position: absolute;
+  top: 5px;
+  left: 224px;
+  width: 310px;
+  height: 40px;
+  background: url(/images/noted.cc.png);
+}
+
+#copy {
+  z-index: 10;
+}
+
 #notepad {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 684px;
-  height: 912px;
-  background: url(/images/notepad1.jpg);
+  top: 60px;
+  left: 224px;
+  width: 556px;
+  height: 764px;
 }
 
 #page {
   position: absolute;
-  top: 104px;
-  left: 42px;
-  width: 555px;
-  height: 777px;
-  background-color: transparent;
+  top: 0;
+  left: 0;
+  width: 556px;
+  height: 764px;
+  background: url(/images/notepad3.jpg);
+  filter: alpha(opacity=90);
+  opacity: 0.9;
   border: 0;
 }
 
@@ -41,9 +56,24 @@ img {
   border: 0;
 }
 
+#handle {
+  position: absolute;
+  border: 1px solid #999;
+  background-color: #ccc;
+  width: 5px;
+  height: 5px;
+  display: none;
+}
+
 .note {
   position: absolute;
   line-height: 41px;
+}
+
+.selected {
+  background-color: #fff;
+  filter: alpha(opacity=50);
+  opacity: 0.5;
 }
 
 #debug {
@@ -59,4 +89,21 @@ img {
   top: 5px;
   right: 5px;
   z-index: 10;
+}
+
+#legal {
+  position: absolute;
+  top: 1100px;
+  left: 10px;
+  color: #ccc;
+  z-index: 10;
+}
+
+#legal a {
+  color: #99f;
+  text-decoration: none;
+}
+
+#legal, #legal * {
+  font-size: 10px;
 }

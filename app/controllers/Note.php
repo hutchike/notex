@@ -5,6 +5,7 @@ class Note_controller extends App_controller
     {
         parent::before();
         load_models('Note');
+        Note::set_database_for($this->username);
     }
 
     public function load()

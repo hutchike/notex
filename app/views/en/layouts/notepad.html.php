@@ -1,3 +1,5 @@
+<a href="/"><div id="logo"></div></a>
+<div id="copy"><?= $copy ?></div>
 <div id="notepad">
   <div id="page">
     <div id="content"><?= $content ?></div>
@@ -11,4 +13,5 @@
 <div id="twitter">
   <a href="/twitter/login"><img src="/images/twitter/lighter.png" alt="twitter login"/></a>
 </div>
+<div id="legal">Copyright &copy;<?= strftime('%Y') ?> <a href="mailto:kevin.hutchinson@guanoo.com">Kevin Hutchinson</a>. All Rights Reserved.</div>
 <? endif ?>
