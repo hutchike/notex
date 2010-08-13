@@ -21,6 +21,8 @@ img {
   width: 310px;
   height: 40px;
   background: url(/images/noted.cc.png);
+  filter: alpha(opacity=60);
+  opacity: 0.6;
 }
 
 #copy {
