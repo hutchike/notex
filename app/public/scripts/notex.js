@@ -5,8 +5,8 @@
  */
 var notex = {
   Line_height: 41,
-  Page_height: 777,
-  Page_width: 560,
+  Page_height: 764,
+  Page_width: 556,
   Poll_msecs: 2000,
   is_editing: false,
   selected: null,
@@ -14,7 +14,7 @@ var notex = {
   color: 'black',
   notes: {},
   cursor: {x: null, y: null},
-  offset: {x: 44, y: 114},
+  offset: {x: 2, y: 8},
   adjust: {x: -1, y: 5},
   origin: {x: null, y: null},
   nearby: {x: 10, y: 20},
@@ -27,6 +27,7 @@ var notex = {
     notex.load();
     notex.set_color();
     notex.set_secret();
+    notex.set_offset();
     window.setInterval(notex.save, notex.Poll_msecs);
   },
   click: function(e) {
@@ -86,11 +87,14 @@ var notex = {
     if (note.deleted) return;
     $('#content').append('<div id="'+id+'" class="note" style="top:'+note.y+'px;left:'+note.x+'px;color:'+note.color+'">'+notex.markup(note.text)+'</div>');
     $('.note').mouseover(function(e) {
+      if (notex.selected) return;
       notex.selected = $(e.target);
       while (notex.selected.attr('class') != 'note') {
         notex.selected = notex.selected.parent(); // for formetted text
       }
+      notex.selected.addClass('selected');
     }).mouseout(function(e) {
+      if (notex.selected) notex.selected.removeClass('selected');
       notex.selected = null;
     });
   },
@@ -153,6 +157,11 @@ var notex = {
     var url = new String(window.location.href);
     var found = url.match(/\?(\w+)/);
     if (found) notex.secret = found[1];
+  },
+  set_offset: function() {
+    var notepad = $('#notepad');
+    notex.offset.x += parseInt(notepad.css('left'));
+    notex.offset.y += parseInt(notepad.css('top'));
   },
   debug: function(obj) { $('#debug').text('['+$.toJSON(obj)+']') }
 };
