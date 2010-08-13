@@ -21,8 +21,6 @@ img {
   width: 310px;
   height: 40px;
   background: url(/images/noted.cc.png);
-  filter: alpha(opacity=60);
-  opacity: 0.6;
 }
 
 #copy {
@@ -108,4 +106,66 @@ img {
 
 #legal, #legal * {
   font-size: 10px;
+}
+
+#stylebox {
+  position: absolute;
+  top: 60px;
+  left: 11px;
+  width: 200px;
+  height: 90px;
+}
+
+#stylebox #selectcolor {
+  position: absolute;
+  top: 28px;
+  left: 28px;
+  width: 24px;
+  height: 24px;
+  background: url(/images/selectcolor.png);
+}
+
+#stylebox #selectfont {
+  position: absolute;
+  top: 57px;
+  left: 4px;
+  width: 62px;
+  height: 28px;
+  background: url(/images/selectfont.png);
+}
+
+#notelist {
+  position: absolute;
+  top: 160px;
+  left: 11px;
+  width: 200px;
+}
+
+#notelist #listhead {
+  width: 200px;
+  height: 24px;
+  background: url(/images/listhead.png);
+}
+
+#notelist #listbody {
+  width: 200px;
+  background: url(/images/listback.png);
+}
+
+#notelist #listbody #listitems {
+  width: 200px;
+  padding: 5px;
+  margin: 0;
+  margin-left: 30px;
+  list-style-image: url(/images/page_white.png);
+}
+
+#notelist #listbody #listitems li {
+  font-size: 14px;
+}
+
+#notelist #listfoot {
+  width: 200px;
+  height: 10px;
+  background: url(/images/listfoot.png);
 }

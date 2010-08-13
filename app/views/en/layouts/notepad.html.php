@@ -13,5 +13,23 @@
 <div id="twitter">
   <a href="/twitter/login"><img src="/images/twitter/lighter.png" alt="twitter login"/></a>
 </div>
+<div id="stylebox">
+  <div id="selectcolor"></div>
+  <div id="selectfont"></div>
+  <img src="/images/stylebox.png" id="styleimg" width="200" height="90" usemap="#stylemap" alt="stylebox" />
+  <map name="stylemap">
+    <area shape="rect" coords="4,27,28,51" onclick="alert('clicked')" alt="black" />
+  </map>
+</div>
+<div id="notelist">
+  <div id="listhead"></div>
+  <div id="listbody">
+    <ul id="listitems">
+      <li>first note</li>
+      <li>second note</li>
+    </ul>
+  </div>
+  <div id="listfoot"></div>
+</div>
 <div id="legal">Copyright &copy;<?= strftime('%Y') ?> <a href="mailto:kevin.hutchinson@guanoo.com">Kevin Hutchinson</a>. All Rights Reserved.</div>
 <? endif ?>
