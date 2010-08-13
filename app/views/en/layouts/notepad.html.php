@@ -18,7 +18,14 @@
   <div id="selectfont"></div>
   <img src="/images/stylebox.png" id="styleimg" width="200" height="90" usemap="#stylemap" alt="stylebox" />
   <map name="stylemap">
-    <area shape="rect" coords="4,27,28,51" onclick="alert('clicked')" alt="black" />
+    <area shape="rect" coords="4,28,27,52" onclick="notex.stylebox.set_color('black', 4, 28)" alt="black" />
+    <area shape="rect" coords="28,28,51,52" onclick="notex.stylebox.set_color('#333', 28, 28)" alt="slate gray" />
+    <area shape="rect" coords="52,28,75,52" onclick="notex.stylebox.set_color('#666', 52, 28)" alt="steel gray" />
+    <area shape="rect" coords="76,28,99,52" onclick="notex.stylebox.set_color('#80007e', 76, 28)" alt="deep purple" />
+    <area shape="rect" coords="100,28,123,52" onclick="notex.stylebox.set_color('#008001', 100, 28)" alt="forest green" />
+    <area shape="rect" coords="123,28,146,52" onclick="notex.stylebox.set_color('#0003ff', 123, 28)" alt="aqua blue" />
+    <area shape="rect" coords="147,28,170,52" onclick="notex.stylebox.set_color('#ff00fc', 147, 28)" alt="pink kiss" />
+    <area shape="rect" coords="171,28,194,52" onclick="notex.stylebox.set_color('red', 171, 28)" alt="red alert" />
   </map>
 </div>
 <div id="notelist">

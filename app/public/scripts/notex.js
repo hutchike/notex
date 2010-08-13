@@ -181,3 +181,11 @@ var notex = {
   },
   debug: function(obj) { $('#debug').text('['+$.toJSON(obj)+']') }
 };
+
+notex.stylebox = {
+  set_color: function(name, x, y) {
+    notex.set_color(name);
+    $('#selectcolor').css({left: x, top: y});
+  },
+  version: 0.1
+}
