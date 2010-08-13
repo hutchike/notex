@@ -15,8 +15,8 @@ var notex = {
   is_editing: false,
   selected: null,
   secret: '',
-  color: '#333',
-  font: 'sans',
+  color: '',
+  font: '',
   notes: {},
   cursor: {x: null, y: null},
   offset: {x: 2, y: 8},
@@ -31,9 +31,9 @@ var notex = {
     }).click(notex.click);
     $('#edit').focusout(notex.write);
     notex.load();
-    notex.set_color();
     notex.set_secret();
     notex.set_offset();
+    notex.stylebox.init();
     window.setInterval(notex.poll, notex.Poll_msecs);
   },
   poll: function() {
@@ -98,10 +98,10 @@ var notex = {
     $('.note').mouseover(function(e) {
       if (notex.selected) return;
       notex.selected = $(e.target);
-      while (notex.selected.attr('class').substr(0, 4) != 'note') {
+      while (!notex.selected.hasClass('note')) {
         notex.selected = notex.selected.parent(); // for formetted text
       }
-      notex.selected.addClass('selected');
+      if (!notex.selected.hasClass('selected')) notex.selected.addClass('selected');
     }).mouseout(function(e) {
       if (notex.selected) notex.selected.removeClass('selected');
       notex.selected = null;
@@ -187,13 +187,61 @@ var notex = {
 };
 
 notex.stylebox = {
+  Cookie_hours: 24*90,
+  init: function() {
+    var color = notex.cookie.get('color');
+    if (color) {
+      color = color.split(':');
+      this.set_color(color[0], parseInt(color[1]), parseInt(color[2]));
+    } else {
+      notex.set_color('#333');
+    }
+    var font = notex.cookie.get('font');
+    if (font) {
+      font = font.split(':');
+      this.set_font(font[0], parseInt(font[1]), parseInt(font[2]));
+    } else {
+      notex.set_font('sans');
+    }
+  },
   set_color: function(name, x, y) {
     notex.set_color(name);
     $('#selectcolor').css({left: x, top: y});
+    notex.cookie.set('color', name+':'+x+':'+y, this.Cookie_hours);
   },
   set_font: function(name, x, y) {
     notex.set_font(name);
     $('#selectfont').css({left: x, top: y});
+    notex.cookie.set('font', name+':'+x+':'+y, this.Cookie_hours);
   },
   version: 0.1
-}
+};
+
+notex.cookie = {
+  decode: decodeURIComponent,
+  encode: encodeURIComponent,
+  set: function(name, value, hours) {
+    var cookie = 'notex_' + name + '=' + this.encode(value) + '; path=/'
+    if (hours) {
+      var expires = new Date();
+      expires.setTime(expires.getTime() + hours*60*60*1000);
+      cookie += '; expires=' + expires.toGMTString();
+    }
+    document.cookie = cookie;
+    return value;
+  },
+  get: function(name)
+  {
+    var cookie = document.cookie;
+    var prefix = 'notex_' + name + '=';
+    var begin = cookie.indexOf('; ' + prefix);
+    if (begin == -1) {
+      begin = cookie.indexOf(prefix);
+      if (begin != 0) return '';
+    }
+    else begin += 2;
+    var end = document.cookie.indexOf(';', begin);
+    if (end == -1) end = cookie.length;
+    return this.decode(cookie.substring(begin + prefix.length, end));
+  }
+};
