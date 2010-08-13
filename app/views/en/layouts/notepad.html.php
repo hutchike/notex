@@ -26,6 +26,10 @@
     <area shape="rect" coords="123,28,146,52" onclick="notex.stylebox.set_color('#0003ff', 123, 28)" alt="aqua blue" />
     <area shape="rect" coords="147,28,170,52" onclick="notex.stylebox.set_color('#ff00fc', 147, 28)" alt="pink kiss" />
     <area shape="rect" coords="171,28,194,52" onclick="notex.stylebox.set_color('red', 171, 28)" alt="red alert" />
+
+    <area shape="rect" coords="4,56,66,85" onclick="notex.stylebox.set_font('sans', 4, 56)" alt="sans serif" />
+    <area shape="rect" coords="68,56,130,85" onclick="notex.stylebox.set_font('serif', 68, 56)" alt="serif" />
+    <area shape="rect" coords="133,56,195,85" onclick="notex.stylebox.set_font('mono', 133, 56)" alt="mono" />
   </map>
 </div>
 <div id="notelist">

@@ -1,9 +1,5 @@
-* {
-  font-family: arial, helvetica, sans-serif;
-  font-size: 24px;
-}
-
 body {
+  font-family: arial, helvetica, sans-serif;
   padding: 0;
   margin: 0;
   background: url(/images/redrocks.jpg);
@@ -54,6 +50,7 @@ img {
   width: 555px;
   background-color: transparent;
   border: 0;
+  font-size: 24px;
 }
 
 #handle {
@@ -68,12 +65,25 @@ img {
 .note {
   position: absolute;
   line-height: 41px;
+  font-size: 24px;
 }
 
 .selected {
   background-color: #fff;
   filter: alpha(opacity=50);
   opacity: 0.5;
+}
+
+.sans {
+  font-family: arial, helvetica, sans-serif;
+}
+
+.serif {
+  font-family: times new roman, times, serif;
+}
+
+.mono {
+  font-family: courier new, monospace;
 }
 
 #debug {

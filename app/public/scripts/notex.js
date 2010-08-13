@@ -16,6 +16,7 @@ var notex = {
   selected: null,
   secret: '',
   color: '#333',
+  font: 'serif',
   notes: {},
   cursor: {x: null, y: null},
   offset: {x: 2, y: 8},
@@ -66,7 +67,7 @@ var notex = {
       }
     }
     var width = notex.Page_width - notex.origin.x;
-    $('#edit').css({'top': notex.origin.y, 'left': notex.origin.x, 'width': width, color: notex.color}).attr('value', text).show().select().focus();
+    $('#edit').css({'top': notex.origin.y, 'left': notex.origin.x, 'width': width, color: notex.color}).attr({value: text, 'class': notex.font}).show().select().focus();
     notex.is_editing = true;
   },
   write: function(opts) {
@@ -83,7 +84,7 @@ var notex = {
     text = text.replace(/"/g, '&quot;'); // for JSON
     text = text.replace(/</g, '&lt;');  // for XML
     text = text.replace(/>/g, '&gt;'); // for XML
-    var note = {x: notex.origin.x - notex.adjust.x, y: notex.origin.y - notex.adjust.y, text: text, color: notex.color};
+    var note = {x: notex.origin.x - notex.adjust.x, y: notex.origin.y - notex.adjust.y, text: text, color: notex.color, font: notex.font};
     notex.notes[id] = note;
     notex.render(id, note);
   },
@@ -93,11 +94,11 @@ var notex = {
   },
   render: function(id, note) {
     if (note.deleted) return;
-    $('#content').append('<div id="'+id+'" class="note" style="top:'+note.y+'px;left:'+note.x+'px;color:'+note.color+'">'+notex.markup(note.text)+'</div>');
+    $('#content').append('<div id="'+id+'" class="note '+note.font+'" style="top:'+note.y+'px;left:'+note.x+'px;color:'+note.color+'">'+notex.markup(note.text)+'</div>');
     $('.note').mouseover(function(e) {
       if (notex.selected) return;
       notex.selected = $(e.target);
-      while (notex.selected.attr('class') != 'note') {
+      while (notex.selected.attr('class').substr(0, 4) != 'note') {
         notex.selected = notex.selected.parent(); // for formetted text
       }
       notex.selected.addClass('selected');
@@ -165,6 +166,9 @@ var notex = {
       if (found) notex.color = found[1];
     }
   },
+  set_font: function(font) {
+    notex.font = font;
+  },
   set_secret: function(secret) {
     if (secret) {
       notex.secret = secret;
@@ -186,6 +190,10 @@ notex.stylebox = {
   set_color: function(name, x, y) {
     notex.set_color(name);
     $('#selectcolor').css({left: x, top: y});
+  },
+  set_font: function(name, x, y) {
+    notex.set_font(name);
+    $('#selectfont').css({left: x, top: y});
   },
   version: 0.1
 }
