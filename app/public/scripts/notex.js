@@ -11,7 +11,7 @@ var notex = {
   is_editing: false,
   selected: null,
   secret: '',
-  color: 'black',
+  color: '#333',
   notes: {},
   cursor: {x: null, y: null},
   offset: {x: 2, y: 8},
