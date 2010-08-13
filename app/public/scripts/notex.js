@@ -152,6 +152,7 @@ var notex = {
     var url = new String(window.location.href);
     var found = url.match(/#(\w+)/);
     if (found) notex.color = found[1];
+    setInterval(notex.set_color, 500);
   },
   set_secret: function() {
     var url = new String(window.location.href);
