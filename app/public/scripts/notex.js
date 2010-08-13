@@ -95,14 +95,14 @@ var notex = {
   render: function(id, note) {
     if (note.deleted) return;
     $('#content').append('<div id="'+id+'" class="note '+note.font+'" style="top:'+note.y+'px;left:'+note.x+'px;color:'+note.color+'">'+notex.markup(note.text)+'</div>');
-    $('.note').mouseover(function(e) {
+    $('.note').mouseenter(function(e) {
       if (notex.selected) return;
       notex.selected = $(e.target);
       while (!notex.selected.hasClass('note')) {
         notex.selected = notex.selected.parent(); // for formetted text
       }
       if (!notex.selected.hasClass('selected')) notex.selected.addClass('selected');
-    }).mouseout(function(e) {
+    }).mouseleave(function(e) {
       if (notex.selected) notex.selected.removeClass('selected');
       notex.selected = null;
     });
