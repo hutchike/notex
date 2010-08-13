@@ -25,10 +25,13 @@ var notex = {
     }).click(notex.click);
     $('#edit').focusout(notex.write);
     notex.load();
-    notex.set_color();
     notex.set_secret();
     notex.set_offset();
-    window.setInterval(notex.save, notex.Poll_msecs);
+    window.setInterval(notex.poll, notex.Poll_msecs);
+  },
+  poll: function() {
+    notex.save();
+    notex.set_color();
   },
   click: function(e) {
     if (notex.is_editing) return;
@@ -152,7 +155,6 @@ var notex = {
     var url = new String(window.location.href);
     var found = url.match(/#(\w+)/);
     if (found) notex.color = found[1];
-    setInterval(notex.set_color, 500);
   },
   set_secret: function() {
     var url = new String(window.location.href);
