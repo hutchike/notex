@@ -1,4 +1,5 @@
-<div id="logo"></div>
+<a href="/"><div id="logo"></div></a>
+<div id="copy"><?= $copy ?></div>
 <div id="notepad">
   <div id="page">
     <div id="content"><?= $content ?></div>

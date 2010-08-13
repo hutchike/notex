@@ -23,6 +23,10 @@ img {
   background: url(/images/noted.cc.png);
 }
 
+#copy {
+  z-index: 10;
+}
+
 #notepad {
   position: absolute;
   top: 60px;

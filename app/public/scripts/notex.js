@@ -25,13 +25,13 @@ var notex = {
     }).click(notex.click);
     $('#edit').focusout(notex.write);
     notex.load();
+    notex.set_color();
     notex.set_secret();
     notex.set_offset();
     window.setInterval(notex.poll, notex.Poll_msecs);
   },
   poll: function() {
     notex.save();
-    notex.set_color();
   },
   click: function(e) {
     if (notex.is_editing) return;
