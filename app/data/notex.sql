@@ -20,9 +20,9 @@ create table if not exists notes
     labels      varchar(255),
     secret      varchar(255),
     readers     varchar(255),
-    writers     varchar(255),
-    style       varchar(255),
-    background  varchar(255)
+    editors     varchar(255),
+    photo       varchar(255),
+    paper       varchar(255)
 );
 create index if not exists note_created_at on notes(created_at);
 create index if not exists note_updated_at on notes(updated_at);
