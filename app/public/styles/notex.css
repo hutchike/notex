@@ -12,7 +12,7 @@ img {
 
 #logo {
   position: absolute;
-  top: 5px;
+  top: 10px;
   left: 10px;
   width: 324px;
   height: 54px;
@@ -25,7 +25,7 @@ img {
 
 #notepad {
   position: absolute;
-  top: 55px;
+  top: 65px;
   left: 220px;
   width: 579px;
   height: 787px;
@@ -125,7 +125,7 @@ img {
 
 #penbox {
   position: absolute;
-  top: 65px;
+  top: 75px;
   left: 13px;
   width: 200px;
   height: 82px;
@@ -151,7 +151,7 @@ img {
 
 #notebox {
   position: absolute;
-  top: 160px;
+  top: 170px;
   left: 13px;
   width: 200px;
   height: 160px;
@@ -159,7 +159,7 @@ img {
 
 #notelist {
   position: absolute;
-  top: 332px;
+  top: 342px;
   left: 13px;
   width: 200px;
 }
