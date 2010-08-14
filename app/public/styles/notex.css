@@ -2,7 +2,7 @@ body {
   font-family: arial, helvetica, sans-serif;
   padding: 0;
   margin: 0;
-  background: url(/images/redrocks.jpg);
+  background: url(/images/photo1.jpg);
   min-height: 1125px;
 }
 
@@ -38,7 +38,7 @@ img {
   left: 12px;
   width: 556px;
   height: 764px;
-  background: url(/images/notepad6.jpg);
+  background: url(/images/paper1.jpg);
   filter: alpha(opacity=90);
   opacity: 0.9;
   border: 0;
@@ -154,12 +154,48 @@ img {
   top: 170px;
   left: 13px;
   width: 200px;
-  height: 160px;
+  height: 130px;
+}
+
+#notebox #photo {
+  position: absolute;
+  top: 44px;
+  left: 6px;
+  width: 55px;
+  height: 55px;
+  background: url(/images/thumbs/photo1.jpg);
+}
+
+#notebox #paper {
+  position: absolute;
+  top: 44px;
+  left: 66px;
+  width: 55px;
+  height: 55px;
+  background: url(/images/thumbs/paper1.jpg);
+}
+
+#notebox #canread {
+  position: absolute;
+  top: 50px;
+  left: 132px;
+  width: 20px;
+  height: 20px;
+  background: url(/images/check.png);
+}
+
+#notebox #canedit {
+  position: absolute;
+  top: 74px;
+  left: 132px;
+  width: 20px;
+  height: 20px;
+  background: url(/images/check.png);
 }
 
 #notelist {
   position: absolute;
-  top: 342px;
+  top: 312px;
   left: 13px;
   width: 200px;
 }

@@ -35,7 +35,11 @@
   </map>
 </div>
 <div id="notebox">
-  <img src="/images/notebox.png" id="styleimg" width="200" height="160" usemap="#notemap" alt="notebox" />
+  <div id="photo" onclick="alert('photo')"></div></a>
+  <div id="paper" onclick="alert('paper')"></div></a>
+  <div id="canread" onclick="alert('canread')"></div></a>
+  <div id="canedit" onclick="alert('canedit')"></div></a>
+  <img src="/images/notebox.png" id="styleimg" width="200" height="130" usemap="#notemap" alt="notebox" />
   <map name="notemap">
   </map>
 </div>
