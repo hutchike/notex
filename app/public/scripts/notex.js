@@ -131,8 +131,7 @@ var notex = {
     function(data) {
       eval('notex.notes='+data+';');
       for (id in notex.notes) {
-        var note = notex.notes[id];
-        notex.render(id, note);
+        notex.render(id, notex.notes[id]);
       }
     });
   },

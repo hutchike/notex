@@ -35,10 +35,10 @@
   </map>
 </div>
 <div id="notebox">
-  <div id="photo" onclick="alert('photo')"></div></a>
-  <div id="paper" onclick="alert('paper')"></div></a>
-  <div id="canread" onclick="alert('canread')"></div></a>
-  <div id="canedit" onclick="alert('canedit')"></div></a>
+  <div id="photo" onclick="alert('photo')"><img src="/images/nothing.gif" alt="photo" /></div>
+  <div id="paper" onclick="alert('paper')"><img src="/images/nothing.gif" alt="paper" /></div>
+  <div id="canread" onclick="alert('canread')"></div>
+  <div id="canedit" onclick="alert('canedit')"></div>
   <img src="/images/notebox.png" id="styleimg" width="200" height="130" usemap="#notemap" alt="notebox" />
   <map name="notemap">
   </map>

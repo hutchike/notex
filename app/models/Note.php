@@ -45,7 +45,8 @@ class Note extends Model
     public function to_array()
     {
         $notes_json = str_replace('<', '&lt;', $this->notes);
-        return json_decode($notes_json, TRUE);
+        $arry = json_decode($notes_json, TRUE);
+        return (is_array($arry) ? $arry : array());
     }
 
     public static function set_database_for($username)

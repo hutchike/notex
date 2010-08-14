@@ -38,7 +38,7 @@ img {
   left: 12px;
   width: 556px;
   height: 764px;
-  background: url(/images/paper1.jpg);
+  background: url(/images/papers/paper1.jpg);
   filter: alpha(opacity=90);
   opacity: 0.9;
   border: 0;
@@ -161,18 +161,17 @@ img {
   position: absolute;
   top: 44px;
   left: 6px;
-  width: 55px;
-  height: 55px;
-  background: url(/images/thumbs/photo1.jpg);
 }
 
 #notebox #paper {
   position: absolute;
   top: 44px;
   left: 66px;
+}
+
+#notebox #photo, #notebox #photo img, #notebox #paper, #notebox #paper img {
   width: 55px;
   height: 55px;
-  background: url(/images/thumbs/paper1.jpg);
 }
 
 #notebox #canread {
