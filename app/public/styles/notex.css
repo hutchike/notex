@@ -14,7 +14,7 @@ img {
   position: absolute;
   top: 2px;
   left: 220px;
-  width: 325px;
+  width: 324px;
   height: 54px;
   background: url(/images/noted.cc.png);
 }
@@ -38,7 +38,7 @@ img {
   left: 12px;
   width: 556px;
   height: 764px;
-  background: url(/images/notepad3.jpg);
+  background: url(/images/notepad6.jpg);
   filter: alpha(opacity=90);
   opacity: 0.9;
   border: 0;
@@ -145,9 +145,17 @@ img {
   background: url(/images/selectfont.png);
 }
 
-#notelist {
+#notebox {
   position: absolute;
   top: 165px;
+  left: 13px;
+  width: 200px;
+  height: 136px;
+}
+
+#notelist {
+  position: absolute;
+  top: 312px;
   left: 13px;
   width: 200px;
 }

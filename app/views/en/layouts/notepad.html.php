@@ -13,11 +13,12 @@
 <div id="twitter">
   <a href="/twitter/login"><img src="/images/twitter/lighter.png" alt="twitter login"/></a>
 </div>
+<? endif ?>
 <div id="penbox">
   <div id="selectcolor"></div>
   <div id="selectfont"></div>
-  <img src="/images/penbox.png" id="styleimg" width="200" height="90" usemap="#stylemap" alt="penbox" />
-  <map name="stylemap">
+  <img src="/images/penbox.png" id="styleimg" width="200" height="90" usemap="#penmap" alt="penbox" />
+  <map name="penmap">
     <area shape="rect" coords="4,28,27,52" onclick="notex.penbox.set_color('black', 4, 28)" alt="black" />
     <area shape="rect" coords="28,28,51,52" onclick="notex.penbox.set_color('#333', 28, 28)" alt="slate gray" />
     <area shape="rect" coords="52,28,75,52" onclick="notex.penbox.set_color('#666', 52, 28)" alt="steel gray" />
@@ -32,6 +33,11 @@
     <area shape="rect" coords="133,56,195,85" onclick="notex.penbox.set_font('mono', 133, 56)" alt="mono" />
   </map>
 </div>
+<div id="notebox">
+  <img src="/images/notebox.png" id="styleimg" width="200" height="136" usemap="#notemap" alt="notebox" />
+  <map name="notemap">
+  </map>
+</div>
 <div id="notelist">
   <div id="listhead"></div>
   <div id="listbody">
@@ -43,4 +49,3 @@
   <div id="listfoot"></div>
 </div>
 <div id="legal">Copyright &copy;<?= strftime('%Y') ?> <a href="mailto:kevin.hutchinson@guanoo.com">Kevin Hutchinson</a>. All Rights Reserved.</div>
-<? endif ?>
