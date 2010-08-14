@@ -26,7 +26,7 @@
     <area shape="rect" coords="100,29,123,52" onclick="notex.penbox.set_color('#008001', 100, 28)" alt="forest green" />
     <area shape="rect" coords="123,29,146,52" onclick="notex.penbox.set_color('#0003ff', 123, 28)" alt="aqua blue" />
     <area shape="rect" coords="147,29,170,52" onclick="notex.penbox.set_color('#ff00fc', 147, 28)" alt="pink kiss" />
-    <area shape="rect" coords="171,29,194,52" onclick="notex.penbox.set_color('red', 171, 28)" alt="red alert" />
+    <area shape="rect" coords="172,29,195,52" onclick="notex.penbox.set_color('red', 172, 28)" alt="red alert" />
 
     <area shape="rect" coords="4,56,51,78" onclick="notex.penbox.set_font('sans', 4, 55)" alt="sans serif" />
     <area shape="rect" coords="53,56,100,78" onclick="notex.penbox.set_font('serif', 53, 55)" alt="serif" />
