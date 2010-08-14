@@ -17,7 +17,7 @@
 <div id="penbox">
   <div id="selectcolor"></div>
   <div id="selectfont"></div>
-  <img src="/images/penbox.png" id="styleimg" width="200" height="90" usemap="#penmap" alt="penbox" />
+  <img src="/images/penbox.png" id="styleimg" width="200" height="82" usemap="#penmap" alt="penbox" />
   <map name="penmap">
     <area shape="rect" coords="4,28,27,52" onclick="notex.penbox.set_color('black', 4, 28)" alt="black" />
     <area shape="rect" coords="28,28,51,52" onclick="notex.penbox.set_color('#333', 28, 28)" alt="slate gray" />
@@ -28,13 +28,14 @@
     <area shape="rect" coords="147,28,170,52" onclick="notex.penbox.set_color('#ff00fc', 147, 28)" alt="pink kiss" />
     <area shape="rect" coords="171,28,194,52" onclick="notex.penbox.set_color('red', 171, 28)" alt="red alert" />
 
-    <area shape="rect" coords="4,56,66,85" onclick="notex.penbox.set_font('sans', 4, 56)" alt="sans serif" />
-    <area shape="rect" coords="68,56,130,85" onclick="notex.penbox.set_font('serif', 68, 56)" alt="serif" />
-    <area shape="rect" coords="133,56,195,85" onclick="notex.penbox.set_font('mono', 133, 56)" alt="mono" />
+    <area shape="rect" coords="4,56,51,78" onclick="notex.penbox.set_font('sans', 4, 56)" alt="sans serif" />
+    <area shape="rect" coords="53,56,100,78" onclick="notex.penbox.set_font('serif', 53, 56)" alt="serif" />
+    <area shape="rect" coords="101,56,147,78" onclick="notex.penbox.set_font('mono', 101, 56)" alt="mono" />
+    <area shape="rect" coords="149,56,196,78" onclick="notex.penbox.set_font('script', 149, 56)" alt="script" />
   </map>
 </div>
 <div id="notebox">
-  <img src="/images/notebox.png" id="styleimg" width="200" height="136" usemap="#notemap" alt="notebox" />
+  <img src="/images/notebox.png" id="styleimg" width="200" height="160" usemap="#notemap" alt="notebox" />
   <map name="notemap">
   </map>
 </div>

@@ -12,8 +12,8 @@ img {
 
 #logo {
   position: absolute;
-  top: 2px;
-  left: 220px;
+  top: 5px;
+  left: 10px;
   width: 324px;
   height: 54px;
   background: url(/images/noted.cc.png);
@@ -87,6 +87,10 @@ img {
   font-family: courier new, monospace;
 }
 
+.script {
+  font-family: brush script mt, cursive;
+}
+
 #debug {
   position: absolute;
   color: red;
@@ -124,7 +128,7 @@ img {
   top: 65px;
   left: 13px;
   width: 200px;
-  height: 90px;
+  height: 82px;
 }
 
 #penbox #selectcolor {
@@ -140,22 +144,22 @@ img {
   position: absolute;
   top: 57px;
   left: 4px;
-  width: 62px;
-  height: 28px;
+  width: 47px;
+  height: 22px;
   background: url(/images/selectfont.png);
 }
 
 #notebox {
   position: absolute;
-  top: 165px;
+  top: 160px;
   left: 13px;
   width: 200px;
-  height: 136px;
+  height: 160px;
 }
 
 #notelist {
   position: absolute;
-  top: 312px;
+  top: 332px;
   left: 13px;
   width: 200px;
 }
