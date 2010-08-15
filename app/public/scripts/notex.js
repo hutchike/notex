@@ -272,7 +272,13 @@ notex.notebox = {
     // TODO
   },
   wipe: function() {
-    // TODO
+    if (confirm('Are you sure?')) {
+      for (id in notex.notes) {
+        var note = notex.notes[id];
+        note.deleted = true;
+        $('#'+id).remove();
+      }
+    }
   },
   version: 0.1
 };
