@@ -14,7 +14,7 @@ var notex = {
 
   // Properties
   is_editing: false,
-  is_hiding: false,
+  is_hiding: true,
   selected: null,
   secret: '',
   paused: 0,
