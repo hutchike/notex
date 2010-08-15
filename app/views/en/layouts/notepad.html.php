@@ -35,7 +35,7 @@
   </map>
 </div>
 <div id="notebox">
-  <div id="photo" onclick="notex.notebox.select('photo')"><img src="/images/nothing.gif" alt="photo" /></div>
+  <div id="photo"><img src="/images/nothing.gif" alt="photo" onclick="notex.notebox.select('photo')" /></div>
   <div id="paper" onclick="notex.notebox.select('paper')"></div>
   <div id="canread" onclick="notex.notebox.toggle('readers')"></div>
   <div id="canedit" onclick="notex.notebox.toggle('editors')"></div>
