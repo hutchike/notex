@@ -15,8 +15,6 @@ var notex = {
   is_editing: false,
   selected: null,
   secret: '',
-  color: '',
-  font: '',
   notes: {},
   cursor: {x: null, y: null},
   offset: {x: 14, y: 20},
@@ -71,7 +69,7 @@ var notex = {
       }
     }
     var width = notex.Page_width - notex.origin.x;
-    $('#edit').css({'top': notex.origin.y, 'left': notex.origin.x, 'width': width, color: notex.color}).attr({value: text, 'class': notex.font}).show().select().focus();
+    $('#edit').css({'top': notex.origin.y, 'left': notex.origin.x, 'width': width, color: notex.penbox.color}).attr({value: text, 'class': notex.penbox.font}).show().select().focus();
     notex.is_editing = true;
   },
   write: function(opts) {
@@ -88,7 +86,7 @@ var notex = {
     text = text.replace(/"/g, '&quot;'); // for JSON
     text = text.replace(/</g, '&lt;');  // for XML
     text = text.replace(/>/g, '&gt;'); // for XML
-    var note = {x: notex.origin.x - notex.adjust.x, y: notex.origin.y - notex.adjust.y, text: text, color: notex.color, font: notex.font};
+    var note = {x: notex.origin.x - notex.adjust.x, y: notex.origin.y - notex.adjust.y, text: text, color: notex.penbox.color, font: notex.penbox.font};
     notex.notes[id] = note;
     notex.render(id, note);
   },
@@ -163,18 +161,6 @@ var notex = {
     var y_diff = Math.abs(pos1.y - pos2.y);
     return (x_diff <= notex.nearby.x && y_diff <= notex.nearby.y);
   },
-  set_color: function(color) {
-    if (color) {
-      notex.color = color;
-    } else { // use a named anchor from the URL
-      var url = new String(window.location.href);
-      var found = url.match(/#(\w+)/);
-      if (found) notex.color = found[1];
-    }
-  },
-  set_font: function(font) {
-    notex.font = font;
-  },
   set_secret: function(secret) {
     if (secret) {
       notex.secret = secret;
@@ -189,10 +175,16 @@ var notex = {
     notex.offset.x += parseInt(notepad.css('left'));
     notex.offset.y += parseInt(notepad.css('top'));
   },
-  debug: function(obj) { $('#debug').text('['+$.toJSON(obj)+']') }
+  debug: function(obj) { $('#debug').text('['+$.toJSON(obj)+']') },
+  version: 0.1
 };
 
 notex.penbox = {
+
+  // Properties
+  color: '',
+  font: '',
+
   init: function() {
     var color = notex.cookie.get('color');
     if (color) {
@@ -210,12 +202,12 @@ notex.penbox = {
     }
   },
   set_color: function(name, x, y) {
-    notex.set_color(name);
+    this.color = name;
     $('#selectcolor').css({left: x, top: y});
     notex.cookie.set('color', name+':'+x+':'+y);
   },
   set_font: function(name, x, y) {
-    notex.set_font(name);
+    this.font = name;
     $('#selectfont').css({left: x, top: y});
     notex.cookie.set('font', name+':'+x+':'+y);
   },
@@ -223,10 +215,13 @@ notex.penbox = {
 };
 
 notex.notebox = {
+
+  // Properties
   photo: null,
   paper: null,
   readers: null,
   editors: null,
+
   init: function() {
   },
   setup: function(settings) {
@@ -279,7 +274,10 @@ notex.notelist = {
 };
 
 notex.cookie = {
+
+  // Constants
   Hours: 24*90,
+  
   decode: decodeURIComponent,
   encode: encodeURIComponent,
   set: function(name, value, hours) {
@@ -306,5 +304,6 @@ notex.cookie = {
     var end = document.cookie.indexOf(';', begin);
     if (end == -1) end = cookie.length;
     return this.decode(cookie.substring(begin + prefix.length, end));
-  }
+  },
+  version: 0.1
 };
