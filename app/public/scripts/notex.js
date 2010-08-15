@@ -19,21 +19,17 @@ var notex = {
   secret: '',
   paused: 0,
   notes: {},
-  cursor: {x: null, y: null},
   offset: {x: 14, y: 20},
   adjust: {x: -1, y: 5},
   origin: {x: null, y: null},
   nearby: {x: 10, y: 20},
 
   init: function() {
-    $(window).mousemove(function(e) {
+    $('body').mousemove(function(e) {
       notex.paused = 0;
       if (notex.is_hiding) notex.hide(false);
     });
-    $('#page').mousemove(function(e) {
-      notex.cursor.x = e.pageX;
-      notex.cursor.y = e.pageY;
-    }).click(notex.click);
+    $('#page').click(notex.click);
     $('#edit').focusout(notex.write);
     with (notex) {
       load();
@@ -71,8 +67,8 @@ var notex = {
         }
       }
     } else {
-      notex.origin.x = notex.cursor.x - notex.offset.x - notex.adjust.x;
-      notex.origin.y = notex.cursor.y - notex.offset.y - notex.adjust.y;
+      notex.origin.x = e.pageX - notex.offset.x - notex.adjust.x;
+      notex.origin.y = e.pageY - notex.offset.y - notex.adjust.y;
     }
     if (notex.selected) {
       var id = notex.selected.attr('id');
