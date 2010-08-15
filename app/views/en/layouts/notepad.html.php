@@ -39,7 +39,7 @@
   <div id="paper" onclick="notex.notebox.select('paper')"></div>
   <div id="canread" onclick="notex.notebox.toggle('readers')"></div>
   <div id="canedit" onclick="notex.notebox.toggle('editors')"></div>
-  <img src="/images/notebox.png" id="styleimg" width="200" height="138" usemap="#notemap" alt="notebox" />
+  <img src="/images/notebox.png" id="styleimg" width="200" height="139" usemap="#notemap" alt="notebox" />
   <map name="notemap">
     <area shape="rect" coords="5,111,60,133" onclick="notex.notebox.share()" alt="share" />
     <area shape="rect" coords="65,111,120,133" onclick="notex.notebox.rename()" alt="rename" />
