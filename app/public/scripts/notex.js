@@ -10,11 +10,14 @@ var notex = {
   Page_height: 764,
   Page_width: 556,
   Poll_msecs: 2000,
+  Hide_after: 5,
 
   // Properties
   is_editing: false,
+  is_hiding: false,
   selected: null,
   secret: '',
+  paused: 0,
   notes: {},
   cursor: {x: null, y: null},
   offset: {x: 14, y: 20},
@@ -23,6 +26,10 @@ var notex = {
   nearby: {x: 10, y: 20},
 
   init: function() {
+    $(window).mousemove(function(e) {
+      notex.paused = 0;
+      if (notex.is_hiding) notex.hide(false);
+    });
     $('#page').mousemove(function(e) {
       notex.cursor.x = e.pageX;
       notex.cursor.y = e.pageY;
@@ -40,6 +47,15 @@ var notex = {
   },
   poll: function() {
     notex.save();
+    notex.paused++;
+    if (notex.paused >= notex.Hide_after) {
+      notex.hide(true);
+    }
+  },
+  hide: function(is_hiding) {
+    var divs = $('#penbox,#notebox,#notelist');
+    is_hiding ? divs.fadeOut() : divs.fadeIn();
+    notex.is_hiding = is_hiding;
   },
   click: function(e) {
     if (notex.is_editing) return;
