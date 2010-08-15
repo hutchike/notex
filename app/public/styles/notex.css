@@ -2,7 +2,6 @@ body {
   font-family: arial, helvetica, sans-serif;
   padding: 0;
   margin: 0;
-  background: url(/images/photos/photo1.jpg);
   min-height: 1125px;
 }
 
@@ -38,7 +37,6 @@ img {
   left: 12px;
   width: 556px;
   height: 764px;
-  background: url(/images/papers/paper1.jpg);
   filter: alpha(opacity=90);
   opacity: 0.9;
   border: 0;
