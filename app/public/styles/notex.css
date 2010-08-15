@@ -227,3 +227,16 @@ img {
   height: 10px;
   background: url(/images/listfoot.png);
 }
+
+#dialogs #photo, #dialogs #paper {
+  display: none;
+  background-color: white;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 5px;
+}
+
+#dialogs #photo img, #dialogs #paper img {
+  padding: 5px;
+}

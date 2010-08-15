@@ -35,12 +35,15 @@
   </map>
 </div>
 <div id="notebox">
-  <div id="photo" onclick="alert('photo')"><img src="/images/nothing.gif" alt="photo" /></div>
-  <div id="paper" onclick="alert('paper')"><img src="/images/nothing.gif" alt="paper" /></div>
-  <div id="canread" onclick="alert('canread')"></div>
-  <div id="canedit" onclick="alert('canedit')"></div>
+  <div id="photo" onclick="notex.notebox.select('photo')"><img src="/images/nothing.gif" alt="photo" /></div>
+  <div id="paper" onclick="notex.notebox.select('paper')"></div>
+  <div id="canread" onclick="notex.notebox.toggle('readers')"></div>
+  <div id="canedit" onclick="notex.notebox.toggle('editors')"></div>
   <img src="/images/notebox.png" id="styleimg" width="200" height="138" usemap="#notemap" alt="notebox" />
   <map name="notemap">
+    <area shape="rect" coords="5,111,60,133" onclick="notex.notebox.share()" alt="share" />
+    <area shape="rect" coords="65,111,120,133" onclick="notex.notebox.rename()" alt="rename" />
+    <area shape="rect" coords="125,111,194,133" onclick="notex.notebox.wipe()" alt="wipe" />
   </map>
 </div>
 <div id="notelist">
@@ -52,5 +55,34 @@
     </ul>
   </div>
   <div id="listfoot"></div>
+</div>
+<div id="dialogs">
+  <div id="photo">
+    <div>
+      <img src="/images/thumbs/photo1.jpg" alt="photo1" onclick="notex.notebox.select('photo', 'photo1')" />
+      <img src="/images/thumbs/photo2.jpg" alt="photo2" onclick="notex.notebox.select('photo', 'photo2')" />
+      <img src="/images/thumbs/photo3.jpg" alt="photo3" onclick="notex.notebox.select('photo', 'photo3')" />
+    </div>
+    <div>
+      <img src="/images/thumbs/photo4.jpg" alt="photo4" onclick="notex.notebox.select('photo', 'photo4')" />
+      <img src="/images/thumbs/photo5.jpg" alt="photo5" onclick="notex.notebox.select('photo', 'photo5')" />
+      <img src="/images/thumbs/photo6.jpg" alt="photo6" onclick="notex.notebox.select('photo', 'photo6')" />
+    </div>
+    <div>
+      <img src="/images/thumbs/photo7.jpg" alt="photo7" onclick="notex.notebox.select('photo', 'photo7')" />
+      <img src="/images/thumbs/photo8.jpg" alt="photo8" onclick="notex.notebox.select('photo', 'photo8')" />
+      <img src="/images/thumbs/photo9.jpg" alt="photo9" onclick="notex.notebox.select('photo', 'photo9')" />
+    </div>
+  </div>
+  <div id="paper">
+    <div>
+      <img src="/images/thumbs/paper1.jpg" alt="photo1" onclick="notex.notebox.select('paper', 'paper1')" />
+      <img src="/images/thumbs/paper2.jpg" alt="photo2" onclick="notex.notebox.select('paper', 'paper2')" />
+    </div>
+    <div>
+      <img src="/images/thumbs/paper3.jpg" alt="photo3" onclick="notex.notebox.select('paper', 'paper3')" />
+      <img src="/images/thumbs/paper4.jpg" alt="photo4" onclick="notex.notebox.select('paper', 'paper4')" />
+    </div>
+  </div>
 </div>
 <div id="legal">Copyright &copy;<?= strftime('%Y') ?> <a href="mailto:kevin.hutchinson@guanoo.com">Kevin Hutchinson</a>. All Rights Reserved.</div>

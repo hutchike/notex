@@ -15,7 +15,16 @@ class Note_controller extends App_controller
         $url = parse_url($this->params->url);
         $notes = array();
         $note = new Note(array('url' => $url['path']));
-        $this->render->data = $note->load() ? $note->filter() : NULL;
+        $data = array('photo' => 'photo1',
+                      'paper' => 'paper1',
+                      'readers' => 'all',
+                      'editors' => 'all',
+                      'notes' => array());
+        if ($note->load())
+        {
+            $data['notes'] = $note->filter();
+        }
+        $this->render->data = $data;
     }
 
     public function save()

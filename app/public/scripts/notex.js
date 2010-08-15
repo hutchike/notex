@@ -30,10 +30,14 @@ var notex = {
       notex.cursor.y = e.pageY;
     }).click(notex.click);
     $('#edit').focusout(notex.write);
-    notex.load();
-    notex.set_secret();
-    notex.set_offset();
-    notex.penbox.init();
+    with (notex) {
+      load();
+      set_secret();
+      set_offset();
+      penbox.init();
+      notebox.init();
+      notelist.init();
+    }
     window.setInterval(notex.poll, notex.Poll_msecs);
   },
   poll: function() {
@@ -129,7 +133,10 @@ var notex = {
   load: function() {
     $.get('/note/load.json', {url: window.location.href},
     function(data) {
-      eval('notex.notes='+data+';');
+      var loaded;
+      eval('loaded='+data+';');
+      notex.notebox.setup(loaded);
+      notex.notes = loaded.notes ? loaded.notes : {};
       for (id in notex.notes) {
         notex.render(id, notex.notes[id]);
       }
@@ -186,7 +193,6 @@ var notex = {
 };
 
 notex.penbox = {
-  Cookie_hours: 24*90,
   init: function() {
     var color = notex.cookie.get('color');
     if (color) {
@@ -206,20 +212,78 @@ notex.penbox = {
   set_color: function(name, x, y) {
     notex.set_color(name);
     $('#selectcolor').css({left: x, top: y});
-    notex.cookie.set('color', name+':'+x+':'+y, this.Cookie_hours);
+    notex.cookie.set('color', name+':'+x+':'+y);
   },
   set_font: function(name, x, y) {
     notex.set_font(name);
     $('#selectfont').css({left: x, top: y});
-    notex.cookie.set('font', name+':'+x+':'+y, this.Cookie_hours);
+    notex.cookie.set('font', name+':'+x+':'+y);
+  },
+  version: 0.1
+};
+
+notex.notebox = {
+  photo: null,
+  paper: null,
+  readers: null,
+  editors: null,
+  init: function() {
+  },
+  setup: function(settings) {
+    this.photo = settings.photo;
+    this.paper = settings.paper;
+    this.readers = settings.readers;
+    this.editors = settings.editors;
+    this.display();
+  },
+  display: function() {
+    var images = '/images/';
+    $('body').css('background', 'url(' + images + 'photos/' + this.photo + '.jpg)');
+    $('#page').css('background', 'url(' + images + 'papers/' + this.paper + '.jpg)');
+    $('#notebox #photo img').attr('src', images + 'thumbs/' + this.photo + '.jpg');
+    $('#notebox #paper').css('background', 'url(' + images + 'thumbs/' + this.paper + '.jpg) no-repeat -27px -47px');
+    var canread = (this.readers == 'all' ? 'check' : 'cross');
+    $('#canread').css('background', 'url(' + images + canread + '.png)');
+    var canedit = (this.editors == 'all' ? 'check' : 'cross');
+    $('#canedit').css('background', 'url(' + images + canedit + '.png)');
+  },
+  select: function(dialog, selected) {
+    if (selected) {
+      $('#dialogs #'+dialog).fadeOut();
+      this[dialog] = selected;
+      this.display();
+    } else {
+      $('#dialogs #'+dialog).fadeIn();
+    }
+  },
+  toggle: function(setting) {
+    this[setting] = (this[setting] ? '' : 'all');
+    this.display();
+  },
+  share: function() {
+    // TODO
+  },
+  rename: function() {
+    // TODO
+  },
+  wipe: function() {
+    // TODO
+  },
+  version: 0.1
+};
+
+notex.notelist = {
+  init: function() {
   },
   version: 0.1
 };
 
 notex.cookie = {
+  Hours: 24*90,
   decode: decodeURIComponent,
   encode: encodeURIComponent,
   set: function(name, value, hours) {
+    hours = hours || this.Hours;
     var cookie = 'notex_' + name + '=' + this.encode(value) + '; path=/'
     if (hours) {
       var expires = new Date();
