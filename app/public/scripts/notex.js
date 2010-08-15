@@ -207,14 +207,14 @@ notex.penbox = {
       color = color.split(':');
       this.set_color(color[0], parseInt(color[1]), parseInt(color[2]));
     } else {
-      notex.set_color('#333');
+      this.set_color('#333');
     }
     var font = notex.cookie.get('font');
     if (font) {
       font = font.split(':');
       this.set_font(font[0], parseInt(font[1]), parseInt(font[2]));
     } else {
-      notex.set_font('sans');
+      this.set_font('sans');
     }
   },
   set_color: function(name, x, y) {
