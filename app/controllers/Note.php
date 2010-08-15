@@ -15,10 +15,10 @@ class Note_controller extends App_controller
         $url = parse_url($this->params->url);
         $notes = array();
         $note = new Note(array('url' => $url['path']));
-        $data = array('photo' => 'photo1',
-                      'paper' => 'paper1',
-                      'readers' => 'all',
-                      'editors' => 'all',
+        $data = array('photo' => '',
+                      'paper' => '',
+                      'readers' => '',
+                      'editors' => '',
                       'notes' => array());
         if ($note->load())
         {

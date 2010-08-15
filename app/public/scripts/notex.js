@@ -216,6 +216,14 @@ notex.penbox = {
 
 notex.notebox = {
 
+  // Constants
+  Defaults: {
+    photo: 'photo1',
+    paper: 'paper1',
+    readers: 'all',
+    editors: 'all'
+  },
+
   // Properties
   photo: null,
   paper: null,
@@ -225,10 +233,10 @@ notex.notebox = {
   init: function() {
   },
   setup: function(settings) {
-    this.photo = settings.photo;
-    this.paper = settings.paper;
-    this.readers = settings.readers;
-    this.editors = settings.editors;
+    this.photo = settings.photo || notex.cookie.get('photo') || this.Defaults.photo;
+    this.paper = settings.paper || notex.cookie.get('paper') || this.Defaults.paper;
+    this.readers = settings.readers || notex.cookie.get('readers') || this.Defaults.readers;
+    this.editors = settings.editors || notex.cookie.get('editors') || this.Defaults.editors;
     this.display();
   },
   display: function() {
@@ -242,18 +250,20 @@ notex.notebox = {
     var canedit = (this.editors == 'all' ? 'check' : 'cross');
     $('#canedit').css('background', 'url(' + images + canedit + '.png)');
   },
-  select: function(dialog, selected) {
+  select: function(photo_or_paper, selected) {
     if (selected) {
-      $('#dialogs #'+dialog).fadeOut();
-      this[dialog] = selected;
+      $('#dialogs #'+photo_or_paper).fadeOut();
+      this[photo_or_paper] = selected;
       this.display();
+      notex.cookie.set(photo_or_paper, selected);
     } else {
-      $('#dialogs #'+dialog).fadeIn();
+      $('#dialogs #'+photo_or_paper).fadeIn();
     }
   },
-  toggle: function(setting) {
-    this[setting] = (this[setting] ? '' : 'all');
+  toggle: function(readers_or_editors) {
+    this[readers_or_editors] = (this[readers_or_editors] == 'all' ? 'me' : 'all');
     this.display();
+    notex.cookie.set(readers_or_editors, this[readers_or_editors]);
   },
   share: function() {
     // TODO
