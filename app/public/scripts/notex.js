@@ -233,7 +233,7 @@ notex.notebox = {
     photo: 'photo1',
     paper: 'paper1',
     readers: 'all',
-    editors: 'all'
+    editors: 'me'
   },
 
   // Properties
