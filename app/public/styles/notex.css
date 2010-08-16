@@ -235,7 +235,7 @@ img {
   background: url(/images/listfoot.png);
 }
 
-#dialogs #photo, #dialogs #paper {
+#dialogs #photo-dialog, #dialogs #paper-dialog {
   position: absolute;
   display: none;
   background-color: white;
@@ -244,6 +244,6 @@ img {
   padding: 5px;
 }
 
-#dialogs #photo img, #dialogs #paper img {
+#dialogs #photo-dialog img, #dialogs #paper-dialog img {
   padding: 5px;
 }

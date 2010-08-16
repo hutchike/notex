@@ -9,8 +9,8 @@ function area($element, $x1, $y1, $x2, $y2, $action, $alt = '')
 <div id="notepad">
   <div id="page">
     <div id="content"><?= $content ?></div>
-    <form id="pen" onsubmit="notex.write({newline: true}); return false">
-      <input type="text" id="edit" />
+    <form id="pen" onsubmit="notex.write({newline: true}); return false" action="get">
+      <div><input type="text" id="edit" /></div>
     </form>
   </div>
 </div>
@@ -24,8 +24,8 @@ function area($element, $x1, $y1, $x2, $y2, $action, $alt = '')
 <div id="penbox">
   <div id="selectcolor"></div>
   <div id="selectfont"></div>
-  <img src="/images/penbox.png" id="styleimg" width="200" height="82" usemap="#penmap" alt="penbox" />
-  <map name="penmap">
+  <img src="/images/penbox.png" id="penbox-img" width="200" height="82" usemap="#penmap" alt="penbox" />
+  <map id="penmap" name="penmap">
     <area shape="rect" coords="4,29,27,52" onclick="notex.penbox.set_color('black', 4, 28)" alt="black" />
     <area shape="rect" coords="28,29,51,52" onclick="notex.penbox.set_color('#333', 28, 28)" alt="slate gray" />
     <area shape="rect" coords="52,29,75,52" onclick="notex.penbox.set_color('#666', 52, 28)" alt="steel gray" />
@@ -46,8 +46,8 @@ function area($element, $x1, $y1, $x2, $y2, $action, $alt = '')
   <div id="paper" onclick="notex.notebox.select('paper')"></div>
   <div id="canread" onclick="notex.notebox.toggle('readers')"></div>
   <div id="canedit" onclick="notex.notebox.toggle('editors')"></div>
-  <img src="/images/notebox.png" id="styleimg" width="200" height="139" usemap="#notemap" alt="notebox" />
-  <map name="notemap">
+  <img src="/images/notebox.png" id="notebox-img" width="200" height="139" usemap="#notemap" alt="notebox" />
+  <map id="notemap" name="notemap">
     <?= area("notebox", 6, 112, 61, 132, "notebox.share()", "share") ?>
     <?= area("notebox", 66, 112, 121, 132, "notebox.rename()", "rename") ?>
     <?= area("notebox", 126, 112, 194, 132, "notebox.wipe()", "wipe") ?>
@@ -64,7 +64,7 @@ function area($element, $x1, $y1, $x2, $y2, $action, $alt = '')
   <div id="listfoot"></div>
 </div>
 <div id="dialogs">
-  <div id="photo">
+  <div id="photo-dialog">
     <div>
       <img src="/images/thumbs/photo1.jpg" alt="photo1" onclick="notex.notebox.select('photo', 'photo1')" />
       <img src="/images/thumbs/photo2.jpg" alt="photo2" onclick="notex.notebox.select('photo', 'photo2')" />
@@ -81,7 +81,7 @@ function area($element, $x1, $y1, $x2, $y2, $action, $alt = '')
       <img src="/images/thumbs/photo9.jpg" alt="photo9" onclick="notex.notebox.select('photo', 'photo9')" />
     </div>
   </div>
-  <div id="paper">
+  <div id="paper-dialog">
     <div>
       <img src="/images/thumbs/paper1.jpg" alt="photo1" onclick="notex.notebox.select('paper', 'paper1')" />
       <img src="/images/thumbs/paper2.jpg" alt="photo2" onclick="notex.notebox.select('paper', 'paper2')" />

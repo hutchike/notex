@@ -263,13 +263,14 @@ notex.notebox = {
     $('#canedit').css('background', 'url(' + images + canedit + '.png)');
   },
   select: function(photo_or_paper, selected) {
+    var dialog = $('#dialogs #' + photo_or_paper + '-dialog');
     if (selected) {
-      $('#dialogs #'+photo_or_paper).fadeOut();
+      dialog.fadeOut();
       this[photo_or_paper] = selected;
       this.display();
       notex.cookie.set(photo_or_paper, selected);
     } else {
-      $('#dialogs #'+photo_or_paper).fadeIn();
+      dialog.fadeIn();
     }
   },
   toggle: function(readers_or_editors) {
