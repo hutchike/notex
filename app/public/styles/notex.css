@@ -18,6 +18,11 @@ img {
   background: url(/images/noted.cc.png);
 }
 
+#logo-img {
+  width: 324px;
+  height: 54px;
+}
+
 #copy {
   z-index: 10;
 }

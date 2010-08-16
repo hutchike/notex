@@ -4,7 +4,7 @@ function area($element, $x1, $y1, $x2, $y2, $action, $alt = '')
     return "<area shape=\"rect\" coords=\"$x1,$y1,$x2,$y2\" onclick=\"notex.$action\" alt=\"$alt\" onmouseover=\"notex.fx.highlight('$element',$x1,$y1,$x2,$y2)\" onmouseout=\"notex.fx.highlight()\" />\n";
 }
 ?>
-<a href="/"><div id="logo"></div></a>
+<div id="logo"><a href="/"><img id="logo-img" src="/images/nothing.gif" alt="logo"/></a></div>
 <div id="copy"><?= $copy ?></div>
 <div id="notepad">
   <div id="page">
