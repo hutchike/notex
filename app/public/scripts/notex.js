@@ -337,12 +337,11 @@ notex.cookie = {
 };
 
 notex.fx = {
-  highlight: function(el, x1, y1, x2, y2) {
-    if (el) {
+  highlight: function(element, x1, y1, x2, y2) {
+    if (element) {
       var w = (x2 - x1) + 'px';
       var h = (y2 - y1) + 'px';
-      var pos = $('#'+el).position();
-document.title = pos.top;
+      var pos = $('#'+element).position();
       x1 = (x1 + pos.left) + 'px';
       y1 = (y1 + pos.top) + 'px';
       $('#highlight').css({left:x1, top:y1, width:w, height:h}).show();
