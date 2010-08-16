@@ -97,6 +97,12 @@ img {
   right: 0;
 }
 
+#highlight {
+  position: absolute;
+  display: none;
+  background-color: white;
+}
+
 #twitter {
   position: absolute;
   top: 5px;

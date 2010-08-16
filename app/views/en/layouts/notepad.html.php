@@ -1,3 +1,9 @@
+<?
+function area($element, $x1, $y1, $x2, $y2, $action, $alt = '')
+{
+    return "<area shape=\"rect\" coords=\"$x1,$y1,$x2,$y2\" onclick=\"notex.$action\" alt=\"$alt\" onmouseover=\"notex.fx.highlight('$element',$x1,$y1,$x2,$y2)\" onmouseout=\"notex.fx.highlight()\" />";
+}
+?>
 <a href="/"><div id="logo"></div></a>
 <div id="copy"><?= $copy ?></div>
 <div id="notepad">
@@ -9,6 +15,7 @@
   </div>
 </div>
 <div id="debug"><?= $debug ?></div>
+<div id="highlight"></div>
 <? if (is_null($access_token)): ?>
 <div id="twitter">
   <a href="/twitter/login"><img src="/images/twitter/lighter.png" alt="twitter login"/></a>
@@ -28,10 +35,10 @@
     <area shape="rect" coords="147,29,170,52" onclick="notex.penbox.set_color('#ff00fc', 147, 28)" alt="pink kiss" />
     <area shape="rect" coords="172,29,195,52" onclick="notex.penbox.set_color('red', 172, 28)" alt="red alert" />
 
-    <area shape="rect" coords="4,56,51,78" onclick="notex.penbox.set_font('sans', 4, 55)" alt="sans serif" />
-    <area shape="rect" coords="53,56,100,78" onclick="notex.penbox.set_font('serif', 53, 55)" alt="serif" />
-    <area shape="rect" coords="101,56,147,78" onclick="notex.penbox.set_font('mono', 101, 55)" alt="mono" />
-    <area shape="rect" coords="149,56,196,78" onclick="notex.penbox.set_font('script', 149, 55)" alt="script" />
+    <?= area("penbox", 6, 57, 50, 75, "penbox.set_font('sans', 4, 55)", "sans") ?>
+    <?= area("penbox", 54, 57, 98, 75, "penbox.set_font('serif', 53, 55)", "serif") ?>
+    <?= area("penbox", 102, 57, 146, 75, "penbox.set_font('mono', 101, 55)", "mono") ?>
+    <?= area("penbox", 150, 57, 194, 75, "penbox.set_font('script', 149, 55)", "script") ?>
   </map>
 </div>
 <div id="notebox">
@@ -41,9 +48,9 @@
   <div id="canedit" onclick="notex.notebox.toggle('editors')"></div>
   <img src="/images/notebox.png" id="styleimg" width="200" height="139" usemap="#notemap" alt="notebox" />
   <map name="notemap">
-    <area shape="rect" coords="6,111,61,133" onclick="notex.notebox.share()" alt="share" />
-    <area shape="rect" coords="66,111,121,133" onclick="notex.notebox.rename()" alt="rename" />
-    <area shape="rect" coords="126,111,194,133" onclick="notex.notebox.wipe()" alt="wipe" />
+    <?= area("notebox", 6, 112, 61, 132, "notebox.share()", "share") ?>
+    <?= area("notebox", 66, 112, 121, 132, "notebox.rename()", "rename") ?>
+    <?= area("notebox", 126, 112, 194, 132, "notebox.wipe()", "wipe") ?>
   </map>
 </div>
 <div id="notelist">
