@@ -1,7 +1,13 @@
 <?
-function area($element, $x1, $y1, $x2, $y2, $action, $alt = '')
+function map_area($element, $x1, $y1, $x2, $y2, $action, $alt = '')
 {
     return "<area shape=\"rect\" coords=\"$x1,$y1,$x2,$y2\" onclick=\"notex.$action\" alt=\"$alt\" onmouseover=\"notex.fx.highlight('$element',$x1,$y1,$x2,$y2)\" onmouseout=\"notex.fx.highlight()\" />\n";
+}
+
+function dialog_img($photo_or_paper, $id)
+{
+    $name = $photo_or_paper . $id;
+    return "<img src=\"/images/thumbs/$name.jpg\" alt=\"$name\" onclick=\"notex.notebox.select('$photo_or_paper', '$name')\" />\n";
 }
 ?>
 <div id="logo"><a href="/"><img id="logo-img" src="/images/nothing.gif" alt="logo"/></a></div>
@@ -35,10 +41,10 @@ function area($element, $x1, $y1, $x2, $y2, $action, $alt = '')
     <area shape="rect" coords="147,29,170,52" onclick="notex.penbox.set_color('#ff00fc', 147, 28)" alt="pink kiss" />
     <area shape="rect" coords="172,29,195,52" onclick="notex.penbox.set_color('red', 172, 28)" alt="red alert" />
 
-    <?= area("penbox", 6, 57, 50, 75, "penbox.set_font('sans', 4, 55)", "sans") ?>
-    <?= area("penbox", 54, 57, 98, 75, "penbox.set_font('serif', 53, 55)", "serif") ?>
-    <?= area("penbox", 102, 57, 146, 75, "penbox.set_font('mono', 101, 55)", "mono") ?>
-    <?= area("penbox", 150, 57, 194, 75, "penbox.set_font('script', 149, 55)", "script") ?>
+    <?= map_area("penbox", 6, 57, 50, 75, "penbox.set_font('sans', 4, 55)", "sans") ?>
+    <?= map_area("penbox", 54, 57, 98, 75, "penbox.set_font('serif', 53, 55)", "serif") ?>
+    <?= map_area("penbox", 102, 57, 146, 75, "penbox.set_font('mono', 101, 55)", "mono") ?>
+    <?= map_area("penbox", 150, 57, 194, 75, "penbox.set_font('script', 149, 55)", "script") ?>
   </map>
 </div>
 <div id="notebox">
@@ -48,9 +54,9 @@ function area($element, $x1, $y1, $x2, $y2, $action, $alt = '')
   <div id="canedit" onclick="notex.notebox.toggle('editors')"></div>
   <img src="/images/notebox.png" id="notebox-img" width="200" height="139" usemap="#notemap" alt="notebox" />
   <map id="notemap" name="notemap">
-    <?= area("notebox", 6, 112, 61, 132, "notebox.share()", "share") ?>
-    <?= area("notebox", 66, 112, 121, 132, "notebox.rename()", "rename") ?>
-    <?= area("notebox", 126, 112, 194, 132, "notebox.wipe()", "wipe") ?>
+    <?= map_area("notebox", 6, 112, 61, 132, "notebox.share()", "share") ?>
+    <?= map_area("notebox", 66, 112, 121, 132, "notebox.rename()", "rename") ?>
+    <?= map_area("notebox", 126, 112, 194, 132, "notebox.wipe()", "wipe") ?>
   </map>
 </div>
 <div id="notelist">
@@ -66,29 +72,29 @@ function area($element, $x1, $y1, $x2, $y2, $action, $alt = '')
 <div id="dialogs">
   <div id="photo-dialog">
     <div>
-      <img src="/images/thumbs/photo1.jpg" alt="photo1" onclick="notex.notebox.select('photo', 'photo1')" />
-      <img src="/images/thumbs/photo2.jpg" alt="photo2" onclick="notex.notebox.select('photo', 'photo2')" />
-      <img src="/images/thumbs/photo3.jpg" alt="photo3" onclick="notex.notebox.select('photo', 'photo3')" />
+      <?= dialog_img('photo', 1) ?>
+      <?= dialog_img('photo', 2) ?>
+      <?= dialog_img('photo', 3) ?>
     </div>
     <div>
-      <img src="/images/thumbs/photo4.jpg" alt="photo4" onclick="notex.notebox.select('photo', 'photo4')" />
-      <img src="/images/thumbs/photo5.jpg" alt="photo5" onclick="notex.notebox.select('photo', 'photo5')" />
-      <img src="/images/thumbs/photo6.jpg" alt="photo6" onclick="notex.notebox.select('photo', 'photo6')" />
+      <?= dialog_img('photo', 4) ?>
+      <?= dialog_img('photo', 5) ?>
+      <?= dialog_img('photo', 6) ?>
     </div>
     <div>
-      <img src="/images/thumbs/photo7.jpg" alt="photo7" onclick="notex.notebox.select('photo', 'photo7')" />
-      <img src="/images/thumbs/photo8.jpg" alt="photo8" onclick="notex.notebox.select('photo', 'photo8')" />
-      <img src="/images/thumbs/photo9.jpg" alt="photo9" onclick="notex.notebox.select('photo', 'photo9')" />
+      <?= dialog_img('photo', 7) ?>
+      <?= dialog_img('photo', 8) ?>
+      <?= dialog_img('photo', 9) ?>
     </div>
   </div>
   <div id="paper-dialog">
     <div>
-      <img src="/images/thumbs/paper1.jpg" alt="photo1" onclick="notex.notebox.select('paper', 'paper1')" />
-      <img src="/images/thumbs/paper2.jpg" alt="photo2" onclick="notex.notebox.select('paper', 'paper2')" />
+      <?= dialog_img('paper', 1) ?>
+      <?= dialog_img('paper', 2) ?>
     </div>
     <div>
-      <img src="/images/thumbs/paper3.jpg" alt="photo3" onclick="notex.notebox.select('paper', 'paper3')" />
-      <img src="/images/thumbs/paper4.jpg" alt="photo4" onclick="notex.notebox.select('paper', 'paper4')" />
+      <?= dialog_img('paper', 3) ?>
+      <?= dialog_img('paper', 4) ?>
     </div>
   </div>
 </div>
