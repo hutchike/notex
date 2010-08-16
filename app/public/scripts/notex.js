@@ -285,7 +285,7 @@ notex.notebox = {
     // TODO
   },
   wipe: function() {
-    if (confirm('Are you sure?')) {
+    if (confirm('Wipe this note clean?')) {
       for (id in notex.notes) {
         var note = notex.notes[id];
         note.deleted = true;
