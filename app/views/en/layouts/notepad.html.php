@@ -41,9 +41,9 @@
   <div id="canedit" onclick="notex.notebox.toggle('editors')"></div>
   <img src="/images/notebox.png" id="styleimg" width="200" height="139" usemap="#notemap" alt="notebox" />
   <map name="notemap">
-    <area shape="rect" coords="5,111,60,133" onclick="notex.notebox.share()" alt="share" />
-    <area shape="rect" coords="65,111,120,133" onclick="notex.notebox.rename()" alt="rename" />
-    <area shape="rect" coords="125,111,194,133" onclick="notex.notebox.wipe()" alt="wipe" />
+    <area shape="rect" coords="6,111,61,133" onclick="notex.notebox.share()" alt="share" />
+    <area shape="rect" coords="66,111,121,133" onclick="notex.notebox.rename()" alt="rename" />
+    <area shape="rect" coords="126,111,194,133" onclick="notex.notebox.wipe()" alt="wipe" />
   </map>
 </div>
 <div id="notelist">
