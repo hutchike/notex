@@ -19,9 +19,13 @@ class Note_controller extends App_controller
                       'paper' => '',
                       'readers' => '',
                       'editors' => '',
-                      'notes' => array());
+                      'notes' => NULL);
         if ($note->load())
         {
+            $data['photo'] = $note->photo;
+            $data['paper'] = $note->paper;
+            $data['readers'] = $note->readers;
+            $data['editors'] = $note->editors;
             $data['notes'] = $note->filter();
         }
         $this->render->data = $data;
