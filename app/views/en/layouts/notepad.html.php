@@ -32,14 +32,14 @@ function dialog_img($photo_or_paper, $id)
   <div id="selectfont"></div>
   <img src="/images/penbox.png" id="penbox-img" width="200" height="82" usemap="#penmap" alt="penbox" />
   <map id="penmap" name="penmap">
-    <area shape="rect" coords="4,29,27,52" onclick="notex.penbox.set_color('black', 4, 28)" alt="black" />
-    <area shape="rect" coords="28,29,51,52" onclick="notex.penbox.set_color('#333', 28, 28)" alt="slate gray" />
-    <area shape="rect" coords="52,29,75,52" onclick="notex.penbox.set_color('#666', 52, 28)" alt="steel gray" />
-    <area shape="rect" coords="76,29,99,52" onclick="notex.penbox.set_color('#80007e', 76, 28)" alt="deep purple" />
-    <area shape="rect" coords="100,29,123,52" onclick="notex.penbox.set_color('#008001', 100, 28)" alt="forest green" />
-    <area shape="rect" coords="123,29,146,52" onclick="notex.penbox.set_color('#0003ff', 123, 28)" alt="aqua blue" />
-    <area shape="rect" coords="147,29,170,52" onclick="notex.penbox.set_color('#ff00fc', 147, 28)" alt="pink kiss" />
-    <area shape="rect" coords="172,29,195,52" onclick="notex.penbox.set_color('red', 172, 28)" alt="red alert" />
+    <?= map_area("penbox", 4, 29, 27, 52, "penbox.set_color('black', 4, 28)", "black") ?>
+    <?= map_area("penbox", 28, 29, 51, 52, "penbox.set_color('#333', 28, 28)", "slate gray") ?>
+    <?= map_area("penbox", 52, 29, 75, 52, "penbox.set_color('#666', 52, 28)", "steel gray") ?>
+    <?= map_area("penbox", 76, 29, 99, 52, "penbox.set_color('#80007e', 76, 28)", "purple") ?>
+    <?= map_area("penbox", 100, 29, 123, 52, "penbox.set_color('#008001', 100, 28)", "forest green") ?>
+    <?= map_area("penbox", 124, 29, 147, 52, "penbox.set_color('#0003ff', 124, 28)", "aqua blue") ?>
+    <?= map_area("penbox", 148, 29, 171, 52, "penbox.set_color('#ff00fc', 148, 28)", "pink kiss") ?>
+    <?= map_area("penbox", 173, 29, 196, 52, "penbox.set_color('red', 173, 28)", "red alert") ?>
 
     <?= map_area("penbox", 6, 57, 50, 75, "penbox.set_font('sans', 4, 55)", "sans") ?>
     <?= map_area("penbox", 54, 57, 98, 75, "penbox.set_font('serif', 53, 55)", "serif") ?>
