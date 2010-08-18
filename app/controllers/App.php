@@ -44,7 +44,8 @@ class App_controller extends Controller
         $parts = explode('.', $_SERVER['HTTP_HOST']);
         array_pop($parts);  // remove "cc"
         array_pop($parts);  // remove "noted"
-        return join('.', $parts);
+        $username = join('.', $parts);
+        return $username == 'www' ? '' : $username;
     }
 }
 

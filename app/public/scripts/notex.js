@@ -156,7 +156,7 @@ var notex = {
       var config;
       eval('config=' + (data || '{}') + ';');
       notex.perms(config);
-      notex.notebox.setup(config);
+      notex.notebox.load(config);
       notex.notes = config.notes ? config.notes : {};
       for (id in notex.notes) {
         notex.render(id, notex.notes[id]);
@@ -171,7 +171,7 @@ var notex = {
       var config;
       eval('config=' + (data || '{}') + ';');
       notex.perms(config);
-      notex.notebox.setup(config);
+      notex.notebox.update(config);
       if (config.can_read == false) return notex.notebox.wipe(false, true);
       for (id in config.diff) {
         var note = notex.notes[id] = config.diff[id];
@@ -202,7 +202,7 @@ var notex = {
     notex.offset.x += parseInt(notepad.css('left'));
     notex.offset.y += parseInt(notepad.css('top'));
   },
-  debug: function(obj) { $('#debug').text('['+$.toJSON(obj)+']') },
+  debug: function(obj) { $('#debug').append('<div>['+$.toJSON(obj)+']</div>') },
   version: 0.1
 };
 
@@ -272,20 +272,26 @@ notex.notebox = {
 
   init: function() {
   },
-  setup: function(config) {
-    config = config || this.config();
-    this.photo = config.photo || notex.cookie.get('photo') || this.Defaults.photo;
-    this.paper = config.paper || notex.cookie.get('paper') || this.Defaults.paper;
-    this.readers = config.readers || notex.cookie.get('readers') || this.Defaults.readers;
-    this.editors = config.editors || notex.cookie.get('editors') || this.Defaults.editors;
+  load: function(config) {
+    config.photo = config.photo || notex.cookie.get('photo') || this.Defaults.photo;
+    config.paper = config.paper || notex.cookie.get('paper') || this.Defaults.paper;
+    config.readers = config.readers || notex.cookie.get('readers') || this.Defaults.readers;
+    config.editors = config.editors || notex.cookie.get('editors') || this.Defaults.editors;
+    this.update(config);
+  },
+  update: function(config) {
+    if (config.photo) this.photo = config.photo;
+    if (config.paper) this.paper = config.paper;
+    if (config.readers) this.readers = config.readers;
+    if (config.editors) this.editors = config.editors;
     this.display();
   },
   config: function() {
     var changes = {
       photo: this.has_changed.photo ? this.photo : null,
       paper: this.has_changed.paper ? this.paper : null,
-      readers: this.readers,
-      editors: this.editors
+      readers: this.has_changed.readers ? this.readers : null,
+      editors: this.has_changed.editors ? this.editors : null
     };
     this.has_changed = {};
     return changes;
@@ -314,11 +320,12 @@ notex.notebox = {
     }
   },
   toggle: function(readers_or_editors) {
-    if (!notex.is_owner) return;
-    if (readers_or_editors == 'editors' && this['readers'] == 'me') return;
+    if (!notex.is_owner) return alert("You're not signed in as " + notex.username + " so you can't change this");
+    if (readers_or_editors == 'editors' && this['readers'] == 'me') return alert('First click on "read" before "edit"');
     this[readers_or_editors] = (this[readers_or_editors] == 'all' ? 'me' : 'all');
     if (readers_or_editors == 'readers' && this['readers'] == 'me') this['editors'] = 'me';
     this.display();
+    this.has_changed['readers'] = this.has_changed['editors'] = true;
     notex.cookie.set('readers', this.readers);
     notex.cookie.set('editors', this.editors);
   },
