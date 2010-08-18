@@ -333,7 +333,7 @@ notex.notebox = {
     if (to) location.href = match[1] + 'note/rename?from=' + from + '&to=' + to;
   },
   wipe: function(with_confirm, force_erase) {
-    if (with_confirm && !notex.can_edit) return;
+    if (with_confirm && !notex.can_edit) return alert("Can't edit this note");
     var confirmed = with_confirm ? confirm('Wipe this note clean?') : true;
     if (confirmed) {
       for (id in notex.notes) {
