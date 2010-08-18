@@ -14,12 +14,13 @@ class Note_controller extends App_controller
 
         $url = parse_url($this->params->url);
         $note = new Note(array('url' => $url['path']));
-        $config = array('is_owner' => $this->is_owner,
+        $config = array('notes' => NULL,
                         'photo' => '',
                         'paper' => '',
-                        'readers' => '',
-                        'editors' => '',
-                        'notes' => NULL);
+                        'readers' => 'all',
+                        'editors' => 'all',
+                        'can_edit' => TRUE,
+                        'is_owner' => $this->is_owner);
         if ($note->load())
         {
             $can_read = $this->can_read($note);
@@ -28,6 +29,7 @@ class Note_controller extends App_controller
             $config['readers'] = $note->readers;
             $config['editors'] = $note->editors;
             $config['notes'] = $can_read ? $note->filter() : NULL;
+            $config['can_edit'] = $this->can_edit($note);
         }
         $this->render->data = $config;
     }
@@ -65,6 +67,7 @@ class Note_controller extends App_controller
             'photo' => $note->photo,
             'readers' => $note->readers,
             'editors' => $note->editors,
+            'can_edit' => $can_edit,
         );
 
         // Log the info
@@ -75,6 +78,8 @@ class Note_controller extends App_controller
 
     public function can_read($note)
     {
+        if ($this->is_owner || !$note->readers) return TRUE;
+
         // Check the note readers
 
         $readers = preg_replace('/\bme\b/', $this->username, $note->readers);
@@ -90,6 +95,8 @@ class Note_controller extends App_controller
 
     public function can_edit($note)
     {
+        if ($this->is_owner || !$note->editors) return TRUE;
+
         // Check the note editors
 
         $editors = preg_replace('/\bme\b/', $this->username, $note->editors);

@@ -271,8 +271,8 @@ notex.notebox = {
     var changes = {
       photo: this.has_changed.photo ? this.photo : null,
       paper: this.has_changed.paper ? this.paper : null,
-      readers: this.has_changed.readers ? this.readers : null,
-      editors: this.has_changed.editors ? this.editors : null
+      readers: this.readers,
+      editors: this.editors
     };
     this.has_changed = {};
     return changes;
@@ -306,7 +306,6 @@ notex.notebox = {
     this[readers_or_editors] = (this[readers_or_editors] == 'all' ? 'me' : 'all');
     this.display();
     notex.cookie.set(readers_or_editors, this[readers_or_editors]);
-    this.has_changed[readers_or_editors] = true;
   },
   share: function() {
     // TODO
