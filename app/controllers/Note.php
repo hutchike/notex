@@ -13,33 +13,35 @@ class Note_controller extends App_controller
         // Load the note
 
         $url = parse_url($this->params->url);
-        $notes = array();
         $note = new Note(array('url' => $url['path']));
-        $data = array('photo' => '',
-                      'paper' => '',
-                      'readers' => '',
-                      'editors' => '',
-                      'notes' => NULL);
+        $config = array('photo' => '',
+                        'paper' => '',
+                        'readers' => '',
+                        'editors' => '',
+                        'notes' => NULL);
         if ($note->load())
         {
-            $data['photo'] = $note->photo;
-            $data['paper'] = $note->paper;
-            $data['readers'] = $note->readers;
-            $data['editors'] = $note->editors;
-            $data['notes'] = $note->filter();
+            $config['photo'] = $note->photo;
+            $config['paper'] = $note->paper;
+            $config['readers'] = $note->readers;
+            $config['editors'] = $note->editors;
+            $config['notes'] = $note->filter();
         }
-        $this->render->data = $data;
+        $this->render->data = $config;
     }
 
     public function save()
     {
-        // Get the old note
+        // Get the old note config
 
         $url = parse_url($this->params->url);
         $path = $url['path'];
-        $notes = $this->params->notes;
         $note = new Note(array('url' => $path));
         $note->load();
+
+        // Get the new note config
+
+        $config = json_decode($this->params->config);
 
         // Can we edit it?
 
@@ -55,12 +57,22 @@ class Note_controller extends App_controller
             if ($secret) $note->secret = $hidden;
         }
 
-        // Edit the note if allowed
+        // Edit the note (if allowed)
 
         $old_notes = $note->notes;
-        $note->notes = $notes;
+        $note->notes = json_encode($config->notes);
+        if ($config->photo) $note->photo = $config->photo;
+        if ($config->paper) $note->paper = $config->paper;
+        if ($config->readers) $note->readers = $config->readers;
+        if ($config->editors) $note->editors = $config->editors;
         if ($can_edit) $note->save();
-        $this->render->data = $this->diff($old_notes, $notes);
+        $this->render->data = array(
+            'diff' => $this->diff($old_notes, $note->notes),
+            'paper' => $note->paper,
+            'photo' => $note->photo,
+            'readers' => $note->readers,
+            'editors' => $note->editors,
+        );
 
         // Log the info
 

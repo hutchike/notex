@@ -143,23 +143,25 @@ var notex = {
   load: function() {
     $.get('/note/load.json', {url: window.location.href},
     function(data) {
-      var loaded;
-      eval('loaded='+data+';');
-      notex.notebox.setup(loaded);
-      notex.notes = loaded.notes ? loaded.notes : {};
+      var config;
+      eval('config='+data+';');
+      notex.notebox.setup(config);
+      notex.notes = config.notes ? config.notes : {};
       for (id in notex.notes) {
         notex.render(id, notex.notes[id]);
       }
     });
   },
   save: function() {
-    if (notex.is_editing) return;
-    $.post('/note/save.json', {url: window.location.href, notes: $.toJSON(notex.notes), secret: notex.secret},
+    var config = notex.notebox.config();
+    config.notes = notex.notes;
+    $.post('/note/save.json', {url: window.location.href, config: $.toJSON(config), secret: notex.secret},
     function(data) {
-      var diff;
-      eval('diff='+data+';');
-      for (id in diff) {
-        var note = notex.notes[id] = diff[id];
+      var config;
+      eval('config='+data+';');
+      notex.notebox.setup(config);
+      for (id in config.diff) {
+        var note = notex.notes[id] = config.diff[id];
         if (note.deleted) {
           $('#'+id).remove();
         } else {
@@ -188,6 +190,16 @@ var notex = {
     notex.offset.y += parseInt(notepad.css('top'));
   },
   debug: function(obj) { $('#debug').text('['+$.toJSON(obj)+']') },
+  version: 0.1
+};
+
+notex.utils = {
+  rand: function(lo, hi) {
+    lo = lo || 1;
+    hi = hi || 2;
+    var time = (new Date()).getTime();
+    return (time % (1 + hi - lo) + lo);
+  },
   version: 0.1
 };
 
@@ -230,7 +242,7 @@ notex.notebox = {
 
   // Constants
   Defaults: {
-    photo: 'photo1',
+    photo: 'photo' + notex.utils.rand(1, 9),
     paper: 'paper1',
     readers: 'all',
     editors: 'me'
@@ -241,15 +253,27 @@ notex.notebox = {
   paper: null,
   readers: null,
   editors: null,
+  has_changed: {},
 
   init: function() {
   },
-  setup: function(settings) {
-    this.photo = settings.photo || notex.cookie.get('photo') || this.Defaults.photo;
-    this.paper = settings.paper || notex.cookie.get('paper') || this.Defaults.paper;
-    this.readers = settings.readers || notex.cookie.get('readers') || this.Defaults.readers;
-    this.editors = settings.editors || notex.cookie.get('editors') || this.Defaults.editors;
+  setup: function(config) {
+    config = config || this.config();
+    this.photo = config.photo || notex.cookie.get('photo') || this.Defaults.photo;
+    this.paper = config.paper || notex.cookie.get('paper') || this.Defaults.paper;
+    this.readers = config.readers || notex.cookie.get('readers') || this.Defaults.readers;
+    this.editors = config.editors || notex.cookie.get('editors') || this.Defaults.editors;
     this.display();
+  },
+  config: function() {
+    var changes = {
+      photo: this.has_changed.photo ? this.photo : null,
+      paper: this.has_changed.paper ? this.paper : null,
+      readers: this.has_changed.readers ? this.readers : null,
+      editors: this.has_changed.editors ? this.editors : null
+    };
+    this.has_changed = {};
+    return changes;
   },
   display: function() {
     var images = '/images/';
@@ -269,6 +293,7 @@ notex.notebox = {
       this[photo_or_paper] = selected;
       this.display();
       notex.cookie.set(photo_or_paper, selected);
+      this.has_changed[photo_or_paper] = true;
     } else {
       dialog.fadeIn();
     }
@@ -277,6 +302,7 @@ notex.notebox = {
     this[readers_or_editors] = (this[readers_or_editors] == 'all' ? 'me' : 'all');
     this.display();
     notex.cookie.set(readers_or_editors, this[readers_or_editors]);
+    this.has_changed[readers_or_editors] = true;
   },
   share: function() {
     // TODO
@@ -352,3 +378,5 @@ notex.fx = {
   },
   version: 0.1
 };
+
+// End of notex.js

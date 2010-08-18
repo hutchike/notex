@@ -9,6 +9,10 @@ function dialog_img($photo_or_paper, $id)
     $name = $photo_or_paper . $id;
     return "<img src=\"/images/thumbs/$name.jpg\" alt=\"$name\" onclick=\"notex.notebox.select('$photo_or_paper', '$name')\" />\n";
 }
+
+// Users have extra features in the "notebox2"
+
+$notebox = $username ? 'notebox2' : 'notebox1';
 ?>
 <div id="logo"><a href="/"><img id="logo-img" src="/images/nothing.gif" alt="logo"/></a></div>
 <div id="copy"><?= $copy ?></div>
@@ -52,7 +56,7 @@ function dialog_img($photo_or_paper, $id)
   <div id="paper" onclick="notex.notebox.select('paper')"></div>
   <div id="canread" onclick="notex.notebox.toggle('readers')"></div>
   <div id="canedit" onclick="notex.notebox.toggle('editors')"></div>
-  <img src="/images/notebox.png" id="notebox-img" width="200" height="139" usemap="#notemap" alt="notebox" />
+  <img src="/images/<?= $notebox ?>.png" id="notebox-img" width="200" height="139" usemap="#notemap" alt="notebox" />
   <map id="notemap" name="notemap">
     <?= map_area("notebox", 6, 112, 61, 132, "notebox.share()", "share") ?>
     <?= map_area("notebox", 66, 112, 121, 132, "notebox.rename()", "rename") ?>
