@@ -75,6 +75,23 @@ class Note_controller extends App_controller
         Log::info($this->host_ip . " $action a note at $path");
     }
 
+    public function rename()
+    {
+        $from = $this->params->from;
+        $to = $this->params->to;
+        if ($this->username && !$this->is_owner) $this->redirect($from, TRUE);
+
+        $orig = new Note(array('url' => "/$from"));
+        if ($orig->load())
+        {
+            $dest = new Note(array('url' => "/$to"));
+            if ($dest->load()) $this->redirect($from, TRUE);
+
+            $orig->url = "/$to";
+            if ($orig->save()) $this->redirect($to, TRUE);
+        }
+    }
+
     public function can_read($note)
     {
         if ($this->is_owner || !$note->readers) return TRUE;

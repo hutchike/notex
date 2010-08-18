@@ -56,6 +56,11 @@ var notex = {
     is_hiding ? divs.fadeOut() : divs.fadeIn();
     notex.is_hiding = is_hiding;
   },
+  perms: function(config) {
+    notex.can_read = config.can_read;
+    notex.can_edit = config.can_edit;
+    notex.fx.show_tools();
+  },
   click: function(e) {
     if (notex.is_editing || !notex.can_edit) return;
     var text = '';
@@ -148,6 +153,7 @@ var notex = {
     function(data) {
       var config;
       eval('config=' + (data || '{}') + ';');
+      notex.perms(config);
       notex.notebox.setup(config);
       notex.notes = config.notes ? config.notes : {};
       notex.is_owner = config.is_owner;
@@ -163,10 +169,8 @@ var notex = {
     function(data) {
       var config;
       eval('config=' + (data || '{}') + ';');
+      notex.perms(config);
       notex.notebox.setup(config);
-      notex.can_read = config.can_read;
-      notex.can_edit = config.can_edit;
-      notex.fx.show_tools();
       if (config.can_read == false) return notex.notebox.wipe(false);
       for (id in config.diff) {
         var note = notex.notes[id] = config.diff[id];
@@ -202,6 +206,8 @@ var notex = {
 };
 
 notex.utils = {
+  decode: decodeURIComponent,
+  encode: encodeURIComponent,
   rand: function(lo, hi) {
     lo = lo || 1;
     hi = hi || 2;
@@ -320,7 +326,11 @@ notex.notebox = {
     // TODO
   },
   rename: function() {
-    // TODO
+    var re = /(http:\/\/[^/]+\/)(.*)/i;
+    match = re.exec(location.href);
+    var from = notex.utils.encode(match[2]);
+    var to = notex.utils.encode(prompt('New name?', match[2]));
+    if (to) location.href = match[1] + 'note/rename?from=' + from + '&to=' + to;
   },
   wipe: function(with_confirm) {
     var confirmed = with_confirm ? confirm('Wipe this note clean?') : true;
@@ -351,11 +361,9 @@ notex.cookie = {
   // Constants
   Hours: 24*90,
   
-  decode: decodeURIComponent,
-  encode: encodeURIComponent,
   set: function(name, value, hours) {
     hours = hours || this.Hours;
-    var cookie = 'notex_' + name + '=' + this.encode(value) + '; path=/'
+    var cookie = 'notex_' + name + '=' + notex.utils.encode(value) + '; path=/'
     if (hours) {
       var expires = new Date();
       expires.setTime(expires.getTime() + hours*60*60*1000);
@@ -376,7 +384,7 @@ notex.cookie = {
     else begin += 2;
     var end = document.cookie.indexOf(';', begin);
     if (end == -1) end = cookie.length;
-    return this.decode(cookie.substring(begin + prefix.length, end));
+    return notex.utils.decode(cookie.substring(begin + prefix.length, end));
   },
   version: 0.1
 };
