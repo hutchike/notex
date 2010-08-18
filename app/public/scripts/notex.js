@@ -320,7 +320,7 @@ notex.notebox = {
     }
   },
   toggle: function(readers_or_editors) {
-    if (!notex.is_owner) return alert("Sorry but you don't own this note so you can't change this");
+    if (!notex.is_owner) return alert("Can't change this note's settings");
     if (readers_or_editors == 'editors' && this['readers'] == 'me') return alert('First click on "read" before "edit"');
     this[readers_or_editors] = (this[readers_or_editors] == 'all' ? 'me' : 'all');
     if (readers_or_editors == 'readers' && this['readers'] == 'me') this['editors'] = 'me';
