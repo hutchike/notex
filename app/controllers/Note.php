@@ -79,7 +79,7 @@ class Note_controller extends App_controller
         // Apply any secret password
 
         $secret = $this->params->secret;
-        $hidden = md5($path . $secret);
+        $hidden = md5($note->url . ':' . $secret);
         if ($note->get_id())
         {
             if ($note->secret && $note->secret != $hidden) $can_edit = FALSE;
