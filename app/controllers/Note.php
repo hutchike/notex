@@ -19,6 +19,7 @@ class Note_controller extends App_controller
                         'paper' => '',
                         'readers' => 'all',
                         'editors' => 'all',
+                        'can_read' => TRUE,
                         'can_edit' => TRUE,
                         'username' => $this->username,
                         'is_owner' => $this->is_owner);
@@ -30,6 +31,7 @@ class Note_controller extends App_controller
             $config['readers'] = $note->readers;
             $config['editors'] = $note->editors;
             $config['notes'] = $can_read ? $note->filter() : NULL;
+            $config['can_read'] = $this->can_read($note);
             $config['can_edit'] = $this->can_edit($note);
         }
         $this->render->data = $config;
