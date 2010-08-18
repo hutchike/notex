@@ -20,6 +20,7 @@ class App_controller extends Controller
         $this->render->debug = '';
         $this->render->layout = 'notepad';
         $this->host_ip = array_key($_SERVER, 'HTTP_X_FORWARDED_FOR', $_SERVER['REMOTE_ADDR']);
+        $this->mode = ($this->screen_name && $this->screen_name == $this->username ? 'user' : 'open');
 
         // Handle alternative content types, e.g. XML and JSON
 
