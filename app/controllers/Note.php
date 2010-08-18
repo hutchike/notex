@@ -20,6 +20,7 @@ class Note_controller extends App_controller
                         'readers' => 'all',
                         'editors' => 'all',
                         'can_edit' => TRUE,
+                        'username' => $this->username,
                         'is_owner' => $this->is_owner);
         if ($note->load())
         {
@@ -65,6 +66,8 @@ class Note_controller extends App_controller
             'diff' => $can_read ? $this->diff($old_notes, $note->notes) : NULL,
             'paper' => $can_read ? $note->paper : 'secret',
             'photo' => $note->photo,
+            'username' => $this->username,
+            'is_owner' => $this->is_owner,
             'can_read' => $can_read,
             'can_edit' => $can_edit,
         );
@@ -111,7 +114,8 @@ class Note_controller extends App_controller
 
     public function can_edit($note)
     {
-        if ($this->is_owner || !$note->editors) return TRUE;
+        if ($this->is_owner) return TRUE;
+        if (!$note->editors && !$note->secret && !$this->username) return TRUE;
 
         // Check the note editors
 

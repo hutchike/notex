@@ -19,6 +19,7 @@ var notex = {
   secret: '',
   paused: 0,
   notes: {},
+  username: null,
   is_owner: false,
   can_read: true,
   can_edit: true,
@@ -57,6 +58,8 @@ var notex = {
     notex.is_hiding = is_hiding;
   },
   perms: function(config) {
+    notex.username = config.username;
+    notex.is_owner = config.is_owner;
     notex.can_read = config.can_read;
     notex.can_edit = config.can_edit;
     notex.fx.show_tools();
@@ -156,7 +159,6 @@ var notex = {
       notex.perms(config);
       notex.notebox.setup(config);
       notex.notes = config.notes ? config.notes : {};
-      notex.is_owner = config.is_owner;
       for (id in notex.notes) {
         notex.render(id, notex.notes[id]);
       }
@@ -171,7 +173,7 @@ var notex = {
       eval('config=' + (data || '{}') + ';');
       notex.perms(config);
       notex.notebox.setup(config);
-      if (config.can_read == false) return notex.notebox.wipe(false);
+      if (config.can_read == false) return notex.notebox.wipe(false, true);
       for (id in config.diff) {
         var note = notex.notes[id] = config.diff[id];
         if (note.deleted) {
@@ -332,7 +334,7 @@ notex.notebox = {
     var to = notex.utils.encode(prompt('New name?', match[2]));
     if (to) location.href = match[1] + 'note/rename?from=' + from + '&to=' + to;
   },
-  wipe: function(with_confirm) {
+  wipe: function(with_confirm, then_erase) {
     var confirmed = with_confirm ? confirm('Wipe this note clean?') : true;
     if (confirmed) {
       for (id in notex.notes) {
@@ -341,6 +343,7 @@ notex.notebox = {
         $('#'+id).remove();
       }
     }
+    if (then_erase) notex.notes = {};
   },
   version: 0.1
 };
