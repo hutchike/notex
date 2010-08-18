@@ -320,7 +320,7 @@ notex.notebox = {
     }
   },
   toggle: function(readers_or_editors) {
-    if (!notex.is_owner) return alert("You're not signed in as " + notex.username + " so you can't change this");
+    if (!notex.is_owner) return alert("You're not signed in as " + (notex.username || 'a Twitter user') + " so you can't change this");
     if (readers_or_editors == 'editors' && this['readers'] == 'me') return alert('First click on "read" before "edit"');
     this[readers_or_editors] = (this[readers_or_editors] == 'all' ? 'me' : 'all');
     if (readers_or_editors == 'readers' && this['readers'] == 'me') this['editors'] = 'me';
