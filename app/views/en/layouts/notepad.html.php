@@ -12,7 +12,7 @@ function dialog_img($photo_or_paper, $id)
 
 // Users have extra features in the "notebox2"
 
-$notebox = $access_token ? 'notebox2' : 'notebox1';
+$notebox = ($username == $screen_name ? 'notebox2' : 'notebox1');
 ?>
 <div id="logo"><a href="/"><img id="logo-img" src="/images/nothing.gif" alt="logo"/></a></div>
 <div id="copy"><?= $copy ?></div>
@@ -26,7 +26,7 @@ $notebox = $access_token ? 'notebox2' : 'notebox1';
 </div>
 <div id="debug"><?= $debug ?></div>
 <div id="highlight"></div>
-<? if (is_null($access_token)): ?>
+<? if (is_null($screen_name)): ?>
 <div id="twitter">
   <a href="/twitter/login"><img src="/images/twitter/lighter.png" alt="twitter login"/></a>
 </div>
