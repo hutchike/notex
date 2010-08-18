@@ -23,11 +23,12 @@ class Note_controller extends App_controller
                         'notes' => NULL);
         if ($note->load())
         {
+            $can_read = $this->can_read($note);
             $config['photo'] = $note->photo;
-            $config['paper'] = $note->paper;
+            $config['paper'] = $can_read ? $note->paper : 'secret';
             $config['readers'] = $note->readers;
             $config['editors'] = $note->editors;
-            $config['notes'] = $note->filter();
+            $config['notes'] = $can_read ? $note->filter() : NULL;
         }
         $this->render->data = $config;
     }
@@ -45,9 +46,10 @@ class Note_controller extends App_controller
 
         $config = json_decode($this->params->config);
 
-        // Can we edit it?
+        // Can we read or edit it?
 
-        $can_edit = $this->can_edit($note);
+        $can_read = $this->can_read($note);
+        $can_edit = $can_read ? $this->can_edit($note) : FALSE;
 
         // Edit the note (if allowed)
 
@@ -59,8 +61,8 @@ class Note_controller extends App_controller
         if ($config->editors) $note->editors = $config->editors;
         if ($can_edit) $note->save();
         $this->render->data = array(
-            'diff' => $this->diff($old_notes, $note->notes),
-            'paper' => $note->paper,
+            'diff' => $can_read ? $this->diff($old_notes, $note->notes) : NULL,
+            'paper' => $can_read ? $note->paper : 'secret',
             'photo' => $note->photo,
             'readers' => $note->readers,
             'editors' => $note->editors,
@@ -72,12 +74,34 @@ class Note_controller extends App_controller
         Log::info($this->host_ip . " $action a note at $path");
     }
 
+    public function can_read($note)
+    {
+        // Check the note readers
+
+        $readers = preg_replace('/\bme\b/', $this->username, $note->readers);
+        if ($readers != 'all' && strpos($readers, $this->screen_name) === FALSE)
+        {
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
+        }
+    }
+
     public function can_edit($note)
     {
-        $can_edit = TRUE;
+        // Check the note editors
+
+        $editors = preg_replace('/\bme\b/', $this->username, $note->editors);
+        if ($editors != 'all' && strpos($editors, $this->screen_name) === FALSE)
+        {
+            return FALSE;
+        }
 
         // Apply any secret password
 
+        $can_edit = TRUE;
         $secret = $this->params->secret;
         $hidden = md5($note->url . ':' . $secret);
         if ($note->get_id())
@@ -88,15 +112,6 @@ class Note_controller extends App_controller
         {
             if ($secret) $note->secret = $hidden;
         }
-
-        // Check the note editors
-
-        if (($note->editors == 'me' && $this->screen_name != $this->username) ||
-            strpos($note->editors, $this->screen_name) === FALSE)
-        {
-            $can_edit = FALSE;
-        }
-
         return $can_edit;
     }
 
