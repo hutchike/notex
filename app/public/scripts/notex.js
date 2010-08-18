@@ -202,7 +202,7 @@ var notex = {
     notex.offset.x += parseInt(notepad.css('left'));
     notex.offset.y += parseInt(notepad.css('top'));
   },
-  debug: function(obj) { $('#debug').text('['+$.toJSON(obj)+']') },
+  debug: function(obj) { $('#debug').append('<div>['+$.toJSON(obj)+']</div>') },
   version: 0.1
 };
 

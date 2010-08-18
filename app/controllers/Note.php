@@ -68,6 +68,8 @@ class Note_controller extends App_controller
             'diff' => $can_read ? $this->diff($old_notes, $note->notes) : NULL,
             'paper' => $can_read ? $note->paper : 'secret',
             'photo' => $note->photo,
+            'readers' => $note->readers,
+            'editors' => $note->editors,
             'username' => $this->username,
             'is_owner' => $this->is_owner,
             'can_read' => $can_read,
