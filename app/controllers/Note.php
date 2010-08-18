@@ -58,15 +58,14 @@ class Note_controller extends App_controller
         if ($config->notes) $note->notes = json_encode($config->notes);
         if ($config->photo) $note->photo = $config->photo;
         if ($config->paper) $note->paper = $config->paper;
-        if ($config->readers) $note->readers = $config->readers;
-        if ($config->editors) $note->editors = $config->editors;
+        if ($this->is_owner) $note->readers = $config->readers;
+        if ($this->is_owner) $note->editors = $config->editors;
         if ($can_edit) $note->save();
         $this->render->data = array(
             'diff' => $can_read ? $this->diff($old_notes, $note->notes) : NULL,
             'paper' => $can_read ? $note->paper : 'secret',
             'photo' => $note->photo,
-            'readers' => $note->readers,
-            'editors' => $note->editors,
+            'can_read' => $can_read,
             'can_edit' => $can_edit,
         );
 

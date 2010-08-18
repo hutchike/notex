@@ -20,6 +20,8 @@ var notex = {
   paused: 0,
   notes: {},
   is_owner: false,
+  can_read: true,
+  can_edit: true,
   offset: {x: 14, y: 20},
   adjust: {x: -1, y: 5},
   origin: {x: null, y: null},
@@ -55,7 +57,7 @@ var notex = {
     notex.is_hiding = is_hiding;
   },
   click: function(e) {
-    if (notex.is_editing) return;
+    if (notex.is_editing || !notex.can_edit) return;
     var text = '';
     if (typeof e.pageX == 'undefined') {
       notex.origin.y += notex.Line_height;
@@ -162,6 +164,10 @@ var notex = {
       var config;
       eval('config=' + (data || '{}') + ';');
       notex.notebox.setup(config);
+      notex.can_read = config.can_read;
+      notex.can_edit = config.can_edit;
+      notex.fx.show_tools();
+      if (config.can_read == false) return notex.notebox.wipe(false);
       for (id in config.diff) {
         var note = notex.notes[id] = config.diff[id];
         if (note.deleted) {
@@ -303,9 +309,12 @@ notex.notebox = {
     }
   },
   toggle: function(readers_or_editors) {
+    if (readers_or_editors == 'editors' && this['readers'] == 'me') return;
     this[readers_or_editors] = (this[readers_or_editors] == 'all' ? 'me' : 'all');
+    if (readers_or_editors == 'readers' && this['readers'] == 'me') this['editors'] = 'me';
     this.display();
-    notex.cookie.set(readers_or_editors, this[readers_or_editors]);
+    notex.cookie.set('readers', this.readers);
+    notex.cookie.set('editors', this.editors);
   },
   share: function() {
     // TODO
@@ -313,8 +322,9 @@ notex.notebox = {
   rename: function() {
     // TODO
   },
-  wipe: function() {
-    if (confirm('Wipe this note clean?')) {
+  wipe: function(with_confirm) {
+    var confirmed = with_confirm ? confirm('Wipe this note clean?') : true;
+    if (confirmed) {
       for (id in notex.notes) {
         var note = notex.notes[id];
         note.deleted = true;
@@ -326,6 +336,11 @@ notex.notebox = {
 };
 
 notex.notelist = {
+
+  // Constants
+  Top1: '75px',  // when can't edit
+  Top2: '322px', // when can edit
+
   init: function() {
   },
   version: 0.1
@@ -378,6 +393,11 @@ notex.fx = {
     } else {
       $('#highlight').hide();
     }
+  },
+  show_tools: function() {
+    var tools = $('#tools');
+    notex.can_edit ? tools.show() : tools.hide();
+    $('#notelist').css('top', notex.can_edit ? notex.notelist.Top2 : notex.notelist.Top1);
   },
   version: 0.1
 };

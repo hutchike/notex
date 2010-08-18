@@ -31,37 +31,39 @@ $notebox = ($is_owner ? 'notebox2' : 'notebox1');
   <a href="/twitter/login"><img src="/images/twitter/lighter.png" alt="twitter login"/></a>
 </div>
 <? endif ?>
-<div id="penbox">
-  <div id="selectcolor"></div>
-  <div id="selectfont"></div>
-  <img src="/images/penbox.png" id="penbox-img" width="200" height="82" usemap="#penmap" alt="penbox" />
-  <map id="penmap" name="penmap">
-    <?= map_area("penbox", 4, 29, 27, 52, "penbox.set_color('black', 4, 28)", "black") ?>
-    <?= map_area("penbox", 28, 29, 51, 52, "penbox.set_color('#333', 28, 28)", "slate gray") ?>
-    <?= map_area("penbox", 52, 29, 75, 52, "penbox.set_color('#666', 52, 28)", "steel gray") ?>
-    <?= map_area("penbox", 76, 29, 99, 52, "penbox.set_color('#80007e', 76, 28)", "purple") ?>
-    <?= map_area("penbox", 100, 29, 123, 52, "penbox.set_color('#008001', 100, 28)", "forest green") ?>
-    <?= map_area("penbox", 124, 29, 147, 52, "penbox.set_color('#0003ff', 124, 28)", "aqua blue") ?>
-    <?= map_area("penbox", 148, 29, 171, 52, "penbox.set_color('#ff00fc', 148, 28)", "pink kiss") ?>
-    <?= map_area("penbox", 173, 29, 196, 52, "penbox.set_color('red', 173, 28)", "red alert") ?>
+<div id="tools">
+  <div id="penbox">
+    <div id="selectcolor"></div>
+    <div id="selectfont"></div>
+    <img src="/images/penbox.png" id="penbox-img" width="200" height="82" usemap="#penmap" alt="penbox" />
+    <map id="penmap" name="penmap">
+      <?= map_area("penbox", 4, 29, 27, 52, "penbox.set_color('black', 4, 28)", "black") ?>
+      <?= map_area("penbox", 28, 29, 51, 52, "penbox.set_color('#333', 28, 28)", "slate gray") ?>
+      <?= map_area("penbox", 52, 29, 75, 52, "penbox.set_color('#666', 52, 28)", "steel gray") ?>
+      <?= map_area("penbox", 76, 29, 99, 52, "penbox.set_color('#80007e', 76, 28)", "purple") ?>
+      <?= map_area("penbox", 100, 29, 123, 52, "penbox.set_color('#008001', 100, 28)", "forest green") ?>
+      <?= map_area("penbox", 124, 29, 147, 52, "penbox.set_color('#0003ff', 124, 28)", "aqua blue") ?>
+      <?= map_area("penbox", 148, 29, 171, 52, "penbox.set_color('#ff00fc', 148, 28)", "pink kiss") ?>
+      <?= map_area("penbox", 173, 29, 196, 52, "penbox.set_color('red', 173, 28)", "red alert") ?>
 
-    <?= map_area("penbox", 6, 57, 50, 75, "penbox.set_font('sans', 4, 55)", "sans") ?>
-    <?= map_area("penbox", 54, 57, 98, 75, "penbox.set_font('serif', 53, 55)", "serif") ?>
-    <?= map_area("penbox", 102, 57, 146, 75, "penbox.set_font('mono', 101, 55)", "mono") ?>
-    <?= map_area("penbox", 150, 57, 194, 75, "penbox.set_font('script', 149, 55)", "script") ?>
-  </map>
-</div>
-<div id="notebox">
-  <div id="photo"><img src="/images/nothing.gif" alt="photo" onclick="notex.notebox.select('photo')" /></div>
-  <div id="paper" onclick="notex.notebox.select('paper')"></div>
-  <div id="canread" onclick="notex.notebox.toggle('readers')"></div>
-  <div id="canedit" onclick="notex.notebox.toggle('editors')"></div>
-  <img src="/images/<?= $notebox ?>.png" id="notebox-img" width="200" height="139" usemap="#notemap" alt="notebox" />
-  <map id="notemap" name="notemap">
-    <?= map_area("notebox", 6, 112, 61, 132, "notebox.share()", "share") ?>
-    <?= map_area("notebox", 66, 112, 121, 132, "notebox.rename()", "rename") ?>
-    <?= map_area("notebox", 126, 112, 194, 132, "notebox.wipe()", "wipe") ?>
-  </map>
+      <?= map_area("penbox", 6, 57, 50, 75, "penbox.set_font('sans', 4, 55)", "sans") ?>
+      <?= map_area("penbox", 54, 57, 98, 75, "penbox.set_font('serif', 53, 55)", "serif") ?>
+      <?= map_area("penbox", 102, 57, 146, 75, "penbox.set_font('mono', 101, 55)", "mono") ?>
+      <?= map_area("penbox", 150, 57, 194, 75, "penbox.set_font('script', 149, 55)", "script") ?>
+    </map>
+  </div>
+  <div id="notebox">
+    <div id="photo"><img src="/images/nothing.gif" alt="photo" onclick="notex.notebox.select('photo')" /></div>
+    <div id="paper" onclick="notex.notebox.select('paper')"></div>
+    <div id="canread" onclick="notex.notebox.toggle('readers')"></div>
+    <div id="canedit" onclick="notex.notebox.toggle('editors')"></div>
+    <img src="/images/<?= $notebox ?>.png" id="notebox-img" width="200" height="139" usemap="#notemap" alt="notebox" />
+    <map id="notemap" name="notemap">
+      <?= map_area("notebox", 6, 112, 61, 132, "notebox.share()", "share") ?>
+      <?= map_area("notebox", 66, 112, 121, 132, "notebox.rename()", "rename") ?>
+      <?= map_area("notebox", 126, 112, 194, 132, "notebox.wipe(true)", "wipe") ?>
+    </map>
+  </div>
 </div>
 <div id="notelist">
   <div id="listhead"></div>
