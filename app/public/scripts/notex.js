@@ -62,7 +62,6 @@ var notex = {
     notex.is_owner = config.is_owner;
     notex.can_read = config.can_read;
     notex.can_edit = config.can_edit;
-    notex.fx.show_tools();
   },
   click: function(e) {
     if (notex.is_editing || !notex.can_edit) return;
@@ -297,12 +296,10 @@ notex.notebox = {
     $('#page').css('background', 'url(' + images + 'papers/' + this.paper + '.jpg)');
     $('#notebox #photo img').attr('src', images + 'thumbs/' + this.photo + '.jpg');
     $('#notebox #paper').css('background', 'url(' + images + 'thumbs/' + this.paper + '.jpg) no-repeat -27px -47px');
-    if (notex.is_owner) {
-      var canread = (this.readers == 'all' ? 'check' : 'cross');
-      $('#canread').css('background', 'url(' + images + canread + '.png)');
-      var canedit = (this.editors == 'all' ? 'check' : 'cross');
-      $('#canedit').css('background', 'url(' + images + canedit + '.png)');
-    }
+    var canread = (notex.is_owner ? this.readers == 'all' : notex.can_read) ?  'check' : 'cross';
+    $('#canread').css('background', 'url(' + images + canread + '.png)');
+    var canedit = (notex.is_owner ? this.editors == 'all' : notex.can_edit) ?  'check' : 'cross';
+    $('#canedit').css('background', 'url(' + images + canedit + '.png)');
   },
   select: function(photo_or_paper, selected) {
     var dialog = $('#dialogs #' + photo_or_paper + '-dialog');
@@ -317,6 +314,7 @@ notex.notebox = {
     }
   },
   toggle: function(readers_or_editors) {
+    if (!notex.is_owner) return;
     if (readers_or_editors == 'editors' && this['readers'] == 'me') return;
     this[readers_or_editors] = (this[readers_or_editors] == 'all' ? 'me' : 'all');
     if (readers_or_editors == 'readers' && this['readers'] == 'me') this['editors'] = 'me';
@@ -349,10 +347,6 @@ notex.notebox = {
 };
 
 notex.notelist = {
-
-  // Constants
-  Top1: '75px',  // when can't edit
-  Top2: '322px', // when can edit
 
   init: function() {
   },
@@ -404,11 +398,6 @@ notex.fx = {
     } else {
       $('#highlight').hide();
     }
-  },
-  show_tools: function() {
-    var tools = $('#tools');
-    notex.can_edit ? tools.show() : tools.hide();
-    $('#notelist').css('top', notex.can_edit ? notex.notelist.Top2 : notex.notelist.Top1);
   },
   version: 0.1
 };
