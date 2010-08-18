@@ -145,7 +145,7 @@ var notex = {
     $.get('/note/load.json', {url: window.location.href},
     function(data) {
       var config;
-      eval('config='+data+';');
+      eval('config=' + (data || '{}') + ';');
       notex.notebox.setup(config);
       notex.notes = config.notes ? config.notes : {};
       notex.mode = config.mode; // "open" or "user"
@@ -160,7 +160,7 @@ var notex = {
     $.post('/note/save.json', {url: window.location.href, config: $.toJSON(config), secret: notex.secret},
     function(data) {
       var config;
-      eval('config='+data+';');
+      eval('config=' + (data || '{}') + ';');
       notex.notebox.setup(config);
       for (id in config.diff) {
         var note = notex.notes[id] = config.diff[id];
