@@ -332,7 +332,8 @@ notex.notebox = {
     var to = notex.utils.encode(prompt('New name?', match[2]));
     if (to) location.href = match[1] + 'note/rename?from=' + from + '&to=' + to;
   },
-  wipe: function(with_confirm, then_erase) {
+  wipe: function(with_confirm, force_erase) {
+    if (with_confirm && !notex.can_edit) return;
     var confirmed = with_confirm ? confirm('Wipe this note clean?') : true;
     if (confirmed) {
       for (id in notex.notes) {
