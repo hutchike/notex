@@ -14,7 +14,9 @@ class Note_controller extends App_controller
 
         $url = parse_url($this->params->url);
         $note = new Note(array('url' => $url['path']));
-        $config = array('photo' => '',
+        $mode = $this->session->access_token ? 'user' : 'open';
+        $config = array('mode' => $mode,
+                        'photo' => '',
                         'paper' => '',
                         'readers' => '',
                         'editors' => '',

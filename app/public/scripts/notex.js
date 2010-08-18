@@ -19,6 +19,7 @@ var notex = {
   secret: '',
   paused: 0,
   notes: {},
+  mode: 'open',
   offset: {x: 14, y: 20},
   adjust: {x: -1, y: 5},
   origin: {x: null, y: null},
@@ -147,6 +148,7 @@ var notex = {
       eval('config='+data+';');
       notex.notebox.setup(config);
       notex.notes = config.notes ? config.notes : {};
+      notex.mode = config.mode; // "open" or "user"
       for (id in notex.notes) {
         notex.render(id, notex.notes[id]);
       }
@@ -281,10 +283,12 @@ notex.notebox = {
     $('#page').css('background', 'url(' + images + 'papers/' + this.paper + '.jpg)');
     $('#notebox #photo img').attr('src', images + 'thumbs/' + this.photo + '.jpg');
     $('#notebox #paper').css('background', 'url(' + images + 'thumbs/' + this.paper + '.jpg) no-repeat -27px -47px');
-    var canread = (this.readers == 'all' ? 'check' : 'cross');
-    $('#canread').css('background', 'url(' + images + canread + '.png)');
-    var canedit = (this.editors == 'all' ? 'check' : 'cross');
-    $('#canedit').css('background', 'url(' + images + canedit + '.png)');
+    if (notex.mode == 'user') {
+      var canread = (this.readers == 'all' ? 'check' : 'cross');
+      $('#canread').css('background', 'url(' + images + canread + '.png)');
+      var canedit = (this.editors == 'all' ? 'check' : 'cross');
+      $('#canedit').css('background', 'url(' + images + canedit + '.png)');
+    }
   },
   select: function(photo_or_paper, selected) {
     var dialog = $('#dialogs #' + photo_or_paper + '-dialog');
