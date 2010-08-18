@@ -47,17 +47,7 @@ class Note_controller extends App_controller
 
         // Can we edit it?
 
-        $can_edit = TRUE;
-        $secret = $this->params->secret;
-        $hidden = md5($path . $secret);
-        if ($note->get_id())
-        {
-            if ($note->secret && $note->secret != $hidden) $can_edit = FALSE;
-        }
-        else // it's a new note and might be secret?
-        {
-            if ($secret) $note->secret = $hidden;
-        }
+        $can_edit = $this->can_edit($note);
 
         // Edit the note (if allowed)
 
@@ -80,6 +70,34 @@ class Note_controller extends App_controller
 
         $action = $can_edit ? 'saved' : 'viewed';
         Log::info($this->host_ip . " $action a note at $path");
+    }
+
+    public function can_edit($note)
+    {
+        $can_edit = TRUE;
+
+        // Apply any secret password
+
+        $secret = $this->params->secret;
+        $hidden = md5($path . $secret);
+        if ($note->get_id())
+        {
+            if ($note->secret && $note->secret != $hidden) $can_edit = FALSE;
+        }
+        else // it's a new note and might be secret?
+        {
+            if ($secret) $note->secret = $hidden;
+        }
+
+        // Check the note editors
+
+        if (($note->editors == 'me' && $this->screen_name != $this->username) ||
+            strpos($note->editors, $this->screen_name) === FALSE)
+        {
+            $can_edit = FALSE;
+        }
+
+        return $can_edit;
     }
 
     public function diff($old_notes, $new_notes)
