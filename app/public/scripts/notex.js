@@ -326,6 +326,7 @@ notex.notebox = {
     // TODO
   },
   rename: function() {
+    if (!notex.can_edit) return alert("Can't rename this note");
     var re = /(http:\/\/[^/]+\/)(.*)/i;
     match = re.exec(location.href);
     var from = notex.utils.encode(match[2]);
