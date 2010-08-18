@@ -1,5 +1,5 @@
 <?
-load_helpers('Translate');
+load_helpers('Twitter', 'Translate');
 
 class App_controller extends Controller
 {
@@ -15,7 +15,7 @@ class App_controller extends Controller
         $uri = $_SERVER['REQUEST_URI'];
         $this->render->title = $uri == '/' ? 'your web notepad' : ltrim($uri, '/');
         $this->render->username = $this->username = $this->username_from_host();
-        $this->render->access_token = $this->session->access_token;
+        $this->render->screen_name = Twitter::screen_name($this->session->access_token);
         $this->render->copy = '';
         $this->render->debug = '';
         $this->render->layout = 'notepad';

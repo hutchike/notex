@@ -3,6 +3,7 @@ class Twitter_controller extends App_controller
 {
     public function before()
     {
+        load_helper('Twitter');
         load_plugin('Twitter/OAuth');
         parent::before();
     }
@@ -58,12 +59,6 @@ class Twitter_controller extends App_controller
         {
             return $this->clear();
         }
-    }
-
-    public function access_token()
-    {
-        var_dump($this->session->access_token);
-        exit;
     }
 }
 
