@@ -12,7 +12,7 @@ function dialog_img($photo_or_paper, $id)
 
 // Users have extra features in the "notebox2"
 
-$notebox = ($username == $screen_name ? 'notebox2' : 'notebox1');
+$notebox = ($is_owner ? 'notebox2' : 'notebox1');
 ?>
 <div id="logo"><a href="/"><img id="logo-img" src="/images/nothing.gif" alt="logo"/></a></div>
 <div id="copy"><?= $copy ?></div>

@@ -14,7 +14,7 @@ class Note_controller extends App_controller
 
         $url = parse_url($this->params->url);
         $note = new Note(array('url' => $url['path']));
-        $config = array('mode' => $this->mode,
+        $config = array('is_owner' => $this->is_owner,
                         'photo' => '',
                         'paper' => '',
                         'readers' => '',

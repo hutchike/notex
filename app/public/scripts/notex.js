@@ -19,7 +19,7 @@ var notex = {
   secret: '',
   paused: 0,
   notes: {},
-  mode: 'open',
+  is_owner: false,
   offset: {x: 14, y: 20},
   adjust: {x: -1, y: 5},
   origin: {x: null, y: null},
@@ -148,7 +148,7 @@ var notex = {
       eval('config=' + (data || '{}') + ';');
       notex.notebox.setup(config);
       notex.notes = config.notes ? config.notes : {};
-      notex.mode = config.mode; // "open" or "user"
+      notex.is_owner = config.is_owner;
       for (id in notex.notes) {
         notex.render(id, notex.notes[id]);
       }
@@ -283,7 +283,7 @@ notex.notebox = {
     $('#page').css('background', 'url(' + images + 'papers/' + this.paper + '.jpg)');
     $('#notebox #photo img').attr('src', images + 'thumbs/' + this.photo + '.jpg');
     $('#notebox #paper').css('background', 'url(' + images + 'thumbs/' + this.paper + '.jpg) no-repeat -27px -47px');
-    if (notex.mode == 'user') {
+    if (notex.is_owner) {
       var canread = (this.readers == 'all' ? 'check' : 'cross');
       $('#canread').css('background', 'url(' + images + canread + '.png)');
       var canedit = (this.editors == 'all' ? 'check' : 'cross');
