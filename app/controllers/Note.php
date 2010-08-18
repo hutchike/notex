@@ -62,7 +62,7 @@ class Note_controller extends App_controller
         // Edit the note (if allowed)
 
         $old_notes = $note->notes;
-        $note->notes = json_encode($config->notes);
+        if ($config->notes) $note->notes = json_encode($config->notes);
         if ($config->photo) $note->photo = $config->photo;
         if ($config->paper) $note->paper = $config->paper;
         if ($config->readers) $note->readers = $config->readers;
