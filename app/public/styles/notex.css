@@ -191,7 +191,7 @@ img {
   left: 132px;
   width: 20px;
   height: 20px;
-  background: url(/images/check.gif);
+  background: url(/images/check.png);
 }
 
 #notebox #canedit {
@@ -200,7 +200,7 @@ img {
   left: 132px;
   width: 20px;
   height: 20px;
-  background: url(/images/check.gif);
+  background: url(/images/check.png);
 }
 
 #notelist {
