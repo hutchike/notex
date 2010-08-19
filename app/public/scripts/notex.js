@@ -370,6 +370,7 @@ notex.notelist = {
     $('#search').keyup(function() {
       var text = $(this).val();
       notex.search = (text == 'search' ? '' : text);
+      notex.paused = -10;
     }).keyup();
   },
   update: function(config) {
