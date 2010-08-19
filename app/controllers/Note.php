@@ -59,7 +59,11 @@ class Note_controller extends App_controller
         // Edit the note (if allowed)
 
         $old_notes = $note->notes;
-        if ($config->notes) $note->notes = json_encode($config->notes);
+        if ($config->notes)
+        {
+            $note->notes = json_encode($config->notes);
+            $note->words = Note::words($config->notes);
+        }
         if ($config->photo) $note->photo = $config->photo;
         if ($config->paper) $note->paper = $config->paper;
         if ($config->readers) $note->readers = $config->readers;
@@ -90,7 +94,7 @@ class Note_controller extends App_controller
 
         $list = array();
         $note = new Note();
-        if ($search) $note->notes = "%$search%";
+        if ($search) $note->words = "%$search%";
         $notes = $note->set_limit(RECENT_NOTES_LIST_LENGTH)->set_order('updated_at desc')->find_all();
         foreach ($notes as $note)
         {

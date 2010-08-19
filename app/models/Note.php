@@ -61,6 +61,17 @@ class Note extends Model
         }
         parent::connect($data_file, TRUE);
     }
+
+    public static function words($notes)
+    {
+        $words = '';
+        foreach ($notes as $id => $note)
+        {
+            if ($note->deleted) continue;
+            $words .= $note->text . ' ';
+        }
+        return rtrim($words);
+    }
 }
 
 // End of Note.php
