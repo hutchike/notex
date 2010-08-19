@@ -375,12 +375,20 @@ notex.notelist = {
     var list = config.notelist;
     for (i in list) {
       var note = list[i];
-      html += '<li><a href="/' + note.url + '">'+ note.url +'</a></li>';
+      var show_url = note.url ? note.url : 'Home page';
+      html += '<li><div><a href="/' + note.url + '">'+ show_url +'</a></div><div class="timestamp">' + this.elapsed(config.now - note.time) + '</div></li>';
     }
     if (this.html != html) {
       $('#notelist #listitems').html(html);
       this.html = html;
     }
+  },
+  elapsed: function(secs) {
+    if (secs < 60) return '' + secs + ' seconds ago';
+    if (secs < 3600) return '' + Math.floor(secs / 60) + ' minutes ago';
+    if (secs < 3600 * 24) return '' + Math.floor(secs / 3600) + ' hours ago';
+    if (secs < 3600 * 24 * 30) return '' + Math.floor(secs / 3600 / 24) + ' days ago';
+    return '';
   },
   version: 0.1
 };

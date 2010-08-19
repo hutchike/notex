@@ -94,6 +94,10 @@ img {
   font-family: brush script mt, cursive;
 }
 
+.timestamp {
+  font-size: 10px;
+}
+
 #debug {
   position: absolute;
   color: red;
