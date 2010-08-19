@@ -67,7 +67,7 @@ class Note extends Model
         $words = '';
         foreach ($notes as $id => $note)
         {
-            if ($note->deleted) continue;
+            if (property_exists($note, 'deleted')) continue;
             $words .= $note->text . ' ';
         }
         return rtrim($words);
