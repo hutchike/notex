@@ -239,6 +239,21 @@ img {
   background: url(/images/listback.png);
 }
 
+#notelist #listbody #newnote {
+  float: left;
+  padding: 5px;
+}
+
+#notelist #listbody #search {
+  font-size: 15px;
+  width: 115px;
+  margin: 5px;
+  padding: 1px;
+  color: white;
+  background-color: transparent;
+  border: 1px solid #ccc;
+}
+
 #notelist #listbody #listitems {
   width: 155px;
   padding: 5px;

@@ -17,6 +17,7 @@ var notex = {
   is_editing: false,
   is_hiding: true,
   selected: null,
+  search: '',
   secret: '',
   paused: 0,
   notes: {},
@@ -166,7 +167,7 @@ var notex = {
   save: function() {
     var config = notex.notebox.config();
     config.notes = notex.notes;
-    $.post('/note/save.json', {url: window.location.href, config: $.toJSON(config), secret: notex.secret},
+    $.post('/note/save.json', {url: window.location.href, config: $.toJSON(config), search: notex.search, secret: notex.secret},
     function(data) {
       if (notex.is_updating) return (notex.is_updating = false);
       var config;
@@ -364,9 +365,12 @@ notex.notebox = {
 };
 
 notex.notelist = {
-  search: '',
   html: '',
   init: function() {
+    $('#search').keyup(function() {
+      var text = $(this).val();
+      notex.search = (text == 'search' ? '' : text);
+    }).keyup();
   },
   update: function(config) {
     if (!config.notelist) return;
