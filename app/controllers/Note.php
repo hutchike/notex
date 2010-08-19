@@ -94,9 +94,10 @@ class Note_controller extends App_controller
         $notes = $note->set_limit(RECENT_NOTES_LIST_LENGTH)->set_order('updated_at desc')->find_all();
         foreach ($notes as $note)
         {
-            $list[] = array('url' => ltrim($note->url, '/'),
-                            'time' => strtotime($note->updated_at));
+            $list[] = new Object(array('url' => ltrim($note->url, '/'),
+                                       'time' => strtotime($note->updated_at)));
         }
+        usort($list, 'Note::compare_urls');
         $this->render->data = $list;
         return $list;
     }

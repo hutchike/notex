@@ -61,6 +61,11 @@ class Note extends Model
         }
         parent::connect($data_file, TRUE);
     }
+
+    public static function compare_urls($note1, $note2)
+    {
+        return strcmp($note1->url, $note2->url);
+    }
 }
 
 // End of Note.php
