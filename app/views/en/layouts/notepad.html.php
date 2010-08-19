@@ -69,7 +69,7 @@ $notebox = ($is_owner ? 'notebox2' : 'notebox1');
   <div id="listhead"></div>
   <div id="listbody">
     <a href="/new"><img id="newnote" src="/images/newnote.png" width="57" height="22" alt="new note" onmouseover="notex.fx.highlight('notelist',5,30,61,50)" onmouseout="notex.fx.highlight()" /></a>
-    <form><input id="search" type="text" value="search" onfocus="this.value=''" /></form>
+    <form id="filter" onsubmit="return false" method="get"><input id="search" type="text" value="search" onfocus="this.value=''" /></form>
     <ul id="listitems">
     </ul>
   </div>
