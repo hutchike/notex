@@ -341,7 +341,7 @@ notex.notebox = {
     var re = /(http:\/\/[^/]+\/)([^\?#]*)/i;
     match = re.exec(location.href);
     var from = notex.utils.decode(match[2]);
-    var to = notex.utils.encode(prompt('New name?', from));
+    var to = notex.utils.encode(prompt('New name?', from.spacify())).scorify();
     if (to != 'null' && to != from) location.href = match[1] + 'note/rename?from=' + from + '&to=' + to;
   },
   wipe: function(with_confirm, then_erase) {
@@ -413,6 +413,16 @@ notex.fx = {
     }
   },
   version: 0.1
+};
+
+// Finally a bit of monkey patching ;-)
+
+String.prototype.spacify = function() {
+  return this.replace(/_/g, ' ');
+};
+
+String.prototype.scorify = function() {
+  return this.replace(/ /g, '_');
 };
 
 // End of notex.js
