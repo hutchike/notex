@@ -117,8 +117,13 @@ class Note_controller extends App_controller
         $orig = new Note(array('url' => "/$from"));
         if ($orig->load())
         {
+            // Check that the destination is missing or empty of words
+
             $dest = new Note(array('url' => "/$to"));
-            if ($dest->load()) $this->redirect($from, TRUE);
+            if ($dest->load())
+            {
+                if (strlen($dest->words))$this->redirect($from, TRUE);
+            }
 
             $orig->url = "/$to";
             $orig->status = STATUS_RENAMED;
