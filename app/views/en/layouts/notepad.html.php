@@ -26,11 +26,13 @@ $notebox = ($is_owner ? 'notebox2' : 'notebox1');
 </div>
 <div id="debug"><?= $debug ?></div>
 <div id="highlight"></div>
-<? if (is_null($screen_name)): ?>
 <div id="twitter">
+<? if (is_null($screen_name)): ?>
   <a href="/twitter/login"><img src="/images/twitter/lighter.png" alt="twitter login"/></a>
-</div>
+<? else: ?>
+  <a href="http://<?= $screen_name ?>.noted.cc/"><img src="/images/twitter/blanker.png" alt="twitter login"/></a>
 <? endif ?>
+</div>
 <div id="penbox">
   <div id="selectcolor"></div>
   <div id="selectfont"></div>
