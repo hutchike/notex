@@ -341,7 +341,7 @@ notex.notebox = {
     var re = /(http:\/\/[^/]+\/)([^\?#]*)/i;
     match = re.exec(location.href);
     var from = notex.utils.decode(match[2]);
-    var to = notex.utils.encode(prompt('New name?', from.spacify())).scorify();
+    var to = notex.utils.encode(prompt('New name?', from.spacify()).scorify());
     if (to != 'null' && to != from) location.href = match[1] + 'note/rename?from=' + from + '&to=' + to;
   },
   wipe: function(with_confirm, then_erase) {
