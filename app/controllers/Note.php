@@ -22,7 +22,6 @@ class Note_controller extends App_controller
                         'editors' => '',
                         'can_read' => TRUE,
                         'can_edit' => TRUE,
-                        'username' => $this->username,
                         'is_owner' => $this->is_owner,
                         'notelist' => $this->recent());
         if ($note->load())
@@ -73,7 +72,6 @@ class Note_controller extends App_controller
             'photo' => $note->photo,
             'readers' => $note->readers,
             'editors' => $note->editors,
-            'username' => $this->username,
             'is_owner' => $this->is_owner,
             'can_read' => $can_read,
             'can_edit' => $can_edit,

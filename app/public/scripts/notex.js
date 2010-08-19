@@ -20,7 +20,6 @@ var notex = {
   secret: '',
   paused: 0,
   notes: {},
-  username: null,
   is_owner: false,
   can_read: true,
   can_edit: true,
@@ -59,7 +58,6 @@ var notex = {
     notex.is_hiding = is_hiding;
   },
   perms: function(config) {
-    notex.username = config.username;
     notex.is_owner = config.is_owner;
     notex.can_read = config.can_read;
     notex.can_edit = config.can_edit;
