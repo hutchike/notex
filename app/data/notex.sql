@@ -17,6 +17,7 @@ create table if not exists notes
     updated_at  datetime,
     url         varchar(255),
     notes       text,
+    words       text,
     labels      varchar(255),
     secret      varchar(255),
     readers     varchar(255),
