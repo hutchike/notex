@@ -158,6 +158,7 @@ var notex = {
       eval('config=' + (data || '{}') + ';');
       notex.perms(config);
       notex.notebox.load(config);
+      notex.notelist.update(config);
       notex.notes = config.notes ? config.notes : {};
       for (id in notex.notes) {
         notex.render(id, notex.notes[id]);
