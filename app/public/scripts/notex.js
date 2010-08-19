@@ -376,7 +376,7 @@ notex.notelist = {
     var list = config.notelist;
     for (i in list) {
       var note = list[i];
-      var show_url = note.url ? note.url : 'Home page';
+      var show_url = note.url ? note.url.spacify() : 'Home page';
       html += '<li><div><a href="/' + note.url + '">'+ show_url +'</a></div><div class="timestamp">' + this.elapsed(config.now - note.time) + '</div></li>';
     }
     if (this.html != html) {
