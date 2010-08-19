@@ -13,6 +13,7 @@ var notex = {
   Hide_after: 5,
 
   // Properties
+  is_updating: false,
   is_editing: false,
   is_hiding: true,
   selected: null,
@@ -168,6 +169,7 @@ var notex = {
     config.notes = notex.notes;
     $.post('/note/save.json', {url: window.location.href, config: $.toJSON(config), secret: notex.secret},
     function(data) {
+      if (notex.is_updating) return (notex.is_updating = false);
       var config;
       eval('config=' + (data || '{}') + ';');
       notex.perms(config);
@@ -315,29 +317,31 @@ notex.notebox = {
       this.display();
       notex.cookie.set(photo_or_paper, selected);
       this.has_changed[photo_or_paper] = true;
+      notex.is_updating = true;
     } else {
       dialog.fadeIn();
     }
   },
   toggle: function(readers_or_editors) {
     if (!notex.is_owner) return alert("Can't change this note's settings");
-    if (readers_or_editors == 'editors' && this['readers'] == 'me') return alert('First click on "read" before "edit"');
     this[readers_or_editors] = (this[readers_or_editors] == 'all' ? 'me' : 'all');
     if (readers_or_editors == 'readers' && this['readers'] == 'me') this['editors'] = 'me';
+    if (readers_or_editors == 'editors' && this['editors'] == 'all') this['readers'] = 'all';
     this.display();
     this.has_changed['readers'] = this.has_changed['editors'] = true;
     notex.cookie.set('readers', this.readers);
     notex.cookie.set('editors', this.editors);
+    notex.is_updating = true;
   },
   share: function() {
     // TODO
   },
   rename: function() {
     if (!notex.can_edit) return alert("Can't rename this note");
-    var re = /(http:\/\/[^/]+\/)(.*)/i;
+    var re = /(http:\/\/[^/]+\/)([^\?#]*)/i;
     match = re.exec(location.href);
-    var from = notex.utils.encode(match[2]);
-    var to = notex.utils.encode(prompt('New name?', match[2]));
+    var from = notex.utils.decode(match[2]);
+    var to = notex.utils.encode(prompt('New name?', from));
     if (to != 'null' && to != from) location.href = match[1] + 'note/rename?from=' + from + '&to=' + to;
   },
   wipe: function(with_confirm, then_erase) {
