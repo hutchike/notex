@@ -5,5 +5,6 @@ twitter:
 
 notes:
     recent_notes_list_length: 10
+    note_words_summary_length: 30
     status_renamed: R
     status_obscene: O

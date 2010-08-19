@@ -98,8 +98,11 @@ class Note_controller extends App_controller
         $notes = $note->set_limit(RECENT_NOTES_LIST_LENGTH)->set_order('updated_at desc')->find_all();
         foreach ($notes as $note)
         {
+            if ($note->readers == 'me' && !$this->is_owner) continue;
+            $words = $note->words ? substr($note->words, 0, NOTE_WORDS_SUMMARY_LENGTH) : '';
             $list[] = new Object(array('url' => ltrim($note->url, '/'),
-                                       'time' => strtotime($note->updated_at)));
+                                       'time' => strtotime($note->updated_at),
+                                       'words' => $words));
         }
         $this->render->data = $list;
         return $list;
