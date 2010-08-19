@@ -1,7 +1,7 @@
 <?
 function map_area($element, $x1, $y1, $x2, $y2, $action, $alt = '')
 {
-    return "<area shape=\"rect\" coords=\"$x1,$y1,$x2,$y2\" onclick=\"notex.$action\" alt=\"$alt\" onmouseover=\"notex.fx.highlight('$element',$x1,$y1,$x2,$y2)\" onmouseout=\"notex.fx.highlight()\" />\n";
+    return "<area shape=\"rect\" coords=\"$x1,$y1,$x2,$y2\" href=\"#\" onclick=\"notex.$action; return false\" alt=\"$alt\" onmouseover=\"notex.fx.highlight('$element',$x1,$y1,$x2,$y2)\" onmouseout=\"notex.fx.highlight()\" />\n";
 }
 
 function dialog_img($photo_or_paper, $id)

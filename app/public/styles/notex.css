@@ -195,11 +195,13 @@ img {
   position: absolute;
   top: 44px;
   left: 66px;
+  cursor: pointer;
 }
 
 #notebox #photo, #notebox #photo img, #notebox #paper, #notebox #paper img {
   width: 55px;
   height: 55px;
+  cursor: pointer;
 }
 
 #notebox #canread {
@@ -209,6 +211,7 @@ img {
   width: 20px;
   height: 20px;
   background: url(/images/nothing.gif);
+  cursor: pointer;
 }
 
 #notebox #canedit {
@@ -218,6 +221,7 @@ img {
   width: 20px;
   height: 20px;
   background: url(/images/nothing.gif);
+  cursor: pointer;
 }
 
 #notelist {
@@ -260,6 +264,7 @@ img {
   margin: 0;
   margin-left: 25px;
   list-style-image: url(/images/page_white.png);
+  clear: both;
 }
 
 #notelist #listbody #listitems li {
