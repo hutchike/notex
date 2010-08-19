@@ -336,7 +336,7 @@ notex.notebox = {
     notex.is_updating = true;
   },
   share: function() {
-    // TODO
+    alert('Coming very soon...');
   },
   rename: function() {
     if (!notex.can_edit) return notex.fx.flash('norename-dialog');
