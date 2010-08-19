@@ -273,6 +273,8 @@ notex.notebox = {
   has_changed: {},
 
   init: function() {
+    var dialog_images = ['dialogs/nochange.png', 'dialogs/norename.png', 'dialogs/nowipe.png'];
+    notex.fx.preload(dialog_images);
   },
   load: function(config) {
     config.photo = config.photo || notex.cookie.get('photo') || this.Defaults.photo;
@@ -400,6 +402,7 @@ notex.cookie = {
 };
 
 notex.fx = {
+  cache: {},
   highlight: function(element, x1, y1, x2, y2) {
     if (element) {
       var w = (x2 - x1) + 'px';
@@ -414,7 +417,20 @@ notex.fx = {
   },
   flash: function(element) {
     var e = $('#'+element);
-    e.fadeIn(500, function() { setTimeout(function() { e.fadeOut(1000) }, 2500) });
+    if ($.browser.msie) {
+      e.show();
+      setTimeout(function() { e.hide() }, 3000);
+    } else {
+      e.fadeIn(500, function() { setTimeout(function() { e.fadeOut(1000) }, 2500) });
+    }
+  },
+  preload: function(images) {
+    for (i in images) {
+      var img = new Image();
+      var src = images[i];
+      img.src = '/images/' + src;
+      this.cache[src] = img;
+    }
   },
   version: 0.1
 };

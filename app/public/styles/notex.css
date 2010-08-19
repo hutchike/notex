@@ -253,7 +253,7 @@ img {
 #dialogs #norename-dialog {
   position: absolute;
   display: none;
-  top: 255px;
+  top: 300px;
   left: 60px;
   width: 202px;
   height: 54px;
@@ -263,7 +263,7 @@ img {
 #dialogs #nowipe-dialog {
   position: absolute;
   display: none;
-  top: 155px;
+  top: 300px;
   left: 120px;
   width: 186px;
   height: 54px;
