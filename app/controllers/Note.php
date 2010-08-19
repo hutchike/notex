@@ -88,11 +88,11 @@ class Note_controller extends App_controller
 
     public function recent()
     {
-        $search = $this->params->search;
+        $search = first($this->params->search, 'note');
 
         $list = array();
         $note = new Note();
-        if ($search) $note->notes = "%$search%";
+        $note->notes = "%$search%";
         $notes = $note->set_limit(RECENT_NOTES_LIST_LENGTH)->set_order('updated_at desc')->find_all();
         foreach ($notes as $note)
         {
