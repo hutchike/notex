@@ -5,6 +5,10 @@ body {
   min-height: 1125px;
 }
 
+a {
+  color: #22e;
+}
+
 img {
   border: 0;
 }
