@@ -380,7 +380,7 @@ notex.notelist = {
     for (i in list) {
       var note = list[i];
       var show_url = note.url ? note.url.spacify() : 'Home page';
-      var words = words ? note.words.quotify() + '&hellip;' : '';
+      var words = note.words ? note.words.quotify() + '&hellip;' : '';
       html += '<li><div><a href="/' + note.url + '" title="' + words + '">' + show_url + '</a></div><div class="timestamp">' + this.elapsed(config.now - note.time) + '</div></li>';
     }
     if (this.html != html) {
