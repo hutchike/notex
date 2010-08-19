@@ -45,7 +45,7 @@ class App_controller extends Controller
         array_pop($parts);  // remove "cc"
         array_pop($parts);  // remove "noted"
         $username = join('.', $parts);
-        return $username == 'www' ? '' : $username;
+        return ($username == 'www' || $username == 'local') ? '' : $username;
     }
 }
 
