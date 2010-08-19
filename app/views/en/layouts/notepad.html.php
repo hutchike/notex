@@ -30,7 +30,7 @@ $notebox = ($is_owner ? 'notebox2' : 'notebox1');
 <? if (is_null($screen_name)): ?>
   <a href="/twitter/login"><img src="/images/twitter/lighter.png" alt="twitter login"/></a>
 <? else: ?>
-  <div id="screen_name"><a href="http://<?= $screen_name ?>.noted.cc/"><?= $screen_name ?></a></div>
+  <div id="screen_name"><a href="http://<?= $screen_name ?>.noted.cc/" title="Go to my notes"><?= $screen_name ?></a></div>
 <? endif ?>
 </div>
 <div id="penbox">
