@@ -375,7 +375,7 @@ notex.notelist = {
     var list = config.notelist;
     for (i in list) {
       var note = list[i];
-      html += '<li>'+note.url+'</li>';
+      html += '<li><a href="/' + note.url + '">'+ note.url +'</a></li>';
     }
     if (this.html != html) {
       $('#notelist #listitems').html(html);
