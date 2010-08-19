@@ -14,7 +14,8 @@ class Note_controller extends App_controller
 
         $url = parse_url($this->params->url);
         $note = new Note(array('url' => $url['path']));
-        $config = array('notes' => NULL,
+        $config = array('now' => time(),
+                        'notes' => NULL,
                         'photo' => '',
                         'paper' => '',
                         'readers' => '',
@@ -66,6 +67,7 @@ class Note_controller extends App_controller
         if ($config->editors) $note->editors = $config->editors;
         if ($can_edit) $note->save();
         $this->render->data = array(
+            'now' => time(),
             'diff' => $can_read ? $this->diff($old_notes, $note->notes) : NULL,
             'paper' => $can_read ? $note->paper : 'secret',
             'photo' => $note->photo,
