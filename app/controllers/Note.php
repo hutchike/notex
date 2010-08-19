@@ -22,7 +22,8 @@ class Note_controller extends App_controller
                         'can_read' => TRUE,
                         'can_edit' => TRUE,
                         'username' => $this->username,
-                        'is_owner' => $this->is_owner);
+                        'is_owner' => $this->is_owner,
+                        'notelist' => $this->recent());
         if ($note->load())
         {
             $can_read = $this->can_read($note);
@@ -74,12 +75,30 @@ class Note_controller extends App_controller
             'is_owner' => $this->is_owner,
             'can_read' => $can_read,
             'can_edit' => $can_edit,
+            'notelist' => $this->recent(),
         );
 
         // Log the info
 
         $action = $can_edit ? 'saved' : 'viewed';
         Log::info($this->host_ip . " $action a note at $path");
+    }
+
+    public function recent()
+    {
+        $search = $this->params->search;
+
+        $list = array();
+        $note = new Note();
+        if ($search) $note->notes = "%$search%";
+        $notes = $note->set_limit(RECENT_NOTES_LIST_LENGTH)->set_order('updated_at desc')->find_all();
+        foreach ($notes as $note)
+        {
+            $list[] = array('url' => ltrim($note->url, '/'),
+                            'time' => strtotime($note->updated_at));
+        }
+        $this->render->data = $list;
+        return $list;
     }
 
     public function rename()

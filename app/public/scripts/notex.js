@@ -174,6 +174,7 @@ var notex = {
       eval('config=' + (data || '{}') + ';');
       notex.perms(config);
       notex.notebox.update(config);
+      notex.notelist.update(config);
       if (config.can_read == false) return notex.notebox.wipe(false, true);
       for (id in config.diff) {
         var note = notex.notes[id] = config.diff[id];
@@ -364,8 +365,22 @@ notex.notebox = {
 };
 
 notex.notelist = {
-
+  search: '',
+  html: '',
   init: function() {
+  },
+  update: function(config) {
+    if (!config.notelist) return;
+    var html = '';
+    var list = config.notelist;
+    for (i in list) {
+      var note = list[i];
+      html += '<li>'+note.url+'</li>';
+    }
+    if (this.html != html) {
+      $('#notelist #listitems').html(html);
+      this.html = html;
+    }
   },
   version: 0.1
 };

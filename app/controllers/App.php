@@ -9,6 +9,7 @@ class App_controller extends Controller
 
         $config = Config::load('notex');
         Config::define_constants($config['twitter']);
+        Config::define_constants($config['notes']);
 
         // Setup global variables and rendering data
 

@@ -67,8 +67,6 @@ $notebox = ($is_owner ? 'notebox2' : 'notebox1');
   <div id="listhead"></div>
   <div id="listbody">
     <ul id="listitems">
-      <li>first note</li>
-      <li>second note</li>
     </ul>
   </div>
   <div id="listfoot"></div>
