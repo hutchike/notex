@@ -261,7 +261,7 @@ notex.notebox = {
 
   // Constants
   Defaults: {
-    photo: 'photo' + notex.utils.rand(1, 9),
+    photo: 'photo4',
     paper: 'paper1',
     readers: 'all',
     editors: 'me'
