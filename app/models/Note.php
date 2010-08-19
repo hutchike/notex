@@ -61,13 +61,6 @@ class Note extends Model
         }
         parent::connect($data_file, TRUE);
     }
-
-    public static function compare_urls($note1, $note2)
-    {
-        $priority1 = $note1->status == STATUS_RENAMED ? 1 : 2;
-        $priority2 = $note2->status == STATUS_RENAMED ? 1 : 2;
-        return strcmp($priority1 . $note1->url, $priority2 . $note2->url);
-    }
 }
 
 // End of Note.php

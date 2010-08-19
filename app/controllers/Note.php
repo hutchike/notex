@@ -86,19 +86,17 @@ class Note_controller extends App_controller
 
     public function recent()
     {
-        $search = first($this->params->search, 'note');
+        $search = $this->params->search;
 
         $list = array();
         $note = new Note();
-        $note->notes = "%$search%";
+        if ($search) $note->notes = "%$search%";
         $notes = $note->set_limit(RECENT_NOTES_LIST_LENGTH)->set_order('updated_at desc')->find_all();
         foreach ($notes as $note)
         {
             $list[] = new Object(array('url' => ltrim($note->url, '/'),
-                                       'status' => $note->status,
                                        'time' => strtotime($note->updated_at)));
         }
-        usort($list, 'Note::compare_urls');
         $this->render->data = $list;
         return $list;
     }
