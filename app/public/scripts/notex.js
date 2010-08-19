@@ -382,11 +382,14 @@ notex.notelist = {
       this.html = html;
     }
   },
+  ago: function(n, unit) {
+    return '' + n + ' ' + unit + (n == 1 ? '' : 's') + ' ago';
+  },
   elapsed: function(secs) {
-    if (secs < 60) return '' + secs + ' seconds ago';
-    if (secs < 3600) return '' + Math.floor(secs / 60) + ' minutes ago';
-    if (secs < 3600 * 24) return '' + Math.floor(secs / 3600) + ' hours ago';
-    if (secs < 3600 * 24 * 30) return '' + Math.floor(secs / 3600 / 24) + ' days ago';
+    if (secs < 60) return this.ago(secs, 'second');
+    if (secs < 3600) return this.ago(Math.floor(secs / 60), 'minute');
+    if (secs < 3600 * 24) return this.ago(Math.floor(secs / 3600), 'hour');
+    if (secs < 3600 * 24 * 30) return this.ago(Math.floor(secs / 3600 / 24), 'day');
     return '';
   },
   version: 0.1
