@@ -337,7 +337,7 @@ notex.notebox = {
     // TODO
   },
   rename: function() {
-    if (!notex.can_edit) return alert("Can't rename this note");
+    if (!notex.can_edit) return notex.fx.flash('norename-dialog');
     var re = /(http:\/\/[^/]+\/)([^\?#]*)/i;
     match = re.exec(location.href);
     var from = notex.utils.decode(match[2]);
@@ -345,7 +345,7 @@ notex.notebox = {
     if (to != 'null' && to != from) location.href = match[1] + 'note/rename?from=' + from + '&to=' + to;
   },
   wipe: function(with_confirm, then_erase) {
-    if (with_confirm && !notex.can_edit) return alert("Can't edit this note");
+    if (with_confirm && !notex.can_edit) return notex.fx.flash('nowipe-dialog');
     var confirmed = with_confirm ? confirm('Wipe this note clean?') : true;
     if (confirmed) {
       for (id in notex.notes) {

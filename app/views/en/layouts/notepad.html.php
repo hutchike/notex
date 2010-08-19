@@ -75,6 +75,8 @@ $notebox = ($is_owner ? 'notebox2' : 'notebox1');
 </div>
 <div id="dialogs">
   <div id="nochange-dialog"></div>
+  <div id="norename-dialog"></div>
+  <div id="nowipe-dialog"></div>
   <div id="photo-dialog">
     <div>
       <?= dialog_img('photo', 1) ?>

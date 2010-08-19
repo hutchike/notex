@@ -247,7 +247,27 @@ img {
   left: 120px;
   width: 293px;
   height: 54px;
-  background: url(/images/nochange.png);
+  background: url(/images/dialogs/nochange.png);
+}
+
+#dialogs #norename-dialog {
+  position: absolute;
+  display: none;
+  top: 255px;
+  left: 60px;
+  width: 202px;
+  height: 54px;
+  background: url(/images/dialogs/norename.png);
+}
+
+#dialogs #nowipe-dialog {
+  position: absolute;
+  display: none;
+  top: 155px;
+  left: 120px;
+  width: 186px;
+  height: 54px;
+  background: url(/images/dialogs/nowipe.png);
 }
 
 #dialogs #photo-dialog, #dialogs #paper-dialog {
