@@ -4,6 +4,6 @@ twitter:
     oauth_callback: http://noted.cc/twitter/callback
 
 notes:
-    recent_notes_list_length: 23
+    recent_notes_list_length: 20
     status_renamed: R
     status_obscene: O
