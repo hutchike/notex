@@ -323,7 +323,7 @@ notex.notebox = {
     }
   },
   toggle: function(readers_or_editors) {
-    if (!notex.is_owner) return alert("Can't change this note's settings");
+    if (!notex.is_owner) return notex.fx.flash("nochange-dialog");
     this[readers_or_editors] = (this[readers_or_editors] == 'all' ? 'me' : 'all');
     if (readers_or_editors == 'readers' && this['readers'] == 'me') this['editors'] = 'me';
     if (readers_or_editors == 'editors' && this['editors'] == 'all') this['readers'] = 'all';
@@ -411,6 +411,10 @@ notex.fx = {
     } else {
       $('#highlight').hide();
     }
+  },
+  flash: function(element) {
+    var e = $('#'+element);
+    e.fadeIn(500, function() { setTimeout(function() { e.fadeOut(1000) }, 2500) });
   },
   version: 0.1
 };

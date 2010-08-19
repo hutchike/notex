@@ -240,6 +240,16 @@ img {
   background: url(/images/listfoot.png);
 }
 
+#dialogs #nochange-dialog {
+  position: absolute;
+  display: none;
+  top: 155px;
+  left: 120px;
+  width: 293px;
+  height: 54px;
+  background: url(/images/nochange.png);
+}
+
 #dialogs #photo-dialog, #dialogs #paper-dialog {
   position: absolute;
   display: none;
