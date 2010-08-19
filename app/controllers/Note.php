@@ -112,7 +112,7 @@ class Note_controller extends App_controller
     {
         $from = $this->params->from;
         $to = $this->params->to;
-        if ($this->username && !$this->is_owner) $this->redirect($from, TRUE);
+        if ($this->username && !$this->is_owner) return $this->redirect($from);
 
         $orig = new Note(array('url' => "/$from"));
         if ($orig->load())
@@ -122,12 +122,13 @@ class Note_controller extends App_controller
             $dest = new Note(array('url' => "/$to"));
             if ($dest->load())
             {
-                if (strlen($dest->words))$this->redirect($from, TRUE);
+                if (strlen($dest->words)) return $this->redirect($from);
+                $dest->delete();
             }
 
             $orig->url = "/$to";
             $orig->status = STATUS_RENAMED;
-            if ($orig->save()) $this->redirect($to, TRUE);
+            if ($orig->save()) return $this->redirect($to);
         }
     }
 
