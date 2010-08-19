@@ -95,6 +95,7 @@ class Note_controller extends App_controller
         foreach ($notes as $note)
         {
             $list[] = new Object(array('url' => ltrim($note->url, '/'),
+                                       'status' => $note->status,
                                        'time' => strtotime($note->updated_at)));
         }
         usort($list, 'Note::compare_urls');
@@ -115,6 +116,7 @@ class Note_controller extends App_controller
             if ($dest->load()) $this->redirect($from, TRUE);
 
             $orig->url = "/$to";
+            $orig->status = STATUS_RENAMED;
             if ($orig->save()) $this->redirect($to, TRUE);
         }
     }

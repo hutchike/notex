@@ -22,7 +22,8 @@ create table if not exists notes
     readers     varchar(255),
     editors     varchar(255),
     photo       varchar(255),
-    paper       varchar(255)
+    paper       varchar(255),
+    status      char(1)
 );
 create index if not exists note_created_at on notes(created_at);
 create index if not exists note_updated_at on notes(updated_at);

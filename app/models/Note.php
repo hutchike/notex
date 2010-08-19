@@ -64,7 +64,9 @@ class Note extends Model
 
     public static function compare_urls($note1, $note2)
     {
-        return strcmp($note1->url, $note2->url);
+        $priority1 = $note1->status == STATUS_RENAMED ? 1 : 2;
+        $priority2 = $note2->status == STATUS_RENAMED ? 1 : 2;
+        return strcmp($priority1 . $note1->url, $priority2 . $note2->url);
     }
 }
 
