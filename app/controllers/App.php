@@ -14,7 +14,6 @@ class App_controller extends Controller
         // Setup global variables and rendering data
 
         $uri = $_SERVER['REQUEST_URI'];
-        $this->render->title = $uri == '/' ? 'your web notepad' : ltrim($uri, '/');
         $this->render->username = $this->username = $this->username_from_host();
         $this->render->screen_name = $this->screen_name = Twitter::screen_name($this->session->access_token);
         $this->render->is_owner = $this->is_owner = ($this->screen_name && $this->screen_name == $this->username);
@@ -22,6 +21,10 @@ class App_controller extends Controller
         $this->render->debug = '';
         $this->render->layout = 'notepad';
         $this->host_ip = array_key($_SERVER, 'HTTP_X_FORWARDED_FOR', $_SERVER['REMOTE_ADDR']);
+
+        $title = ($this->username ? $this->username . '.' : '') . 'noted.cc';
+        $title .= $uri == '/' ? ' | web notepad' : $uri;
+        $this->render->title = $title;
 
         // Handle alternative content types, e.g. XML and JSON
 
