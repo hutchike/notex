@@ -16,7 +16,7 @@
       notex.init();
     });
     </script>
-    <title>noted.cc | <?= $title ?></title>
+    <title><?= $title ?></title>
 </head>
 <body>
 <?= $content ?>

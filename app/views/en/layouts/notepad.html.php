@@ -110,7 +110,7 @@ $address = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
   <div id="share-dialog">
     <a href="http://twitter.com/share" class="twitter-share-button" data-count="none" data-via="noted_cc">Tweet</a>
     <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-    <iframe src="http://www.facebook.com/plugins/like.php?href=<?= urlencode($address) ?>&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe>
+    <iframe src="http://www.facebook.com/plugins/like.php?href=<?= urlencode($address) ?>&amp;layout=button_count&amp;show_faces=false&amp;width=125&amp;action=like&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:125px; height:21px;" allowTransparency="true"></iframe>
   </div>
 </div>
 <div id="legal">Copyright &copy;<?= strftime('%Y') ?> <a href="mailto:kevin.hutchinson@guanoo.com">Kevin Hutchinson</a>. All Rights Reserved.</div>
