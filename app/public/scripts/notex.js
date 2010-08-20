@@ -337,7 +337,8 @@ notex.notebox = {
     notex.is_updating = true;
   },
   share: function() {
-    alert('Coming very soon...');
+    var dialog = $('#dialogs #share-dialog');
+    dialog.fadeIn().mouseleave(function(){ dialog.fadeOut() });
   },
   rename: function() {
     if (!notex.can_edit) return notex.fx.flash('norename-dialog');

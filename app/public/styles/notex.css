@@ -319,3 +319,14 @@ img {
 #dialogs #photo-dialog img, #dialogs #paper-dialog img {
   padding: 5px;
 }
+
+#dialogs #share-dialog {
+  position: absolute;
+  display: none;
+  background-color: white;
+  top: 276px;
+  left: 13px;
+  height: 22px;
+  width: 188px;
+  padding: 6px;
+}
