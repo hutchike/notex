@@ -385,7 +385,7 @@ notex.notelist = {
       html += '<li><div><a href="/' + note.url + '" title="' + words + '">' + show_url + '</a></div><div class="timestamp">' + this.elapsed(config.now - note.time) + '</div></li>';
     }
     if (this.html != html) {
-      $('#notelist #listitems').html(html ? html : 'no matches');
+      $('#notelist #listitems').html(html ? html : 'no matching notes');
       this.html = html;
     }
   },
