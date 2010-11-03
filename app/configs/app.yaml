@@ -7,6 +7,7 @@ ini:
     log_errors: true
     track_errors: true
     display_errors: true
+    session.cookie_domain: .noted.cc
 
 settings:
     testing_enabled: true
@@ -19,13 +20,13 @@ settings:
     params_strip_slashes: true
     supported_languages: [en]
     default_language: en
-    cookie_domain: .website.org
+    cookie_domain: .noted.cc
     cache_expiry_secs: 3600
 
 testing:
-    contact_email: support@website.org
-    webmaster_email: webmaster@website.org
-    app_name: My Application
+    contact_email: support@notex.com
+    webmaster_email: webmaster@notex.com
+    app_name: noteX
     app_test_controller_list: [User]
     app_test_view_path_list: [/, user/login, user/logout]
 
@@ -34,8 +35,8 @@ database:
     hostname: localhost
     username: root
     password: 
-    database_live: yawf/data/myapp_live.db
-    database_test: yawf/data/myapp_test.db
+    database_live: app/data/notex_live.db
+    database_test: app/data/notex_test.db
 
 content:
     file_url_prefix: /

@@ -1,0 +1,332 @@
+body {
+  font-family: arial, helvetica, sans-serif;
+  padding: 0;
+  margin: 0;
+  min-height: 1125px;
+}
+
+a {
+  color: #22e;
+}
+
+img {
+  border: 0;
+}
+
+#logo {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 324px;
+  height: 54px;
+  background: url(/images/noted.cc.png);
+}
+
+#logo-img {
+  width: 324px;
+  height: 54px;
+}
+
+#copy {
+  z-index: 10;
+}
+
+#notepad {
+  position: absolute;
+  top: 65px;
+  left: 220px;
+  width: 579px;
+  height: 787px;
+  background: url(/images/noteshadow.png);
+}
+
+#page {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 556px;
+  height: 764px;
+  filter: alpha(opacity=90);
+  opacity: 0.9;
+  border: 0;
+}
+
+#edit {
+  position: absolute;
+  display: none;
+  height: 30px;
+  width: 555px;
+  background-color: transparent;
+  border: 0;
+  font-size: 24px;
+}
+
+#handle {
+  position: absolute;
+  border: 1px solid #999;
+  background-color: #ccc;
+  width: 5px;
+  height: 5px;
+  display: none;
+}
+
+.note {
+  position: absolute;
+  line-height: 41px;
+  font-size: 24px;
+}
+
+.selected {
+  background-color: #fff;
+  filter: alpha(opacity=50);
+  opacity: 0.5;
+}
+
+.sans {
+  font-family: arial, helvetica, sans-serif;
+}
+
+.serif {
+  font-family: times new roman, times, serif;
+}
+
+.mono {
+  font-family: courier new, monospace;
+}
+
+.script {
+  font-family: brush script mt, cursive;
+}
+
+.timestamp {
+  font-size: 10px;
+}
+
+#debug {
+  position: absolute;
+  color: red;
+  font-size: 14px;
+  top: 60px;
+  right: 0;
+}
+
+#highlight {
+  position: absolute;
+  display: none;
+  background-color: white;
+}
+
+#twitter {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 10;
+  width: 151px;
+  height: 24px;
+  background: url(/images/twitter/blanker.png);
+}
+
+#twitter #screen_name {
+  padding-top: 3px;
+  padding-left: 30px;
+  font-size: 15px;
+}
+
+#legal {
+  position: absolute;
+  top: 1100px;
+  left: 10px;
+  color: #ccc;
+  z-index: 10;
+}
+
+#legal a {
+  color: #99f;
+  text-decoration: none;
+}
+
+#legal, #legal * {
+  font-size: 10px;
+}
+
+#penbox {
+  position: absolute;
+  display: none;
+  top: 75px;
+  left: 13px;
+  width: 200px;
+  height: 82px;
+}
+
+#penbox #selectcolor {
+  position: absolute;
+  top: 28px;
+  left: 28px;
+  width: 24px;
+  height: 24px;
+  background: url(/images/selectcolor.png);
+}
+
+#penbox #selectfont {
+  position: absolute;
+  top: 55px;
+  left: 4px;
+  width: 47px;
+  height: 22px;
+  background: url(/images/selectfont.png);
+}
+
+#notebox {
+  position: absolute;
+  display: none;
+  top: 170px;
+  left: 13px;
+  width: 200px;
+  height: 139px;
+}
+
+#notebox #photo {
+  position: absolute;
+  top: 44px;
+  left: 6px;
+}
+
+#notebox #paper {
+  position: absolute;
+  top: 44px;
+  left: 66px;
+  cursor: pointer;
+}
+
+#notebox #photo, #notebox #photo img, #notebox #paper, #notebox #paper img {
+  width: 55px;
+  height: 55px;
+  cursor: pointer;
+}
+
+#notebox #canread {
+  position: absolute;
+  top: 50px;
+  left: 132px;
+  width: 20px;
+  height: 20px;
+  background: url(/images/nothing.gif);
+  cursor: pointer;
+}
+
+#notebox #canedit {
+  position: absolute;
+  top: 74px;
+  left: 132px;
+  width: 20px;
+  height: 20px;
+  background: url(/images/nothing.gif);
+  cursor: pointer;
+}
+
+#notelist {
+  position: absolute;
+  display: none;
+  top: 322px;
+  left: 13px;
+  width: 200px;
+}
+
+#notelist #listhead {
+  width: 200px;
+  height: 24px;
+  background: url(/images/listhead.png);
+}
+
+#notelist #listbody {
+  width: 200px;
+  background: url(/images/listback.png);
+}
+
+#notelist #listbody #newnote {
+  float: left;
+  padding: 5px;
+}
+
+#notelist #listbody #search {
+  font-size: 15px;
+  width: 123px;
+  margin-top: 5px;
+  padding: 1px;
+  color: white;
+  background-color: transparent;
+  border: 1px solid #ccc;
+}
+
+#notelist #listbody #listitems {
+  width: 155px;
+  padding: 5px;
+  margin: 0;
+  margin-left: 25px;
+  list-style-image: url(/images/page_white.png);
+  clear: both;
+}
+
+#notelist #listbody #listitems li {
+  font-size: 14px;
+}
+
+#notelist #listfoot {
+  width: 200px;
+  height: 10px;
+  background: url(/images/listfoot.png);
+}
+
+#dialogs #nochange-dialog {
+  position: absolute;
+  display: none;
+  top: 155px;
+  left: 120px;
+  width: 293px;
+  height: 54px;
+  background: url(/images/dialogs/nochange.png);
+}
+
+#dialogs #norename-dialog {
+  position: absolute;
+  display: none;
+  top: 300px;
+  left: 60px;
+  width: 202px;
+  height: 54px;
+  background: url(/images/dialogs/norename.png);
+}
+
+#dialogs #nowipe-dialog {
+  position: absolute;
+  display: none;
+  top: 300px;
+  left: 120px;
+  width: 186px;
+  height: 54px;
+  background: url(/images/dialogs/nowipe.png);
+}
+
+#dialogs #photo-dialog, #dialogs #paper-dialog {
+  position: absolute;
+  display: none;
+  background-color: white;
+  top: 10px;
+  left: 10px;
+  padding: 5px;
+}
+
+#dialogs #photo-dialog img, #dialogs #paper-dialog img {
+  padding: 5px;
+}
+
+#dialogs #share-dialog {
+  position: absolute;
+  display: none;
+  background-color: white;
+  top: 276px;
+  left: 13px;
+  height: 22px;
+  width: 188px;
+  padding: 6px;
+}

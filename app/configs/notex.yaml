@@ -1,0 +1,10 @@
+twitter:
+    consumer_key: gKct9s1JPksh0JdXY006wA
+    consumer_secret: 2nHiDkrNhrYHVrFVdjx4mDc81p6qJwTgDb6yKob27M
+    oauth_callback: http://noted.cc/twitter/callback
+
+notes:
+    recent_notes_list_length: 10
+    note_words_summary_length: 30
+    status_renamed: R
+    status_obscene: O
