@@ -1,27 +1,41 @@
 #!/usr/bin/env php
 <?
+// Copyright (c) 2010 Guanoo, Inc.
+// 
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public License
+// as published by the Free Software Foundation; either version 3
+// of the License, or (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU Lesser General Public License for more details.
+
 require getenv('YAWF_ROOT') . '/yawf/lib/Command.php';
 
 class Sure_command extends Command
 {
     const USAGE = 'usage: sure -rules=rules.txt -facts=facts.txt';
 
+    // Run the "sure" command
+
     public function run()
     {
-        load_plugin('Sure');
+        load_plugin('Logic/Sure');
 
-        $rules = $this->args->rules;
-        $facts = $this->args->facts;
+        $rules = $this->opts->rules;
+        $facts = $this->opts->facts;
         if (!$rules || !$facts) $this->quit(self::USAGE);
 
-        $memory = $this->args->debug ? array('DEBUG' => TRUE) : NULL;
-        $sure = new Sure($this->args->limit);
+        $memory = $this->opts->debug ? array('DEBUG' => TRUE) : NULL;
+        $sure = new Sure($this->opts->limit);
         $sure->with($rules)->given($facts)->infer($memory);
-        if ($this->args->dump) print json_encode((array)$sure->memory());
+        if ($this->opts->dump) print json_encode((array)$sure->memory());
     }
 }
 
 $sure = new Sure_command();
 $sure->run();
 
-// End of sure
+// End of "commands/sure"
